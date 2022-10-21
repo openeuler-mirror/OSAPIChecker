@@ -1,0 +1,793 @@
+[2022-10-13 09:26:39,239][CmdChecker][cmd_checker.py:206]:[INFO][CmdChecker 执行开始。。。]
+[2022-10-13 09:26:39,305][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'at'}...]
+[2022-10-13 09:26:39,322][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: at,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,322][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'awk'}...]
+[2022-10-13 09:26:39,341][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: awk,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,342][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'batch'}...]
+[2022-10-13 09:26:39,348][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: batch,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,348][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sh'}...]
+[2022-10-13 09:26:39,354][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sh,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,354][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'bc'}...]
+[2022-10-13 09:26:39,363][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: bc,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,363][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ar'}...]
+[2022-10-13 09:26:39,396][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ar,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,397][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'strings'}...]
+[2022-10-13 09:26:39,404][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: strings,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,404][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'strip'}...]
+[2022-10-13 09:26:39,411][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: strip,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,411][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'brctl'}...]
+[2022-10-13 09:26:39,415][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: brctl,
+exist_check: {'result': 'fail'}
+version_result: {'result': 'fail'}]
+[2022-10-13 09:26:39,415][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chkconfig'}...]
+[2022-10-13 09:26:39,430][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chkconfig,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,430][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': '['}...]
+[2022-10-13 09:26:39,434][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: [,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,434][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'basename'}...]
+[2022-10-13 09:26:39,442][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: basename,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,442][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cat'}...]
+[2022-10-13 09:26:39,448][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cat,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,448][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chattr'}...]
+[2022-10-13 09:26:39,458][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chattr,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,458][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chgrp'}...]
+[2022-10-13 09:26:39,464][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chgrp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,464][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chmod'}...]
+[2022-10-13 09:26:39,469][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chmod,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,469][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chown'}...]
+[2022-10-13 09:26:39,479][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chown,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,480][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cksum'}...]
+[2022-10-13 09:26:39,485][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cksum,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,485][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cmake'}...]
+[2022-10-13 09:26:39,518][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cmake,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,518][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cmp'}...]
+[2022-10-13 09:26:39,526][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cmp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,526][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'comm'}...]
+[2022-10-13 09:26:39,531][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: comm,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,531][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cp'}...]
+[2022-10-13 09:26:39,536][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,537][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cpio'}...]
+[2022-10-13 09:26:39,545][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cpio,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,545][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'crontab'}...]
+[2022-10-13 09:26:39,554][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: crontab,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,554][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'csplit'}...]
+[2022-10-13 09:26:39,559][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: csplit,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,559][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'cut'}...]
+[2022-10-13 09:26:39,570][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: cut,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,570][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'date'}...]
+[2022-10-13 09:26:39,575][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: date,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,575][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'dd'}...]
+[2022-10-13 09:26:39,581][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: dd,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,581][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'df'}...]
+[2022-10-13 09:26:39,587][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: df,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,587][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'dirname'}...]
+[2022-10-13 09:26:39,592][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: dirname,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,592][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'du'}...]
+[2022-10-13 09:26:39,598][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: du,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,598][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'dumpe2fs'}...]
+[2022-10-13 09:26:39,607][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: dumpe2fs,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,608][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'diff'}...]
+[2022-10-13 09:26:39,614][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: diff,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,614][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ed'}...]
+[2022-10-13 09:26:39,634][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ed,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,635][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'e2fsck'}...]
+[2022-10-13 09:26:39,643][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: e2fsck,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,643][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'echo'}...]
+[2022-10-13 09:26:39,647][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: echo,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,647][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'env'}...]
+[2022-10-13 09:26:39,652][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: env,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,652][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'expand'}...]
+[2022-10-13 09:26:39,657][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: expand,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,657][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'expr'}...]
+[2022-10-13 09:26:39,663][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: expr,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,663][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'false'}...]
+[2022-10-13 09:26:39,666][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: false,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,666][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'file'}...]
+[2022-10-13 09:26:39,673][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: file,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,674][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'find'}...]
+[2022-10-13 09:26:39,686][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: find,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:39,686][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'firewall-cmd'}...]
+[2022-10-13 09:26:41,316][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: firewall-cmd,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,316][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'fold'}...]
+[2022-10-13 09:26:41,325][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: fold,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,326][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'groups'}...]
+[2022-10-13 09:26:41,330][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: groups,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,331][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'head'}...]
+[2022-10-13 09:26:41,336][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: head,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,336][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'id'}...]
+[2022-10-13 09:26:41,343][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: id,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,344][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'install'}...]
+[2022-10-13 09:26:41,349][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: install,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,350][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'join'}...]
+[2022-10-13 09:26:41,355][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: join,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,355][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ln'}...]
+[2022-10-13 09:26:41,361][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ln,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,361][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'lsattr'}...]
+[2022-10-13 09:26:41,371][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: lsattr,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,371][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'logname'}...]
+[2022-10-13 09:26:41,376][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: logname,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,376][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ls'}...]
+[2022-10-13 09:26:41,382][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ls,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,382][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'lp'}...]
+[2022-10-13 09:26:41,412][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: lp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,412][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'lpr'}...]
+[2022-10-13 09:26:41,433][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: lpr,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,434][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'md5sum'}...]
+[2022-10-13 09:26:41,441][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: md5sum,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,441][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mkdir'}...]
+[2022-10-13 09:26:41,447][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mkdir,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,447][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mke2fs'}...]
+[2022-10-13 09:26:41,455][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mke2fs,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,455][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mkfifo'}...]
+[2022-10-13 09:26:41,460][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mkfifo,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,461][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mknod'}...]
+[2022-10-13 09:26:41,465][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mknod,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,466][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mktemp'}...]
+[2022-10-13 09:26:41,471][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mktemp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,471][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mv'}...]
+[2022-10-13 09:26:41,476][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mv,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,477][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'nice'}...]
+[2022-10-13 09:26:41,486][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: nice,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,486][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'nl'}...]
+[2022-10-13 09:26:41,491][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: nl,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,491][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'nohup'}...]
+[2022-10-13 09:26:41,496][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: nohup,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,496][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'od'}...]
+[2022-10-13 09:26:41,502][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: od,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,502][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'paste'}...]
+[2022-10-13 09:26:41,507][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: paste,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,507][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'pathchk'}...]
+[2022-10-13 09:26:41,512][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: pathchk,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,513][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'pr'}...]
+[2022-10-13 09:26:41,518][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: pr,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,518][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'printf'}...]
+[2022-10-13 09:26:41,521][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: printf,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,521][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'pwd'}...]
+[2022-10-13 09:26:41,525][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: pwd,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,525][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'rm'}...]
+[2022-10-13 09:26:41,535][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: rm,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,535][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'rmdir'}...]
+[2022-10-13 09:26:41,540][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: rmdir,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,540][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'seq'}...]
+[2022-10-13 09:26:41,545][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: seq,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,545][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sleep'}...]
+[2022-10-13 09:26:41,550][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sleep,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,550][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sort'}...]
+[2022-10-13 09:26:41,558][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sort,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,558][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'split'}...]
+[2022-10-13 09:26:41,563][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: split,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,563][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'stty'}...]
+[2022-10-13 09:26:41,569][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: stty,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,569][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sync'}...]
+[2022-10-13 09:26:41,574][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sync,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,574][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'scp'}...]
+[2022-10-13 09:26:41,592][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: scp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,592][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sftp'}...]
+[2022-10-13 09:26:41,602][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sftp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,602][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh'}...]
+[2022-10-13 09:26:41,613][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,613][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh-add'}...]
+[2022-10-13 09:26:41,622][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh-add,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,622][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh-agent'}...]
+[2022-10-13 09:26:41,631][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh-agent,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,631][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh-askpass'}...]
+[2022-10-13 09:26:41,635][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh-askpass,
+exist_check: {'result': 'fail'}
+version_result: {'result': 'fail'}]
+[2022-10-13 09:26:41,635][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh-keygen'}...]
+[2022-10-13 09:26:41,650][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh-keygen,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,651][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh-keyscan'}...]
+[2022-10-13 09:26:41,660][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh-keyscan,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,661][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ssh-keysign'}...]
+[2022-10-13 09:26:41,664][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ssh-keysign,
+exist_check: {'result': 'fail'}
+version_result: {'result': 'fail'}]
+[2022-10-13 09:26:41,664][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tail'}...]
+[2022-10-13 09:26:41,673][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tail,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,673][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tee'}...]
+[2022-10-13 09:26:41,679][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tee,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,679][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'test'}...]
+[2022-10-13 09:26:41,683][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: test,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,683][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'touch'}...]
+[2022-10-13 09:26:41,710][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: touch,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,711][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tr'}...]
+[2022-10-13 09:26:41,716][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tr,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,717][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'true'}...]
+[2022-10-13 09:26:41,720][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: true,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,720][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tsort'}...]
+[2022-10-13 09:26:41,726][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tsort,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,727][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tty'}...]
+[2022-10-13 09:26:41,732][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tty,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,732][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tune2fs'}...]
+[2022-10-13 09:26:41,739][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tune2fs,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,739][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'uname'}...]
+[2022-10-13 09:26:41,744][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: uname,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,744][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'unexpand'}...]
+[2022-10-13 09:26:41,749][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: unexpand,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,749][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'uniq'}...]
+[2022-10-13 09:26:41,758][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: uniq,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,759][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'wc'}...]
+[2022-10-13 09:26:41,764][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: wc,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,764][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'xargs'}...]
+[2022-10-13 09:26:41,770][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: xargs,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,770][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'gettext'}...]
+[2022-10-13 09:26:41,777][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: gettext,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,777][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'msgfmt'}...]
+[2022-10-13 09:26:41,800][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: msgfmt,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,800][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'gencat'}...]
+[2022-10-13 09:26:41,806][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: gencat,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,806][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'getconf'}...]
+[2022-10-13 09:26:41,811][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: getconf,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,812][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'iconv'}...]
+[2022-10-13 09:26:41,817][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: iconv,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,817][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'locale'}...]
+[2022-10-13 09:26:41,823][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: locale,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,823][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'localedef'}...]
+[2022-10-13 09:26:41,828][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: localedef,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,828][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'egrep'}...]
+[2022-10-13 09:26:41,838][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: egrep,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,838][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'fgrep'}...]
+[2022-10-13 09:26:41,849][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: fgrep,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,850][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'grep'}...]
+[2022-10-13 09:26:41,854][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: grep,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,854][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'gunzip'}...]
+[2022-10-13 09:26:41,860][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: gunzip,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,860][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'gzip'}...]
+[2022-10-13 09:26:41,865][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: gzip,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,865][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'zcat'}...]
+[2022-10-13 09:26:41,871][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: zcat,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,871][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'hostname'}...]
+[2022-10-13 09:26:41,877][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: hostname,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,877][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'lsb_release'}...]
+[2022-10-13 09:26:41,915][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: lsb_release,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,915][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'less'}...]
+[2022-10-13 09:26:41,926][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: less,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,926][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'm4'}...]
+[2022-10-13 09:26:41,932][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: m4,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,932][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mailx'}...]
+[2022-10-13 09:26:41,941][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mailx,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,941][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'make'}...]
+[2022-10-13 09:26:41,948][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: make,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,948][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'man'}...]
+[2022-10-13 09:26:41,962][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: man,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,962][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'infocmp'}...]
+[2022-10-13 09:26:41,969][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: infocmp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,969][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tput'}...]
+[2022-10-13 09:26:41,974][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tput,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,975][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ping'}...]
+[2022-10-13 09:26:41,982][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ping,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:41,982][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'passwd'}...]
+[2022-10-13 09:26:42,000][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: passwd,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,001][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'patch'}...]
+[2022-10-13 09:26:42,007][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: patch,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,007][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'pidof'}...]
+[2022-10-13 09:26:42,016][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: pidof,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,016][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ps'}...]
+[2022-10-13 09:26:42,024][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ps,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,024][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'fuser'}...]
+[2022-10-13 09:26:42,033][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: fuser,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,033][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'killall'}...]
+[2022-10-13 09:26:42,039][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: killall,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,039][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sed'}...]
+[2022-10-13 09:26:42,053][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sed,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,053][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'sendmail'}...]
+[2022-10-13 09:26:42,096][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: sendmail,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,096][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'groupadd'}...]
+[2022-10-13 09:26:42,104][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: groupadd,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,104][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'groupdel'}...]
+[2022-10-13 09:26:42,111][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: groupdel,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,111][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'groupmod'}...]
+[2022-10-13 09:26:42,118][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: groupmod,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,118][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'newgrp'}...]
+[2022-10-13 09:26:42,125][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: newgrp,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,125][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'useradd'}...]
+[2022-10-13 09:26:42,148][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: useradd,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,148][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'userdel'}...]
+[2022-10-13 09:26:42,154][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: userdel,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,155][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'usermod'}...]
+[2022-10-13 09:26:42,162][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: usermod,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,163][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'pax'}...]
+[2022-10-13 09:26:42,170][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: pax,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,170][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'shutdown'}...]
+[2022-10-13 09:26:42,198][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: shutdown,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,198][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'tar'}...]
+[2022-10-13 09:26:42,204][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: tar,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,204][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'time'}...]
+[2022-10-13 09:26:42,210][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: time,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,211][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'col'}...]
+[2022-10-13 09:26:42,218][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: col,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,218][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'dmesg'}...]
+[2022-10-13 09:26:42,224][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: dmesg,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,225][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ipcrm'}...]
+[2022-10-13 09:26:42,231][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ipcrm,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,231][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'ipcs'}...]
+[2022-10-13 09:26:42,237][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: ipcs,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,237][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'kill'}...]
+[2022-10-13 09:26:42,240][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: kill,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,240][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'logger'}...]
+[2022-10-13 09:26:42,251][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: logger,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,252][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'more'}...]
+[2022-10-13 09:26:42,258][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: more,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,258][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'mount'}...]
+[2022-10-13 09:26:42,264][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: mount,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,265][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'renice'}...]
+[2022-10-13 09:26:42,271][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: renice,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,271][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'su'}...]
+[2022-10-13 09:26:42,277][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: su,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,278][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'umount'}...]
+[2022-10-13 09:26:42,283][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: umount,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,284][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chfn'}...]
+[2022-10-13 09:26:42,292][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chfn,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,293][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'chsh'}...]
+[2022-10-13 09:26:42,305][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: chsh,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,305][CmdChecker][cmd_checker.py:216]:[INFO][cmd running...{'name': 'which'}...]
+[2022-10-13 09:26:42,313][CmdChecker][cmd_checker.py:220]:[INFO][
+cmd: which,
+exist_check: {'result': 'pass'}
+version_result: {'result': 'pass'}]
+[2022-10-13 09:26:42,318][CmdChecker][cmd_checker.py:200]:[INFO][CmdChecker 测试完成，测试结果见 Outputs]
+[2022-10-13 09:26:42,318][CmdChecker][cmd_checker.py:236]:[INFO][CmdChecker 测试结果:{'total': 158, 'pass': 155, 'warning': 0, 'fail': 3}]

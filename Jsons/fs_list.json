@@ -1,0 +1,225 @@
+{
+  "std_name": "信息技术应用创新  操作系统应用编程接口要求",
+  "FS": [
+    {
+      "FS_name": "/",
+      "type": "directory",
+      "permission": "0775"
+    },
+    {
+      "FS_name": "/bin/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/boot/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/dev/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/dev/shm",
+      "type": "directory",
+      "permission": "1777"
+    },
+    {
+      "FS_name": "/etc/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/etc/X11/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/home/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/lib/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/media/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/mnt/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/opt/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/proc/",
+      "type": "directory",
+      "permission": "0555"
+    },
+    {
+      "FS_name": "/proc/sys",
+      "type": "directory",
+      "permission": "0555"
+    },
+    {
+      "FS_name": "/root/",
+      "type": "directory",
+      "permission": "0700"
+    },
+    {
+      "FS_name": "/run",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/run/log",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/sbin/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/srv/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/tmp/",
+      "type": "directory",
+      "permission": "1777"
+    },
+    {
+      "FS_name": "/usr/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/bin/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/include/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/local",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/lib",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/sbin/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/share",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/share/applications/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/share/doc",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/share/fonts/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/share/locale",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/src/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/usr/local/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/var/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/var/cache/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/var/lib/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/var/lock/",
+      "type": "directory",
+      "permission": "1777"
+    },
+    {
+      "FS_name": "/var/log/",
+      "type": "directory",
+      "permission": "0775"
+    },
+    {
+      "FS_name": "/var/mail/",
+      "type": "directory",
+      "permission": "2775"
+    },
+    {
+      "FS_name": "/var/run/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/var/spool/",
+      "type": "directory",
+      "permission": "0755"
+    },
+    {
+      "FS_name": "/var/spool/mail/",
+      "type": "directory",
+      "permission": "2775"
+    },
+    {
+      "FS_name": "/var/tmp/",
+      "type": "directory",
+      "permission": "1777"
+    },
+    {
+      "FS_name": "/var/run",
+      "type": "directory",
+      "permission": "0755"
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+{
+ "std_name": "信息技术应用创新  操作系统应用编程接口要求",
+ "system_cmds": [
+  {
+   "name": "at"
+  },
+  {
+   "name": "awk"
+  },
+  {
+   "name": "batch"
+  },
+  {
+   "name": "sh"
+  },
+  {
+   "name": "bc"
+  },
+  {
+   "name": "ar"
+  },
+  {
+   "name": "strings"
+  },
+  {
+   "name": "strip"
+  },
+  {
+   "name": "brctl"
+  },
+  {
+   "name": "chkconfig"
+  },
+  {
+   "name": "["
+  },
+  {
+   "name": "basename"
+  },
+  {
+   "name": "cat"
+  },
+  {
+   "name": "chattr"
+  },
+  {
+   "name": "chgrp"
+  },
+  {
+   "name": "chmod"
+  },
+  {
+   "name": "chown"
+  },
+  {
+   "name": "cksum"
+  },
+  {
+   "name": "cmake"
+  },
+  {
+   "name": "cmp"
+  },
+  {
+   "name": "comm"
+  },
+  {
+   "name": "cp"
+  },
+  {
+   "name": "cpio"
+  },
+  {
+   "name": "crontab"
+  },
+  {
+   "name": "csplit"
+  },
+  {
+   "name": "cut"
+  },
+  {
+   "name": "date"
+  },
+  {
+   "name": "dd"
+  },
+  {
+   "name": "df"
+  },
+  {
+   "name": "dirname"
+  },
+  {
+   "name": "du"
+  },
+  {
+   "name": "dumpe2fs"
+  },
+  {
+   "name": "diff"
+  },
+  {
+   "name": "ed"
+  },
+  {
+   "name": "e2fsck"
+  },
+  {
+   "name": "echo"
+  },
+  {
+   "name": "env"
+  },
+  {
+   "name": "expand"
+  },
+  {
+   "name": "expr"
+  },
+  {
+   "name": "false"
+  },
+  {
+   "name": "file"
+  },
+  {
+   "name": "find"
+  },
+  {
+   "name": "firewall-cmd"
+  },
+  {
+   "name": "fold"
+  },
+  {
+   "name": "groups"
+  },
+  {
+   "name": "head"
+  },
+  {
+   "name": "id"
+  },
+  {
+   "name": "install"
+  },
+  {
+   "name": "join"
+  },
+  {
+   "name": "ln"
+  },
+  {
+   "name": "lsattr"
+  },
+  {
+   "name": "logname"
+  },
+  {
+   "name": "ls"
+  },
+  {
+   "name": "lp"
+  },
+  {
+   "name": "lpr"
+  },
+  {
+   "name": "md5sum"
+  },
+  {
+   "name": "mkdir"
+  },
+  {
+   "name": "mke2fs"
+  },
+  {
+   "name": "mkfifo"
+  },
+  {
+   "name": "mknod"
+  },
+  {
+   "name": "mktemp"
+  },
+  {
+   "name": "mv"
+  },
+  {
+   "name": "nice"
+  },
+  {
+   "name": "nl"
+  },
+  {
+   "name": "nohup"
+  },
+  {
+   "name": "od"
+  },
+  {
+   "name": "paste"
+  },
+  {
+   "name": "pathchk"
+  },
+  {
+   "name": "pr"
+  },
+  {
+   "name": "printf"
+  },
+  {
+   "name": "pwd"
+  },
+  {
+   "name": "rm"
+  },
+  {
+   "name": "rmdir"
+  },
+  {
+   "name": "seq"
+  },
+  {
+   "name": "sleep"
+  },
+  {
+   "name": "sort"
+  },
+  {
+   "name": "split"
+  },
+  {
+   "name": "stty"
+  },
+  {
+   "name": "sync"
+  },
+  {
+   "name": "scp"
+  },
+  {
+   "name": "sftp"
+  },
+  {
+   "name": "ssh"
+  },
+  {
+   "name": "ssh-add"
+  },
+  {
+   "name": "ssh-agent"
+  },
+  {
+   "name": "ssh-askpass"
+  },
+  {
+   "name": "ssh-keygen"
+  },
+  {
+   "name": "ssh-keyscan"
+  },
+  {
+   "name": "ssh-keysign"
+  },
+  {
+   "name": "tail"
+  },
+  {
+   "name": "tee"
+  },
+  {
+   "name": "test"
+  },
+  {
+   "name": "touch"
+  },
+  {
+   "name": "tr"
+  },
+  {
+   "name": "true"
+  },
+  {
+   "name": "tsort"
+  },
+  {
+   "name": "tty"
+  },
+  {
+   "name": "tune2fs"
+  },
+  {
+   "name": "uname"
+  },
+  {
+   "name": "unexpand"
+  },
+  {
+   "name": "uniq"
+  },
+  {
+   "name": "wc"
+  },
+  {
+   "name": "xargs"
+  },
+  {
+   "name": "gettext"
+  },
+  {
+   "name": "msgfmt"
+  },
+  {
+   "name": "gencat"
+  },
+  {
+   "name": "getconf"
+  },
+  {
+   "name": "iconv"
+  },
+  {
+   "name": "locale"
+  },
+  {
+   "name": "localedef"
+  },
+  {
+   "name": "egrep"
+  },
+  {
+   "name": "fgrep"
+  },
+  {
+   "name": "grep"
+  },
+  {
+   "name": "gunzip"
+  },
+  {
+   "name": "gzip"
+  },
+  {
+   "name": "zcat"
+  },
+  {
+   "name": "hostname"
+  },
+  {
+   "name": "lsb_release"
+  },
+  {
+   "name": "less"
+  },
+  {
+   "name": "m4"
+  },
+  {
+   "name": "mailx"
+  },
+  {
+   "name": "make"
+  },
+  {
+   "name": "man"
+  },
+  {
+   "name": "infocmp"
+  },
+  {
+   "name": "tput"
+  },
+  {
+   "name": "ping"
+  },
+  {
+   "name": "passwd"
+  },
+  {
+   "name": "patch"
+  },
+  {
+   "name": "pidof"
+  },
+  {
+   "name": "ps"
+  },
+  {
+   "name": "fuser"
+  },
+  {
+   "name": "killall"
+  },
+  {
+   "name": "sed"
+  },
+  {
+   "name": "sendmail"
+  },
+  {
+   "name": "groupadd"
+  },
+  {
+   "name": "groupdel"
+  },
+  {
+   "name": "groupmod"
+  },
+  {
+   "name": "newgrp"
+  },
+  {
+   "name": "useradd"
+  },
+  {
+   "name": "userdel"
+  },
+  {
+   "name": "usermod"
+  },
+  {
+   "name": "pax"
+  },
+  {
+   "name": "shutdown"
+  },
+  {
+   "name": "tar"
+  },
+  {
+   "name": "time"
+  },
+  {
+   "name": "col"
+  },
+  {
+   "name": "dmesg"
+  },
+  {
+   "name": "ipcrm"
+  },
+  {
+   "name": "ipcs"
+  },
+  {
+   "name": "kill"
+  },
+  {
+   "name": "logger"
+  },
+  {
+   "name": "more"
+  },
+  {
+   "name": "mount"
+  },
+  {
+   "name": "renice"
+  },
+  {
+   "name": "su"
+  },
+  {
+   "name": "umount"
+  },
+  {
+   "name": "chfn"
+  },
+  {
+   "name": "chsh"
+  },
+  {
+   "name": "which"
+  }
+ ]
+}

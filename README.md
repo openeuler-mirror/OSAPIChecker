@@ -15,9 +15,41 @@ Operating system API compliance check tool.
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. LibChecker
+
+   1. 桌面版的使用
+
+      ```shell
+      # 对 U 系列
+      # 1. /etc/apt/source.list 下打开 deb-src.
+      # 2. 执行 sudo apt update.
+      # 3. (OSAPIChecker)/$: ./OSChecker.py --channel=libchecker
+      # 4. LibChecker 执行的日志位于: (OSAPIChecker)/Logs 下, 输出结果存放于: (OSAPIChecker)/Outputs 下.
+      ```
+
+2. FsChecker
+
+   1. 桌面版的使用
+
+      ```shell
+      # 对 U 系列
+      # 1. /etc/apt/source.list 下打开 deb-src.
+      # 2. 执行 sudo apt update.
+      # 3. (OSAPIChecker)/$: ./OSChecker.py --channel=fschecker
+      ```
+
+3. CmdChecker
+
+   1. 桌面版的使用
+
+      ```shell
+      # 对 U 系列
+      # 1. /etc/apt/source.list 下打开 deb-src.
+      # 2. 执行 sudo apt update.
+      # 3. (OSAPIChecker)/$: ./OSChecker.py --channel=cmdchecker
+      ```
+
+      
 
 #### 参与贡献
 

@@ -1,0 +1,564 @@
+{
+  "result": [
+    {
+      "name": "at",
+      "version": "3.1.23"
+    },
+    {
+      "name": "batch",
+      "version": "not found"
+    },
+    {
+      "name": "sh",
+      "version": "skip"
+    },
+    {
+      "name": "bc",
+      "version": "1.07.1"
+    },
+    {
+      "name": "ar",
+      "version": "2.34"
+    },
+    {
+      "name": "strings",
+      "version": "2.34"
+    },
+    {
+      "name": "strip",
+      "version": "2.34"
+    },
+    {
+      "name": "brctl",
+      "version": "not found"
+    },
+    {
+      "name": "chkconfig",
+      "version": "not found"
+    },
+    {
+      "name": "[",
+      "version": "not found"
+    },
+    {
+      "name": "basename",
+      "version": "8.30"
+    },
+    {
+      "name": "cat",
+      "version": "8.30"
+    },
+    {
+      "name": "chgrp",
+      "version": "8.30"
+    },
+    {
+      "name": "chmod",
+      "version": "8.30"
+    },
+    {
+      "name": "chown",
+      "version": "8.30"
+    },
+    {
+      "name": "cksum",
+      "version": "8.30"
+    },
+    {
+      "name": "comm",
+      "version": "8.30"
+    },
+    {
+      "name": "cp",
+      "version": "8.30"
+    },
+    {
+      "name": "csplit",
+      "version": "8.30"
+    },
+    {
+      "name": "cut",
+      "version": "8.30"
+    },
+    {
+      "name": "date",
+      "version": "8.30"
+    },
+    {
+      "name": "dd",
+      "version": "8.30"
+    },
+    {
+      "name": "df",
+      "version": "8.30"
+    },
+    {
+      "name": "dirname",
+      "version": "8.30"
+    },
+    {
+      "name": "du",
+      "version": "8.30"
+    },
+    {
+      "name": "echo",
+      "version": "not found"
+    },
+    {
+      "name": "env",
+      "version": "8.30"
+    },
+    {
+      "name": "expand",
+      "version": "8.30"
+    },
+    {
+      "name": "expr",
+      "version": "8.30"
+    },
+    {
+      "name": "false",
+      "version": "not found"
+    },
+    {
+      "name": "fold",
+      "version": "8.30"
+    },
+    {
+      "name": "groups",
+      "version": "8.30"
+    },
+    {
+      "name": "head",
+      "version": "8.30"
+    },
+    {
+      "name": "id",
+      "version": "8.30"
+    },
+    {
+      "name": "install",
+      "version": "8.30"
+    },
+    {
+      "name": "join",
+      "version": "8.30"
+    },
+    {
+      "name": "ln",
+      "version": "8.30"
+    },
+    {
+      "name": "logname",
+      "version": "8.30"
+    },
+    {
+      "name": "ls",
+      "version": "8.30"
+    },
+    {
+      "name": "md5sum",
+      "version": "8.30"
+    },
+    {
+      "name": "mkdir",
+      "version": "8.30"
+    },
+    {
+      "name": "mkfifo",
+      "version": "8.30"
+    },
+    {
+      "name": "mknod",
+      "version": "8.30"
+    },
+    {
+      "name": "mktemp",
+      "version": "8.30"
+    },
+    {
+      "name": "mv",
+      "version": "8.30"
+    },
+    {
+      "name": "nice",
+      "version": "8.30"
+    },
+    {
+      "name": "nl",
+      "version": "8.30"
+    },
+    {
+      "name": "nohup",
+      "version": "8.30"
+    },
+    {
+      "name": "od",
+      "version": "8.30"
+    },
+    {
+      "name": "paste",
+      "version": "8.30"
+    },
+    {
+      "name": "pathchk",
+      "version": "8.30"
+    },
+    {
+      "name": "pr",
+      "version": "8.30"
+    },
+    {
+      "name": "printf",
+      "version": "not found"
+    },
+    {
+      "name": "pwd",
+      "version": "not found"
+    },
+    {
+      "name": "rm",
+      "version": "8.30"
+    },
+    {
+      "name": "rmdir",
+      "version": "8.30"
+    },
+    {
+      "name": "seq",
+      "version": "8.30"
+    },
+    {
+      "name": "sleep",
+      "version": "8.30"
+    },
+    {
+      "name": "sort",
+      "version": "skip"
+    },
+    {
+      "name": "split",
+      "version": "8.30"
+    },
+    {
+      "name": "stty",
+      "version": "8.30"
+    },
+    {
+      "name": "sync",
+      "version": "8.30"
+    },
+    {
+      "name": "tail",
+      "version": "8.30"
+    },
+    {
+      "name": "tee",
+      "version": "8.30"
+    },
+    {
+      "name": "test",
+      "version": "not found"
+    },
+    {
+      "name": "touch",
+      "version": "8.30"
+    },
+    {
+      "name": "tr",
+      "version": "8.30"
+    },
+    {
+      "name": "true",
+      "version": "not found"
+    },
+    {
+      "name": "tsort",
+      "version": "8.30"
+    },
+    {
+      "name": "tty",
+      "version": "8.30"
+    },
+    {
+      "name": "uname",
+      "version": "8.30"
+    },
+    {
+      "name": "unexpand",
+      "version": "8.30"
+    },
+    {
+      "name": "uniq",
+      "version": "8.30"
+    },
+    {
+      "name": "wc",
+      "version": "8.30"
+    },
+    {
+      "name": "cpio",
+      "version": "2.13"
+    },
+    {
+      "name": "crontab",
+      "version": "1003.2"
+    },
+    {
+      "name": "lp",
+      "version": "not found"
+    },
+    {
+      "name": "lpr",
+      "version": "not found"
+    },
+    {
+      "name": "cmp",
+      "version": "3.7"
+    },
+    {
+      "name": "diff",
+      "version": "3.7"
+    },
+    {
+      "name": "ed",
+      "version": "not found"
+    },
+    {
+      "name": "file",
+      "version": "5.38"
+    },
+    {
+      "name": "find",
+      "version": "4.7.0"
+    },
+    {
+      "name": "xargs",
+      "version": "4.7.0"
+    },
+    {
+      "name": "awk",
+      "version": "5.0.1"
+    },
+    {
+      "name": "gettext",
+      "version": "0.19.8.1"
+    },
+    {
+      "name": "msgfmt",
+      "version": "0.19.8.1"
+    },
+    {
+      "name": "gencat",
+      "version": "skip"
+    },
+    {
+      "name": "getconf",
+      "version": "skip"
+    },
+    {
+      "name": "iconv",
+      "version": "2.31"
+    },
+    {
+      "name": "locale",
+      "version": "2.31"
+    },
+    {
+      "name": "localedef",
+      "version": "2.31"
+    },
+    {
+      "name": "egrep",
+      "version": "3.4"
+    },
+    {
+      "name": "fgrep",
+      "version": "3.4"
+    },
+    {
+      "name": "grep",
+      "version": "3.4"
+    },
+    {
+      "name": "gunzip",
+      "version": "1.10"
+    },
+    {
+      "name": "gzip",
+      "version": "1.10"
+    },
+    {
+      "name": "zcat",
+      "version": "1.10"
+    },
+    {
+      "name": "hostname",
+      "version": "3.23"
+    },
+    {
+      "name": "lsb_release",
+      "version": "not found"
+    },
+    {
+      "name": "less",
+      "version": "not found"
+    },
+    {
+      "name": "m4",
+      "version": "1.4.18"
+    },
+    {
+      "name": "mailx",
+      "version": "not found"
+    },
+    {
+      "name": "make",
+      "version": "4.2.1"
+    },
+    {
+      "name": "man",
+      "version": "2.9.1"
+    },
+    {
+      "name": "infocmp",
+      "version": "6.2.20200212"
+    },
+    {
+      "name": "tput",
+      "version": "6.2.20200212"
+    },
+    {
+      "name": "passwd",
+      "version": "not found"
+    },
+    {
+      "name": "patch",
+      "version": "2.7.6"
+    },
+    {
+      "name": "pidof",
+      "version": "not found"
+    },
+    {
+      "name": "ps",
+      "version": "not found"
+    },
+    {
+      "name": "fuser",
+      "version": "not found"
+    },
+    {
+      "name": "killall",
+      "version": "not found"
+    },
+    {
+      "name": "sed",
+      "version": "4.7"
+    },
+    {
+      "name": "sendmail",
+      "version": "not found"
+    },
+    {
+      "name": "groupadd",
+      "version": "not found"
+    },
+    {
+      "name": "groupdel",
+      "version": "not found"
+    },
+    {
+      "name": "groupmod",
+      "version": "not found"
+    },
+    {
+      "name": "newgrp",
+      "version": "not found"
+    },
+    {
+      "name": "useradd",
+      "version": "not found"
+    },
+    {
+      "name": "userdel",
+      "version": "not found"
+    },
+    {
+      "name": "usermod",
+      "version": "not found"
+    },
+    {
+      "name": "pax",
+      "version": "not found"
+    },
+    {
+      "name": "shutdown",
+      "version": "not found"
+    },
+    {
+      "name": "tar",
+      "version": "1.30"
+    },
+    {
+      "name": "time",
+      "version": "1.7"
+    },
+    {
+      "name": "col",
+      "version": "not found"
+    },
+    {
+      "name": "dmesg",
+      "version": "2.34"
+    },
+    {
+      "name": "ipcrm",
+      "version": "2.34"
+    },
+    {
+      "name": "ipcs",
+      "version": "2.34"
+    },
+    {
+      "name": "kill",
+      "version": "not found"
+    },
+    {
+      "name": "logger",
+      "version": "2.34"
+    },
+    {
+      "name": "more",
+      "version": "2.34"
+    },
+    {
+      "name": "mount",
+      "version": "2.34"
+    },
+    {
+      "name": "renice",
+      "version": "2.34"
+    },
+    {
+      "name": "su",
+      "version": "2.34"
+    },
+    {
+      "name": "umount",
+      "version": "2.34"
+    },
+    {
+      "name": "chfn",
+      "version": "not found"
+    },
+    {
+      "name": "chsh",
+      "version": "not found"
+    },
+    {
+      "name": "which",
+      "version": "not found"
+    }
+  ]
+}
