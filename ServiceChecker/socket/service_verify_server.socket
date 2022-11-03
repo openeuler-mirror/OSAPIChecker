@@ -1,0 +1,10 @@
+[Unit]
+Description=Detect server socket
+
+[Socket]
+Service=service_verify_server.service
+ListenStream=/run/service_checker/job.socket
+Accept=no
+
+[Install]
+WantedBy=sockets.target

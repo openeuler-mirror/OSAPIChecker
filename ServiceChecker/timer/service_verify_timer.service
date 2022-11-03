@@ -1,0 +1,5 @@
+[Unit]
+Description=Detect systemd timer service
+
+[Service]
+ExecStart=/bin/bash -c "echo [`date`] service_verify_timer has been executed. >> /tmp/tem_monitor/test_timer.log"

@@ -1,0 +1,12 @@
+[Unit]
+Description=Detect server service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/service_checker/service_server
+WorkingDirectory=/usr/libexec/service_checker/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

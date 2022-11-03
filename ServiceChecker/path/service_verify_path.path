@@ -1,0 +1,10 @@
+[Unit]
+Description=Detect systemd Path
+
+[Path]
+PathChanged=/tmp/tem_monitor
+MakeDirectory=yes
+Unit=service_verify_path.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Detect client service
+Requires=service_verify_server.socket
+After=multi-user.target service_verify_server.socket
+
+[Service]
+Type=simple
+PrivateTmp=true
+ExecStart=/usr/libexec/service_checker/service_client -unix /run/service_checker/job.socket
+Restart=on-failure
+
+[Install]
+WantedBy=service_verify_server.service

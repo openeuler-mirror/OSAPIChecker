@@ -1,0 +1,9 @@
+[Unit]
+Description=Detect systemd Timer
+
+[Timer]
+OnActiveSec=5s
+Unit=service_verify_timer.service
+
+[Install]
+WantedBy=multi-user.target
