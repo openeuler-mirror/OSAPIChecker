@@ -99,6 +99,15 @@ def checker_call_handler():
         # For FsChecker
         # import fscheck: input (json-file) (formated-json)
 
+    elif (args.channel == "servicechecker"):
+        print("进入 ServiceChecker 处理程序 . . .")
+
+        os.system('python3 ServiceChecker/service_checker.py')
+
+        # For CmdChecker
+        # import cmdcheck: input (json-file) (formated-json)
+
+
     else:
         print("Invalid Options, please input --channel=[cmdchecker|fschecker|libchecker]")
 
