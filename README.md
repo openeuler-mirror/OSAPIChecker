@@ -15,6 +15,9 @@ Operating system API compliance check tool.
 
 #### 使用说明
 
+0. OSAPIChecker
+![alpha](Docs/01-GUIs/alpha-01.png)
+
 1. LibChecker
 
    1. 桌面版的使用

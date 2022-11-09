@@ -83,10 +83,9 @@ function verify_path()
   if [[ -f test_path.log ]]; then
     rm -f test_path.log
   fi
-  log_info "journalctl 查询path单元日志信息为: \n`journalctl -u service_verify_path.path --since today`"
+  log_info "查询path服务启动状态为: \n`systemctl status service_verify_path.path`\n"
+
   touch tem_verify.txt
-
-
   log_info "在${monitor_path}目录下添加一个临时文件."
   sleep 2
   if [[ -f test_path.log ]]; then
@@ -96,10 +95,11 @@ function verify_path()
     log_info "在${monitor_path}目录下删除该临时文件."
     sleep 2
     log_info "第二次查看path服务输出内容为：\n`cat test_path.log`"
+
   else
-    log_warn "path 单元功能验证失败"
+    log_warn "***** path单元功能验证失败！*****"
   fi
-  log_info "path 单元功能验证正常!"
+  log_info "***** path单元功能验证成功！*****"
 }
 
 function verify_socket()
@@ -111,8 +111,16 @@ function verify_socket()
   fi
   log_info "请等待socket单元测试应用运行..."
   sleep 10
-  log_info "显示客户端服务通信信息：\n`systemctl status service_verify_client.service`"
-  log_info "显示服务端服务通信信息：\n`systemctl status service_verify_server.service`"
+  log_info "显示客户端服务通信日志信息：\n`journalctl -u service_verify_client.service -n 10`"
+  log_info "显示服务端服务通信日志信息：\n`journalctl -u service_verify_server.service -n 5`"
+
+  journalctl -u service_verify_client.service -n 10 | grep "The client is starting" >/dev/null 2>&1 &&
+  journalctl -u service_verify_server.service -n 5 | grep "service server start" >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    log_info "***** socket单元功能验证成功！*****"
+  else
+    log_warn "***** socket单元功能验证失败！*****"
+  fi
 }
 
 function verify_timer() {
@@ -125,9 +133,10 @@ function verify_timer() {
   fi
   sleep 80
   if [[ -f ${monitor_path}/test_timer.log ]]; then
-    log_info "service_verify_timer.service服务启动输出为：\n`cat ${monitor_path}/test_timer.log`,\nTimer单元执行成功!"
+    log_info "service_verify_timer.service服务启动输出为：\n`cat ${monitor_path}/test_timer.log`"
+    log_info "***** timer单元功能验证成功！*****"
   else
-    log_warn "timer 功能验证失败。"
+    log_warn "***** timer单元功能验证失败！*****"
   fi
 }
 
