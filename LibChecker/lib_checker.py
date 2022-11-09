@@ -159,7 +159,7 @@ def check_per_pkg_info(src_pkgname):
 
     if (len(srcpkgver) == 0):
         print("\t\t\t\t没有发现")
-        print("\t\t共享库信息:")
+        # print("\t\t共享库信息:")
         g_notfind_set_flag = 1
     else:
         print("\t\t\t\t实现包名 -> ", src_pkgname.ljust(20),"实现版本 -> ",srcpkgver)
@@ -312,7 +312,7 @@ def libchecker_checking_loop():
             check_per_pkg_info(g_storejsondict[last_key]['alias'][0]['name'])
 
             if (g_notfind_set_flag == 1 ):
-                print("not found")
+                # print("not found")
                 g_notfind_set_flag = 0
             else:
                 for list1_item in g_storejsondict[last_key]['share_objs'][g_ostype]:
