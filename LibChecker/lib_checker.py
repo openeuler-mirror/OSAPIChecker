@@ -129,7 +129,8 @@ def libchecker_environment_init():
 
     get_platform_info()
     # get_stdjsons_info('../Jsons/lib_list_1.0I-20220914-uos.json')
-    get_stdjsons_info('Jsons/lib_list_1.0I-20220914-uos.json')
+    # get_stdjsons_info('Jsons/lib_list_1.0I-20220914-uos.json')
+    get_stdjsons_info('Jsons/lib_list.json')
 
     # gen_mainscrn_init()
 
@@ -297,10 +298,12 @@ def libchecker_checking_loop():
 
         print("\t正在检查 ", '<',last_key,'>', "..." )
         print("\t\t标准约定:")
+        # print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(5))
         print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(5))
 
 
-        g_pkgversiodict[g_storejsondict[last_key]['alias'][0]['name']] = g_storejsondict[last_key]['version'][g_ostype]
+        # g_pkgversiodict[g_storejsondict[last_key]['alias'][0]['name']] = g_storejsondict[last_key]['version'][g_ostype]
+        g_pkgversiodict[g_storejsondict[last_key]['lib_name']] = g_storejsondict[last_key]['version'][g_ostype]
 
         if (len(g_storejsondict[last_key]['version'][g_ostype]) == 0):
             print("\t\t系统实现:")
@@ -309,7 +312,8 @@ def libchecker_checking_loop():
             # print("\t\t\t\t不执行检测")
             # print(l_tmp_dict[key]['necessity'][g_ostype]['level'])
             # print(g_counter_flags['pkg_counter']['total'])
-            check_per_pkg_info(g_storejsondict[last_key]['alias'][0]['name'])
+            # check_per_pkg_info(g_storejsondict[last_key]['alias'][0]['name'])
+            check_per_pkg_info(g_storejsondict[last_key]['lib_name'])
 
             if (g_notfind_set_flag == 1 ):
                 # print("not found")
