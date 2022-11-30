@@ -5,6 +5,7 @@
 # @Time     : 2022/11/09 16:00
 # @File     : Alpha OSAPIChecker Tools Source Code
 
+import apt_pkg
 import argparse
 import json
 import os
@@ -71,6 +72,8 @@ g_pkgversiodict = {}
 g_lib_location_path = " "
 
 g_notfind_set_flag = 0          # bool flag for find source package status
+g_chapter_dict = {}
+
 
 
 # a recycle call function for user
@@ -132,6 +135,8 @@ def libchecker_environment_init():
     # get_stdjsons_info('Jsons/lib_list_1.0I-20220914-uos.json')
     get_stdjsons_info('Jsons/lib_list.json')
 
+    apt_pkg.init_system()
+
     # gen_mainscrn_init()
 
 def check_per_pkg_info(src_pkgname):
@@ -158,6 +163,10 @@ def check_per_pkg_info(src_pkgname):
     print("\t\t系统实现: ")
     # print(g_pkgversiodict)
 
+
+
+
+
     if (len(srcpkgver) == 0):
         print("\t\t\t\t没有发现")
         # print("\t\t共享库信息:")
@@ -169,14 +178,20 @@ def check_per_pkg_info(src_pkgname):
         #       print("\t\t状态信息: L1L2 报错置位！", compare_version_serial_number(srcpkgver.split(':')[1], g_pkgversiodict[src_pkgname]))
         # else:
         #       print("\t\t状态信息: L1L2 报错置位！", compare_version_serial_number(srcpkgver, g_pkgversiodict[src_pkgname]))
+#    vc = apt_pkg.version_compare(a,b)
 
-        if(srcpkgver > g_pkgversiodict[src_pkgname]):
+ #       if(srcpkgver > g_pkgversiodict[src_pkgname]):
+        if (apt_pkg.version_compare(srcpkgver,g_pkgversiodict[src_pkgname]) > 0):
             print("\t\t状态信息: ")
             print("\t\t\t\t兼容")
         else:
-            print("\t\t状态信息: ")
-            print("\t\t\t\t不兼容")
-            g_counter_flags['pkg_counter']['warning']['all'] += 1
+            if (apt_pkg.version_compare(srcpkgver,g_pkgversiodict[src_pkgname]) == 0):
+                print("\t\t状态信息: ")
+                print("\t\t\t\t兼容")
+            else:
+                print("\t\t状态信息: ")
+                print("\t\t\t\t不兼容")
+                g_counter_flags['pkg_counter']['warning']['all'] += 1
 
         print("\t\t共享库信息:")
 
@@ -231,6 +246,7 @@ def check_sharelib_info(path_dir, lib_soname):
 # def libchecker_checking_loop():
 def libchecker_checking_loop():
     global g_notfind_set_flag 
+    global g_chapter_dict
 
     # print("Enter function: libchecker_checking_loop")
     # global g_jsonfile_dict
@@ -255,6 +271,7 @@ def libchecker_checking_loop():
         for key in l_tmp_dict:
 
             # print("\t\t章节:", l_tmp_dict[key]['sections_number'], key)
+            g_chapter_dict.update({ key: l_tmp_dict[key]['sections_number']})
 
             if (args.level == "l1"):
                 if (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L1"):
@@ -296,10 +313,23 @@ def libchecker_checking_loop():
         if (g_storejsondict[last_key]['necessity'][g_ostype]['level'] == "L3"):
             g_counter_flags['pkg_counter']['total']['l3'] += 1
 
-        print("\t正在检查 ", '<',last_key,'>', "..." )
+        print("\t正在检查 ", '<',last_key,'>', "...")
+
+        # print("\t\t章节:", l_tmp_dict[last_key]['sections_number'], last_key)
+        # print("\t\t章节:", last_key)
+        # print("\t\t章节:", g_jsonfile_dict['libs']['category']['base']['description']['chapters_number'])
+
+
         print("\t\t标准约定:")
-        # print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(5))
-        print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(5))
+        print("\t\t\t\t从属章节 -> ", g_chapter_dict[last_key].ljust(20), "兼容级别 -> ", g_storejsondict[last_key]['necessity'][g_ostype]['level'].ljust(20))
+
+#            if (last_key != "glibc" ):
+
+#            # print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(5))
+#        print( g_chapter_dict)
+        print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(20))
+
+
 
 
         # g_pkgversiodict[g_storejsondict[last_key]['alias'][0]['name']] = g_storejsondict[last_key]['version'][g_ostype]
@@ -317,10 +347,12 @@ def libchecker_checking_loop():
 
             if (g_notfind_set_flag == 1 ):
                 # print("not found")
+                g_counter_flags['pkg_counter']['failed']['all'] += 1
                 g_notfind_set_flag = 0
             else:
                 for list1_item in g_storejsondict[last_key]['share_objs'][g_ostype]:
-                    print("\t\t\t\t名称 -> ",list1_item.split('.')[0], ".so")
+                    # print("\t\t\t\t名称 -> ",list1_item.split('.')[0], ".so")
+                    print("\t\t\t\t名称 -> ",list1_item)
                     print("\t\t\t\t\t标准约定 -> ",list1_item, )
 
                     if(g_ostype == "desktop"):
@@ -377,6 +409,7 @@ def libchecker_checking_loop():
             # print(l_tmp_dict['glibc'].keys())
             # check_per_so_info()
 
+#    print(g_chapter_dict)
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     print("")
@@ -1091,34 +1124,67 @@ def gen_json_file():
         json.dump(oschecker,f,indent = 4)
 
 def libchecker_output_json_file():
+    global g_chapter_dict
+    global g_jsonfile_dict
+
     print("Enter function: libchecker_output_json_file()")
     output_info = {}
     output_data = json.loads(json.dumps(output_info))
     
     mateinfo = {}
+    mateinfo_sections_number = {}
+    mateinfo_pkgcheck_result = {}
+    mateinfo_objcheck_result = {}
+    mateinfo_packages_dict = {}
+    mateinfo_share_libs = {}
+    mateinfo_all_info = {}
     out_data_deep = {}
     
     result_dict = libchecker_compare_liblist()
 
-    for key in result_dict:
-        if result_dict[key] == 'false':
-#            mateinfo = {"name" : key, "version" : "no exist", "status" : "no exist" , "category" : "exist", "otherinfo" : "no exist"}
-            mateinfo = {"name" : pick_linkname_from_soname(key), "version" : key, "status" : 'no exist', "category" : "library", "otherinfo" : "none"}
-        elif result_dict[key] == '<':
-#            mateinfo = {"name" : key, "version" : result_dict[key], "status" : "incompatible", "category" : "library", "otherinfo" : "none"}
-            mateinfo = {"name" : pick_linkname_from_soname(key), "version" : key, "status" : 'incompatible', "category" : "library", "otherinfo" : "none"}
-        else:
-#            mateinfo = {"name" : key, "version" : result_dict[key], "status" : "compatible", "category" : "library", "otherinfo" : "none"}
-            mateinfo = {"name" : pick_linkname_from_soname(key), "version" : key, "status" : 'compatible', "category" : "library", "otherinfo" : "none"}
-        
-        #out_data_deep = {key : mateinfo}
-        out_data_deep.update({key : mateinfo})
-        output_data = {"libchecker": out_data_deep}
 
-    json_output = json.dumps(output_data, ensure_ascii = False)
+    for chapter_class in g_jsonfile_dict['libs']['category']: # chapter_class
+        print(chapter_class)
+        for key in g_jsonfile_dict['libs']['category'][chapter_class]['packages']: # package_class
+            print("\t", key)
+            #mateinfo.update = { key : g_jsonfile_dict['libs']['category'][chapter_class][key]['packages']['sections_number'] }
+            for key1 in g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]: # sections_number class
+                print("\t\t", key1)
+                # print("\t\t", key1)
+                # print("\t\t\t",g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number'])
+#                print("\t\t\t", key1)
+                # mateinfo_sections_number.update({ key :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number']})
+#            for key1 in g_jsonfile_dict['libs']['category'][chapter_class]['packages']:
+#                mateinfo_pkgcheck_result.update({ key1 :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key1]['version']['desktop']})
+#            for key1 in g_jsonfile_dict['libs']['category'][chapter_class]['packages']:
+#                mateinfo_objcheck_result.update({ key1 :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key1]['share_objs']['desktop']})
+            #, "Chapter " : g_jsonfile_dict['libs']['category'][chapter_class][key]['packages']['sections_number']}
+            #, "Necessity" : chapter_class['packages']['necessity'], "Share Objs" : chapter_class['packages']['share_objs'], "Otherinfo" : "none"}
+            # mateinfo = { "Package ":  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]}i
+                mateinfo_sections_number.update({ key1 :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number']})
+
+            # mateinfo_packages_dict.update({key : mateinfo_sections_number})
+            mateinfo_packages_dict.update({key : mateinfo_sections_number})
+            mateinfo_sections_number.clear()
+            
+            # mateinfo_all_info.update({ key :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number']})
+        #mateinfo_packages_dict.update({key : "test"})
+
+        mateinfo_all_info.update({chapter_class : mateinfo_packages_dict})
+
+        out_data_deep.update({chapter_class : mateinfo_packages_dict})
+        mateinfo_packages_dict.clear()
+        
+    output_data = {"LibChecker Result" : out_data_deep}
+
+
+
+
+    json_output = json.dumps(out_data_deep, ensure_ascii = False)
 
     with open("Outputs/libchecker-output.json","w") as f:
         json.dump(output_data,f)
+        #json.dump(out_data_deep,f)
 
 
 def libchecker_json_file_output():
@@ -1234,6 +1300,7 @@ def libchecker_json_file_output():
 libchecker_environment_init()
 libchecker_checking_loop()
 libchecker_over_jobs()
+#libchecker_output_json_file()
 
 #check_sharelib_info('/lib', 'libanl.so.1' )
 
