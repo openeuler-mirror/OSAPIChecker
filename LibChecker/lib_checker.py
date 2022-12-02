@@ -5,7 +5,7 @@
 # @Time     : 2022/11/09 16:00
 # @File     : Alpha OSAPIChecker Tools Source Code
 
-import apt_pkg
+
 import argparse
 import json
 import os
@@ -15,16 +15,21 @@ import time
 
 
 parser = argparse.ArgumentParser(description="This Progermm is a OSChecker", prog="OSChecker")
-parser.add_argument('-p', '--strategy', action='store', type=str, help='Choice OSAPIChecker strategy: base,only-expand,with-expand', default="base")
+parser.add_argument('-s', '--strategy', action='store', type=str, help='Choice OSAPIChecker strategy: base,only-expand,with-expand', default="base")
 parser.add_argument('-l', '--level', action='store', type=str, help='Choice OSAPIChecker level: l1,l2,l3,l1l2,l1l2l3', default="l1l2")
+parser.add_argument('-t', '--ostype', action='store', type=str, help='OSType of current OS: desktop, server, embed，other', default="desktop")
+parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package Manager of current OS: apt-deb, yum-rpm, src-bin, other', default="apt-deb")
 # parser.add_argument('-j', '--json', action='store', type=str, help='Choice OSChecker Json templete file', required=True) # this line use for dect the json file.
-
-
 args = parser.parse_args()
-
 
 g_inputstrategy = args.strategy
 g_inputlevel = args.level
+g_inputostype = args.ostype
+g_inputpkgmngr = args.pkgmngr
+
+
+if (g_inputpkgmngr == "apt-deb"):
+    import apt_pkg # import for apt-deb package management tools
 
 # For Logger Handler
 class Logger(object):
@@ -66,6 +71,7 @@ g_pkgstd_dict = {}              # a dict store json node mata-date
 g_counter_flags = {}            # a conuter struct 
 
 g_ostype = "desktop"            # global magic string for OS type
+g_pkgmgr = "apt-deb"            # global magic string for OS type
 
 g_storejsondict = {}
 g_pkgversiodict = {}
@@ -86,8 +92,12 @@ def libchecker_over_jobs():
 
 
 def get_platform_info():
+#    global g_inputstrategy = args.strategy
+#    global g_inputlevel = args.level
+#    global g_inputostype = args.ostype
+#    global g_inputpkgmngr = args.pkgmngr
     global g_ostype
-    print("开始 OSAPI 检查")
+    print("开始 LibChecker 检查")
     # p_platform_info = os.popen('uname -a')
     # print(p_platform_info)
     # p_platform_info.close()
@@ -99,10 +109,12 @@ def get_platform_info():
     print("\t\t 机器:",platform.machine())
     print("\t\t 版本:",platform.release())
 
-    if "desktop" in platform.release():
-        g_ostype = "desktop"
-    else:
-        g_ostype = "server"
+#    if "desktop" in platform.release():
+#        g_ostype = "desktop"
+#    else:
+#        g_ostype = "server"
+    g_ostype = g_inputostype
+#    print(g_ostype)
 
 def get_stdjsons_info(json_file_path):
     with open(json_file_path) as f:
@@ -126,6 +138,10 @@ def get_stdjsons_info(json_file_path):
 def libchecker_environment_init():
     # print("Enter function: libchecker_environment_init")
     global g_counter_flags
+    # g_inputstrategy = args.strategy
+    # g_inputlevel = args.level
+    # g_inputostype = args.ostype
+    # g_inputpkgmngr = args.pkgmngr
     
     # g_counter_flags = {'pkg_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0, 'l1': 0, 'l2': 0, 'l3':0}, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
     g_counter_flags = {'pkg_counter': {'total': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} , 'passed': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'warning': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'failed': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} }, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
@@ -134,8 +150,9 @@ def libchecker_environment_init():
     # get_stdjsons_info('../Jsons/lib_list_1.0I-20220914-uos.json')
     # get_stdjsons_info('Jsons/lib_list_1.0I-20220914-uos.json')
     get_stdjsons_info('Jsons/lib_list.json')
-
-    apt_pkg.init_system()
+    
+    if (g_inputpkgmngr == "apt-deb"):
+        apt_pkg.init_system()
 
     # gen_mainscrn_init()
 
@@ -146,10 +163,18 @@ def check_per_pkg_info(src_pkgname):
     # srcpkgnam = p_srcpkgnam.read().rstrip('\n')
     # p_srcpkgnam.close()
 
-    if(g_ostype == "desktop"):
-        p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+    if(g_inputostype == "desktop"):
+        if (g_inputpkgmngr == "apt-deb"):
+            p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+        elif (g_inputpkgmngr == "yum-rpm"):
+            p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
+    elif(g_inputostype == "server"):
+        if (g_inputpkgmngr == "apt-deb"):
+            p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+        elif (g_inputpkgmngr == "yum-rpm"):
+            p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
     else:
-        p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
+        print("Please input --ostype=[desktop,server,embde,...] and --pkgmngr=[apt-deb,yum-rpm,src-bin,...]")
 
     # yum list gcc | awk '{print $2}' | sed -n '3p'
 
@@ -162,10 +187,6 @@ def check_per_pkg_info(src_pkgname):
 
     print("\t\t系统实现: ")
     # print(g_pkgversiodict)
-
-
-
-
 
     if (len(srcpkgver) == 0):
         print("\t\t\t\t没有发现")
@@ -285,20 +306,28 @@ def libchecker_checking_loop():
             elif (args.level == "l1l2"):
                 g_storejsondict[key] = l_tmp_dict[key]
                 if (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L3"):
-                    g_storejsondict.pop(key) 
+                    g_storejsondict.pop(key)
+                elif (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L0"):
+                    g_storejsondict.pop(key)
             elif (args.level == "l1l3"):
                 g_storejsondict[key] = l_tmp_dict[key]
                 if (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L2"):
                     g_storejsondict.pop(key) 
+                elif (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L0"):
+                    g_storejsondict.pop(key)
             elif (args.level == "l2l3"):
                 g_storejsondict[key] = l_tmp_dict[key]
                 if (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L1"):
                     g_storejsondict.pop(key) 
+                elif (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L0"):
+                    g_storejsondict.pop(key)
             elif (args.level == "l1l2l3"):
                 g_storejsondict = l_tmp_dict
             else:
                 g_storejsondict[key] = l_tmp_dict[key]
                 if (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L3"):
+                    g_storejsondict.pop(key)
+                elif (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L0"):
                     g_storejsondict.pop(key)
                 print("[Warnning]: Invalid input options, execute use default options \"--strate=base --levle=l1l2\"")
 
@@ -314,24 +343,16 @@ def libchecker_checking_loop():
             g_counter_flags['pkg_counter']['total']['l3'] += 1
 
         print("\t正在检查 ", '<',last_key,'>', "...")
-
         # print("\t\t章节:", l_tmp_dict[last_key]['sections_number'], last_key)
         # print("\t\t章节:", last_key)
         # print("\t\t章节:", g_jsonfile_dict['libs']['category']['base']['description']['chapters_number'])
-
-
         print("\t\t标准约定:")
         print("\t\t\t\t从属章节 -> ", g_chapter_dict[last_key].ljust(20), "兼容级别 -> ", g_storejsondict[last_key]['necessity'][g_ostype]['level'].ljust(20))
-
 #            if (last_key != "glibc" ):
 
 #            # print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(5))
 #        print( g_chapter_dict)
         print("\t\t\t\t标准包名 -> " ,last_key.ljust(20),"标准版本 -> ", g_storejsondict[last_key]['version'][g_ostype].ljust(20))
-
-
-
-
         # g_pkgversiodict[g_storejsondict[last_key]['alias'][0]['name']] = g_storejsondict[last_key]['version'][g_ostype]
         g_pkgversiodict[g_storejsondict[last_key]['lib_name']] = g_storejsondict[last_key]['version'][g_ostype]
 
@@ -376,11 +397,6 @@ def libchecker_checking_loop():
                             g_counter_flags['lib_counter']['warning'] += 1
 
                 # print("\t\t\t\t动态库位置 -> ",lib_result,)
-
-
-
-
-
             # if (len(g_storejsondict[key]['version'][g_ostype]) == 0):
             #       print("\t\t系统实现:")
             #       print("\t\t\t\t没有发现")
@@ -413,7 +429,7 @@ def libchecker_checking_loop():
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     print("")
-    print("\t检查策略：", "\"",  "--strategy =",args.strategy, "  --level =",args.level, "\"")
+    print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "\"")
     print("")
     print("\t软件包:")
     print("\t\t总计:", g_counter_flags['pkg_counter']['total']['all'], "{" ,"l1->",g_counter_flags['pkg_counter']['total']['l1'],";", "l2->", g_counter_flags['pkg_counter']['total']['l2'], ";", "l3->", g_counter_flags['pkg_counter']['total']['l3'],  "}")
