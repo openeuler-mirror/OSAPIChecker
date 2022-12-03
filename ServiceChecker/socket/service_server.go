@@ -9,23 +9,23 @@ import (
 )
 
 func handle(conn net.Conn) {
+    var res_content string = "Verify socket server"
     defer conn.Close()
     for {
         receives := bufio.NewReader(conn)
-        var buffer [128]byte
-        num, e := receives.Read(buffer[:])
+        receiveData, e := receives.ReadString('\n')
         if e != nil {
             fmt.Printf("read from conn failed, error:%v\n", e)
             break
         }
-        receiveData := string(buffer[:num])
         fmt.Printf("Server receive: %v\n", receiveData)
-        _, e = conn.Write([]byte(receiveData))
+        _, e = conn.Write([]byte(res_content + "\n"))
         if e != nil {
             fmt.Printf("Write from conn failed, error:%v\n", e)
             break
         }
-		if strings.Contains(receiveData, "closed") {
+		if strings.Contains(receiveData, "client") {
+		    fmt.Println("service server end !")
 			break
 		}
     }
