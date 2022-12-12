@@ -8,4 +8,4 @@ StandardOutput=syslog
 StandardError=inherit
 
 [Install]
-WantedBy=rescue.target
+WantedBy=multi-user.target
