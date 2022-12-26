@@ -1382,7 +1382,7 @@
                                 "libcrammd5.so.3",
                                 "ibdigestmd5.so.3",
                                 "libgs2.so.3",
-                                "libgssapov2.so.3",
+                                "libgssapiv2.so.3",
                                 "libldapdb.so.3",
                                 "liblogin.so.3",
                                 "libntlm.so.3",
@@ -2214,7 +2214,7 @@
                         "sections_number": "9.11",
                         "lib_description": "通过mDNS/DNS-SD协议发现本地网络上的服务。",
                         "version": {
-                            "desktop": ".7", 
+                            "desktop": "0.7", 
                             "server": ""
                         },
                         "alias": [],
@@ -2584,14 +2584,14 @@
                         "lib_description": "SDL的重构版",
                         "version": {
                             "desktop": "2.0.9", 
-                            "server": "2.0.8"
+                            "server": ""
                         },
                         "alias": [
                             {
                                 "name": "libsdl2/SDL2", 
                                 "version": {
                                     "desktop": "2.0.9",
-                                    "server": "2.0.8"
+                                    "server": ""
                                 }
                             }
                         ],
@@ -3174,7 +3174,7 @@
                         "sections_number": "10.28",
                         "lib_description": "为 X 提供访问 PCI 总线和设备的功能平台无关的方式。",
                         "version": {
-                            "desktop": ".14", 
+                            "desktop": "0.14", 
                             "server": ""
                         },
                         "alias": [],
@@ -4469,7 +4469,7 @@
                         },
                         "share_objs": {
                             "desktop": ["libpython2.7.so.1"],
-                            "server": ["libpython2.7.so.2"]
+                            "server": ["libpython2.7.so.1"]
                         }
                     },
                     "openjdk": {
