@@ -1,20 +1,20 @@
 {
     "std_description": {
-          "std_name": "²Ù×÷ÏµÍ³Ó¦ÓÃ±à³Ì½Ó¿Ú",
+          "std_name": "æ“ä½œç³»ç»Ÿåº”ç”¨ç¼–ç¨‹æ¥å£",
           "std_number": "T/CESA-XXXX-2022",
-          "##std_version": "±ê×¼µÄ°æ±¾±êÊ¶£¬½ö¹©×÷Îª±¾jsonÃèÊöÎÄ¼şµÄ±êÊ¶Ê¹ÓÃ£¬ÓÉ±ê×¼°æ±¾ºÅ+Àà±ğ×é³É£¬±ê×¼µÚÒ»°æÎª1.0£¬¿±ÎóÔö¼ÓĞ¡°æ±¾ºÅÈç1.1£¬±ê×¼ĞŞ¶©Ôö¼Ó´ó°æ±¾ºÅ2.0£»",
-          "##std_version": "±ê×¼Àà±ğÓÃ1Î»´óĞ´×ÖÄ¸£¬I±íÊ¾ÍÅ±ê£¬Sµç×ÓĞÅÏ¢ĞĞ±ê£¬G±íÊ¾¹ú±ê",
+          "##std_version": "æ ‡å‡†çš„ç‰ˆæœ¬æ ‡è¯†ï¼Œä»…ä¾›ä½œä¸ºæœ¬jsonæè¿°æ–‡ä»¶çš„æ ‡è¯†ä½¿ç”¨ï¼Œç”±æ ‡å‡†ç‰ˆæœ¬å·+ç±»åˆ«ç»„æˆï¼Œæ ‡å‡†ç¬¬ä¸€ç‰ˆä¸º1.0ï¼Œå‹˜è¯¯å¢åŠ å°ç‰ˆæœ¬å·å¦‚1.1ï¼Œæ ‡å‡†ä¿®è®¢å¢åŠ å¤§ç‰ˆæœ¬å·2.0ï¼›",
+          "##std_version": "æ ‡å‡†ç±»åˆ«ç”¨1ä½å¤§å†™å­—æ¯ï¼ŒIè¡¨ç¤ºå›¢æ ‡ï¼ŒSç”µå­ä¿¡æ¯è¡Œæ ‡ï¼ŒGè¡¨ç¤ºå›½æ ‡",
           "std_version": "1.0I",
-          "etc": "ÕâÊÇ¡¶²Ù×÷ÏµÍ³Ó¦ÓÃ±à³Ì½Ó¿Ú¡·±ê×¼ÔËĞĞ¿âÃèÊöÎÄ¼ş£¬ÊÇ¡¶²Ù×÷ÏµÍ³Ó¦ÓÃ±à³Ì½Ó¿Ú¡·±ê×¼·ûºÏĞÔ²âÊÔ¹¤¾ßµÄ×é³É²¿·Ö£»"
+          "etc": "è¿™æ˜¯ã€Šæ“ä½œç³»ç»Ÿåº”ç”¨ç¼–ç¨‹æ¥å£ã€‹æ ‡å‡†è¿è¡Œåº“æè¿°æ–‡ä»¶ï¼Œæ˜¯ã€Šæ“ä½œç³»ç»Ÿåº”ç”¨ç¼–ç¨‹æ¥å£ã€‹æ ‡å‡†ç¬¦åˆæ€§æµ‹è¯•å·¥å…·çš„ç»„æˆéƒ¨åˆ†ï¼›"
     },
     "CopyRight": {
-          "License": "±¾ÎÄ¼ş×ñÑ­Ä¾À¼Ğ­Òéxxxxxx",
+          "License": "æœ¬æ–‡ä»¶éµå¾ªæœ¨å…°åè®®xxxxxx",
           "comment": "",
-          "Author": "¹±Ï×Õß£ºXXX@cesi£¬xxx@uitech£¬xxx@huawei£¬xxx@kylinos"
+          "Author": "è´¡çŒ®è€…ï¼šXXX@cesiï¼Œxxx@uitechï¼Œxxx@huaweiï¼Œxxx@kylinos"
     },
-    "##libs": "±ê×¼¹æ¶¨¶¯¿â°ü",
+    "##libs": "æ ‡å‡†è§„å®šåŠ¨åº“åŒ…",
     "libs": {
-        "##libs_location": "²éÑ¯¹²Ïí¶ÔÏó¿âµÄÂ·¾¶£¬Óë±ê×¼¹æ¶¨ÁËÎÄ¼şÏµÍ³²ã´Î½á¹¹±£³ÖÒ»ÖÂ",
+        "##libs_location": "æŸ¥è¯¢å…±äº«å¯¹è±¡åº“çš„è·¯å¾„ï¼Œä¸æ ‡å‡†è§„å®šäº†æ–‡ä»¶ç³»ç»Ÿå±‚æ¬¡ç»“æ„ä¿æŒä¸€è‡´",
         "lib_location": [
         "/lib",
         "/lib64",
@@ -22,30 +22,30 @@
         ],
         "category": {
 
-            "##ÕÂ½ÚÃû": "7 »ù´¡¿â",
+            "##ç« èŠ‚å": "7 åŸºç¡€åº“",
             "base": {
                 "description": {
-                    "##chapters_number": "¿â¶ÔÓ¦±ê×¼ÕÂºÅ£¬×öÍêÈÕÖ¾»ò´íÎóµÈÊä³ö¼ÇÂ¼±êÊ¶£¬¿ÉÓÃÓÚ·´²é±ê×¼",
+                    "##chapters_number": "åº“å¯¹åº”æ ‡å‡†ç« å·ï¼Œåšå®Œæ—¥å¿—æˆ–é”™è¯¯ç­‰è¾“å‡ºè®°å½•æ ‡è¯†ï¼Œå¯ç”¨äºåæŸ¥æ ‡å‡†",
                     "chapters_number": "7",
-                    "chapters_Name": "»ù´¡"
+                    "chapters_Name": "åŸºç¡€"
                 },
                 "packages": {
-                    "##glibc": "°üÃû£¬¿¼ÂÇµ½±àÒëºóÃû³Æ¶ş½øÖÆ°²×°°ü¿ÉÄÜ»á´æÔÚ²îÒì£¬Ò»°ãÒÔÔ´Âë°üÈ¥ÃüÃû£¬×öÍêÆ¥Åä·û£¬ÓÃÒÔ¼ì²é°²×°µÄÔËĞĞ¿âÊÇ·ñ´æÔÚ£¬Í¬aliasname¡£ºóÃæ²»ÔÚ×¸Êö",
+                    "##glibc": "åŒ…åï¼Œè€ƒè™‘åˆ°ç¼–è¯‘ååç§°äºŒè¿›åˆ¶å®‰è£…åŒ…å¯èƒ½ä¼šå­˜åœ¨å·®å¼‚ï¼Œä¸€èˆ¬ä»¥æºç åŒ…å»å‘½åï¼Œåšå®ŒåŒ¹é…ç¬¦ï¼Œç”¨ä»¥æ£€æŸ¥å®‰è£…çš„è¿è¡Œåº“æ˜¯å¦å­˜åœ¨ï¼ŒåŒaliasnameã€‚åé¢ä¸åœ¨èµ˜è¿°",
                     "glibc": {
-                        "##lib_name": "°üÃû£¬Ò»°ãÓëÍâ²¿Ãû³ÆÓ¦¸ÃÒ»ÖÂ",
+                        "##lib_name": "åŒ…åï¼Œä¸€èˆ¬ä¸å¤–éƒ¨åç§°åº”è¯¥ä¸€è‡´",
                         "lib_name": "glibc",
-                        "##sections_number": "¿â°ü¶ÔÓ¦±ê×¼½ÚºÅ£¬µ±·ûºÏĞÔ¼ì²é³öÏÖ´íÎó»ò¾¯¸æÊ±£¬¿ÉÓÃÓÚ±ê×¼·´²é",
+                        "##sections_number": "åº“åŒ…å¯¹åº”æ ‡å‡†èŠ‚å·ï¼Œå½“ç¬¦åˆæ€§æ£€æŸ¥å‡ºç°é”™è¯¯æˆ–è­¦å‘Šæ—¶ï¼Œå¯ç”¨äºæ ‡å‡†åæŸ¥",
                         "sections_number": "7.1",
-                        "##lib_description": "¿âµÄ½éÉÜ£¬¿ÉÄÜ»á±»É¾³ı£¬½ö×÷ÎªÊ¶¶ÁÊ¹ÓÃ£¬²»²ÎÓë·ûºÏĞÔ¼ì²é£¬Öµ¿ÉÒÔÖÃ¿Õ",
-                        "lib_description": "¸ÃÈí¼ş°ü°üÀ¨±ê×¼C¿âµÄ¹²Ïí°æ±¾ÒÔ¼°±ê×¼ÊıÑ§¿â£¬ÒÔ¼°ÆäËûĞí¶à¿â¡£",
-                        "##version": "×îµÍ°æ±¾ÒªÇó£¬'desktop_version':×ÀÃæOS£¬'server_version',·şÎñÆ÷OS",
-                        "##version": "°æ±¾Î»´Î¼ì²é¹æÔò£ºÈç¹û°æºÅÓĞnÎ»£¬ÔòÇ°n-1Î»²»¿É±ä£¬µÚnÎ»°æ±¾ºÅ±ÈµÍÓÚ°æ±¾ÒªÇó£»Èç¹û°æºÅÖĞº¬ÓĞ×ÖÄ¸»òÌØÊâ×Ö·ûÁíĞĞÀ©³äÅĞ¶¨¹æÔò",
+                        "##lib_description": "åº“çš„ä»‹ç»ï¼Œå¯èƒ½ä¼šè¢«åˆ é™¤ï¼Œä»…ä½œä¸ºè¯†è¯»ä½¿ç”¨ï¼Œä¸å‚ä¸ç¬¦åˆæ€§æ£€æŸ¥ï¼Œå€¼å¯ä»¥ç½®ç©º",
+                        "lib_description": "è¯¥è½¯ä»¶åŒ…åŒ…æ‹¬æ ‡å‡†Cåº“çš„å…±äº«ç‰ˆæœ¬ä»¥åŠæ ‡å‡†æ•°å­¦åº“ï¼Œä»¥åŠå…¶ä»–è®¸å¤šåº“ã€‚",
+                        "##version": "æœ€ä½ç‰ˆæœ¬è¦æ±‚ï¼Œ'desktop_version':æ¡Œé¢OSï¼Œ'server_version',æœåŠ¡å™¨OS",
+                        "##version": "ç‰ˆæœ¬ä½æ¬¡æ£€æŸ¥è§„åˆ™ï¼šå¦‚æœç‰ˆå·æœ‰nä½ï¼Œåˆ™å‰n-1ä½ä¸å¯å˜ï¼Œç¬¬nä½ç‰ˆæœ¬å·æ¯”ä½äºç‰ˆæœ¬è¦æ±‚ï¼›å¦‚æœç‰ˆå·ä¸­å«æœ‰å­—æ¯æˆ–ç‰¹æ®Šå­—ç¬¦å¦è¡Œæ‰©å……åˆ¤å®šè§„åˆ™",
                         "version": {
                             "desktop": "2.28", 
                             "server": "2.28"
                         },
-                        "##aliasname": "°üµÄ±ğÃû£¬¿¼ÂÇÓÉÓÚÀ´Ô´²îÒì£¬²¿·Ö°üÃü¼°°æ±¾¹æÔòÓë°üµÄ¸ùÉçÇø²»Ò»ÖÂ£¬±ê×¼ÌØ¶ÔÉÙ²¿·Ö°üÔö¼Ó±ğÃû¼°ÌØµã°æ±¾ÒªÇó£¬±ê×¼ÃûºÍ±ğÃûÓ¦±éÀú²éÕÒ",
-                        "##aliaversion": "±ğÃû¶ÔÓ¦°æ±¾£¬Èç¹ûÃ»ÓĞÌØÊâÒªÇó£¬Ó¦Óë±ê×¼°æÒ»ÖÂ£»Èç¹û±ğÃûÓĞ¶à¸ö£¬ÄÇÃ´°æ±¾ºÅÒ²Ó¦¸ÃÊÇ¶à¸ö£¬±£³ÖÒ»Ò»¶ÔÓ¦£¬¶à¸ö±ğÃû¶ÔÒ»¸ö°æ±¾",
+                        "##aliasname": "åŒ…çš„åˆ«åï¼Œè€ƒè™‘ç”±äºæ¥æºå·®å¼‚ï¼Œéƒ¨åˆ†åŒ…å‘½åŠç‰ˆæœ¬è§„åˆ™ä¸åŒ…çš„æ ¹ç¤¾åŒºä¸ä¸€è‡´ï¼Œæ ‡å‡†ç‰¹å¯¹å°‘éƒ¨åˆ†åŒ…å¢åŠ åˆ«ååŠç‰¹ç‚¹ç‰ˆæœ¬è¦æ±‚ï¼Œæ ‡å‡†åå’Œåˆ«ååº”éå†æŸ¥æ‰¾",
+                        "##aliaversion": "åˆ«åå¯¹åº”ç‰ˆæœ¬ï¼Œå¦‚æœæ²¡æœ‰ç‰¹æ®Šè¦æ±‚ï¼Œåº”ä¸æ ‡å‡†ç‰ˆä¸€è‡´ï¼›å¦‚æœåˆ«åæœ‰å¤šä¸ªï¼Œé‚£ä¹ˆç‰ˆæœ¬å·ä¹Ÿåº”è¯¥æ˜¯å¤šä¸ªï¼Œä¿æŒä¸€ä¸€å¯¹åº”ï¼Œå¤šä¸ªåˆ«åå¯¹ä¸€ä¸ªç‰ˆæœ¬",
                         "alias": [
                             {
                                 "name": "libc6", 
@@ -55,10 +55,10 @@
                                 }
                             }
                         ],
-                                "##necessity": "±ØÒªĞÔ",
-                                "##necessity": "µÚÒ»Î»£ºL0±íÊ¾¶ÔÓ¦Æ½Ì¨²»×÷ÒªÇó£¬L1³¤ÆÚ¼æÈİ¿â£¬L2¼æÈİ¿â£¬L3ÊÔÓÃ°æ±¾£»Èç¹ûÊÇL0£¬ÔòµÚ¶şÏî¿ÉÒÔÖÃ¿Õ''£»L1ÓëL2ÔÚ·ûºÏĞÔ¼ì²éÃ»ÓĞÃ÷ÏÔÇø±ğ£¬Ö÷ÒªÊÇÎªÁËÇø±ğ±ê×¼µÄ³¤ÆÚĞÔ³ĞÅµ",
-                                "##necessity": "µÚ¶şÎ»£ºbasic±íÊ¾»ù±¾£¬»ù±¾ISO°²×°Ó¦Ìá¹©¸Ã¿â£¬expansion±íÊ¾À©Õ¹£¬¸Ã¿â¿ÉÒÔÍ¨¹ıÀ©Õ¹¹âÅÌ»ò²Ö¿âÌá¹©£¬µ±¼æÈİĞÔ¼¶±ğÎª'L0'Ê±£¬±¾Ïî¿ÉÖÃ¿Õ£¬²»ÔÙ×ö¼ì²é£¬Ò²²»ÔÙ×ö¹²Ïí¶ÔÏóµÄ¼ì²é",
-                                "##necessity": "µÚÈıÎ»£ºDeprecated±íÊ¾²»ÍÆ¼ö£¬¼´²»ÍÆ¼öÓ¦ÓÃµ÷ÓÃ£¬Îª¼æÈİÀúÊ·Ó¦ÓÃÒªÇó²Ù×÷ÏµÍ³Ìá¹©µÄ¿â£¬²Ù×÷ĞÔÏµÍ³·ûºÏĞÔ¼ì²éÊ±ºöÂÔ¸ÃÏî£¬Ó¦ÓÃÈç¹ûÒÀÀµ¸ÃÀà¿âÓ¦¸ø³ö¸æ¾¯",
+                                "##necessity": "å¿…è¦æ€§",
+                                "##necessity": "ç¬¬ä¸€ä½ï¼šL0è¡¨ç¤ºå¯¹åº”å¹³å°ä¸ä½œè¦æ±‚ï¼ŒL1é•¿æœŸå…¼å®¹åº“ï¼ŒL2å…¼å®¹åº“ï¼ŒL3è¯•ç”¨ç‰ˆæœ¬ï¼›å¦‚æœæ˜¯L0ï¼Œåˆ™ç¬¬äºŒé¡¹å¯ä»¥ç½®ç©º''ï¼›L1ä¸L2åœ¨ç¬¦åˆæ€§æ£€æŸ¥æ²¡æœ‰æ˜æ˜¾åŒºåˆ«ï¼Œä¸»è¦æ˜¯ä¸ºäº†åŒºåˆ«æ ‡å‡†çš„é•¿æœŸæ€§æ‰¿è¯º",
+                                "##necessity": "ç¬¬äºŒä½ï¼šbasicè¡¨ç¤ºåŸºæœ¬ï¼ŒåŸºæœ¬ISOå®‰è£…åº”æä¾›è¯¥åº“ï¼Œexpansionè¡¨ç¤ºæ‰©å±•ï¼Œè¯¥åº“å¯ä»¥é€šè¿‡æ‰©å±•å…‰ç›˜æˆ–ä»“åº“æä¾›ï¼Œå½“å…¼å®¹æ€§çº§åˆ«ä¸º'L0'æ—¶ï¼Œæœ¬é¡¹å¯ç½®ç©ºï¼Œä¸å†åšæ£€æŸ¥ï¼Œä¹Ÿä¸å†åšå…±äº«å¯¹è±¡çš„æ£€æŸ¥",
+                                "##necessity": "ç¬¬ä¸‰ä½ï¼šDeprecatedè¡¨ç¤ºä¸æ¨èï¼Œå³ä¸æ¨èåº”ç”¨è°ƒç”¨ï¼Œä¸ºå…¼å®¹å†å²åº”ç”¨è¦æ±‚æ“ä½œç³»ç»Ÿæä¾›çš„åº“ï¼Œæ“ä½œæ€§ç³»ç»Ÿç¬¦åˆæ€§æ£€æŸ¥æ—¶å¿½ç•¥è¯¥é¡¹ï¼Œåº”ç”¨å¦‚æœä¾èµ–è¯¥ç±»åº“åº”ç»™å‡ºå‘Šè­¦",
                         "necessity": {
                             "desktop": {
                                 "level": "L1",
@@ -71,8 +71,8 @@
                                 "deprecated": "false"
                             }
                         },
-                                "##share_objs": "¿âËùÒªÇóµÄ¹²Ïí¶ÔÏóÃûÇåµ¥£»µ±'share_objs'´æÔÚÊ±±íÊ¾×ÀÃæÓë·şÎñÆ÷µÄÒªÇóÒ»ÖÂ(»ò¶ÔÆäÖĞÒ»Àà²Ù×÷ÏµÍ³ÎŞÒªÇó)£»Èç¹û²»´æÔÚÔò±íÊ¾£¬°´²Ù×÷ÏµÍ³Àà±ğ·Ö±ğ±È½Ï",
-                                "##share_objs": "Ö»ÓĞ±ê×¼ÒªÇóµÄ¹²Ïí¶ÔÏó(»ò·ûºÅÁ´½Ó)¶¼´æÔÚ²Å·ûºÏ±ê×¼¡£Èç¹ûÊÇ¸ö·ûºÅÁ´½Ó£¬Ó¦²éÑ¯µ½¶ÔÓ¦µÄÊµÌå¿â£¬²¢²éÑé¶ÔÓ¦Æä·ûºÅÁ´ÊÇ·ñÓë²éÑ¯µ½µÄ·ûºÅÁ´½ÓÎÄ¼şÊÇ·ñÒ»ÖÂ",
+                                "##share_objs": "åº“æ‰€è¦æ±‚çš„å…±äº«å¯¹è±¡åæ¸…å•ï¼›å½“'share_objs'å­˜åœ¨æ—¶è¡¨ç¤ºæ¡Œé¢ä¸æœåŠ¡å™¨çš„è¦æ±‚ä¸€è‡´(æˆ–å¯¹å…¶ä¸­ä¸€ç±»æ“ä½œç³»ç»Ÿæ— è¦æ±‚)ï¼›å¦‚æœä¸å­˜åœ¨åˆ™è¡¨ç¤ºï¼ŒæŒ‰æ“ä½œç³»ç»Ÿç±»åˆ«åˆ†åˆ«æ¯”è¾ƒ",
+                                "##share_objs": "åªæœ‰æ ‡å‡†è¦æ±‚çš„å…±äº«å¯¹è±¡(æˆ–ç¬¦å·é“¾æ¥)éƒ½å­˜åœ¨æ‰ç¬¦åˆæ ‡å‡†ã€‚å¦‚æœæ˜¯ä¸ªç¬¦å·é“¾æ¥ï¼Œåº”æŸ¥è¯¢åˆ°å¯¹åº”çš„å®ä½“åº“ï¼Œå¹¶æŸ¥éªŒå¯¹åº”å…¶ç¬¦å·é“¾æ˜¯å¦ä¸æŸ¥è¯¢åˆ°çš„ç¬¦å·é“¾æ¥æ–‡ä»¶æ˜¯å¦ä¸€è‡´",
                         "share_objs": {
                             "desktop": ["libBrokenLocale.so.1",
                                 "libanl.so.1",
@@ -115,7 +115,7 @@
                     "krb5": {
                         "lib_name": "krb5",
                         "sections_number": "7.2",
-                        "lib_description": "Kerberos ÍøÂçÉí·İÑéÖ¤Ğ­Òé",
+                        "lib_description": "Kerberos ç½‘ç»œèº«ä»½éªŒè¯åè®®",
                         "version": {
                             "desktop": "1.17", 
                             "server": "1.17"
@@ -153,7 +153,7 @@
                     "elfutils": {
                         "lib_name": "elfutils",
                         "sections_number": "7.3",
-                        "lib_description": "ÓÃÓÚ´¦Àí ELF ÎÄ¼şºÍ DWARF Êı¾İµÄÓ¦ÓÃ³ÌĞò¼¯ºÏ",
+                        "lib_description": "ç”¨äºå¤„ç† ELF æ–‡ä»¶å’Œ DWARF æ•°æ®çš„åº”ç”¨ç¨‹åºé›†åˆ",
                         "version": {
                             "desktop": "0.176", 
                             "server": "0.176"
@@ -183,7 +183,7 @@
                     "pam": {
                         "lib_name": "pam",
                         "sections_number": "7.4",
-                        "lib_description": "LinuxÉí·İÑéÖ¤Ä£¿é",
+                        "lib_description": "Linuxèº«ä»½éªŒè¯æ¨¡å—",
                         "version": {
                             "desktop": "1.3.1", 
                             "server": "1.3.1"
@@ -213,7 +213,7 @@
                     "zlib": {
                         "lib_name": "zlib",
                         "sections_number": "7.5",
-                        "lib_description": "ÎŞËğÊı¾İÑ¹Ëõ¿â",
+                        "lib_description": "æ— æŸæ•°æ®å‹ç¼©åº“",
                         "version": {
                             "desktop": "1.2.11", 
                             "server": "1.2.11"
@@ -239,7 +239,7 @@
                     "gcc": {
                         "lib_name": "gcc",
                         "sections_number": "7.6",
-                        "lib_description": "GNU µÄ±àÒëÆ÷¼¯ºÏ °üÀ¨¶Ô £¬C¡¢C++¡¢Fortran¡¢Object-C¡¢Object-C++¡¢Go¡¢D¡¢µÈµÄÖ§³Ö¡£µ±Ç°ÊÇ GCC 8 µÄÊµÏÖ°æ±¾¡£",
+                        "lib_description": "GNU çš„ç¼–è¯‘å™¨é›†åˆ åŒ…æ‹¬å¯¹ ï¼ŒCã€C++ã€Fortranã€Object-Cã€Object-C++ã€Goã€Dã€ç­‰çš„æ”¯æŒã€‚å½“å‰æ˜¯ GCC 8 çš„å®ç°ç‰ˆæœ¬ã€‚",
                         "version": {
                             "desktop": "8.3.0", 
                             "server": "7.3.0"
@@ -334,7 +334,7 @@
                     "libxcrypt": {
                         "lib_name": "libxcrypt",
                         "sections_number": "7.7",
-                        "lib_description": "ÊµÏÖ¼ÓÃÜºÍ½âÃÜµÄ¿â",
+                        "lib_description": "å®ç°åŠ å¯†å’Œè§£å¯†çš„åº“",
                         "version": {
                             "desktop": "4.4.10", 
                             "server": "4.4.4"
@@ -368,7 +368,7 @@
                     "audit": {
                         "lib_name": "audit",
                         "sections_number": "7.8",
-                        "lib_description": "ÓÃÓÚÄÚºËÉó¼ÆµÄÓÃ»§¿Õ¼ä¹¤¾ß",
+                        "lib_description": "ç”¨äºå†…æ ¸å®¡è®¡çš„ç”¨æˆ·ç©ºé—´å·¥å…·",
                         "version": {
                             "desktop": "2.8.4", 
                             "server": "2.8.4"
@@ -396,7 +396,7 @@
                     "bzip2": {
                         "lib_name": "bzip2",
                         "sections_number": "7.9",
-                        "lib_description": "¸ßÖÊÁ¿µÄÊı¾İÑ¹ËõÆ÷",
+                        "lib_description": "é«˜è´¨é‡çš„æ•°æ®å‹ç¼©å™¨",
                         "version": {
                             "desktop": "1.0.6", 
                             "server": "1.0.6"
@@ -422,7 +422,7 @@
                     "dbus": {
                         "lib_name": "dbus",
                         "sections_number": "7.10",
-                        "lib_description": "ÏûÏ¢×ÜÏßÏµÍ³£¬ÓÃÓÚÓ¦ÓÃ¼äÍ¨ĞÅ¡£Ìá¹©ÏµÍ³ÁôÊØ½ø³ÌºÍÓÃ»§µÇÂ¼ÁôÊØ½ø³Ì",
+                        "lib_description": "æ¶ˆæ¯æ€»çº¿ç³»ç»Ÿï¼Œç”¨äºåº”ç”¨é—´é€šä¿¡ã€‚æä¾›ç³»ç»Ÿç•™å®ˆè¿›ç¨‹å’Œç”¨æˆ·ç™»å½•ç•™å®ˆè¿›ç¨‹",
                         "version": {
                             "desktop": "1.12.16", 
                             "server": "1.12.8"
@@ -448,7 +448,7 @@
                     "expat": {
                         "lib_name": "expat",
                         "sections_number": "7.11",
-                        "lib_description": "expat ÊÇÒ»¸öÓÃ C ÓïÑÔ±àĞ´µÄÃæÏòÁ÷µÄ XML ½âÎöÆ÷¿â",
+                        "lib_description": "expat æ˜¯ä¸€ä¸ªç”¨ C è¯­è¨€ç¼–å†™çš„é¢å‘æµçš„ XML è§£æå™¨åº“",
                         "version": {
                             "desktop": "2.2.6", 
                             "server": "2.2.6"
@@ -474,7 +474,7 @@
                     "glib2": {
                         "lib_name": "glib2",
                         "sections_number": "7.12",
-                        "lib_description": "¹¹³É GTK+ ºÍ GNOME µÈÏîÄ¿»ù´¡µÄºËĞÄ¿â",
+                        "lib_description": "æ„æˆ GTK+ å’Œ GNOME ç­‰é¡¹ç›®åŸºç¡€çš„æ ¸å¿ƒåº“",
                         "version": {
                             "desktop": "2.58", 
                             "server": "2.56"
@@ -516,7 +516,7 @@
                     "gmp": {
                         "lib_name": "gmp",
                         "sections_number": "7.13",
-                        "lib_description": "Ò»¸ö GNU ¶à¾«¶ÈËãÊõ¿â",
+                        "lib_description": "ä¸€ä¸ª GNU å¤šç²¾åº¦ç®—æœ¯åº“",
                         "version": {
                             "desktop": "6.1.2", 
                             "server": "6.1.2"
@@ -542,7 +542,7 @@
                     "libidn2": {
                         "lib_name": "libidn2",
                         "sections_number": "7.14",
-                        "lib_description": "GNU libidn2ÊÇGNU libidnµÄºó¼ÌÕß¡£standalone lib¡£°üº¬IDNA2008£¬Punycode ºÍ Unicode TR46 µÄÊµÏÖ¡£Í¨¹ıIETF¹ú¼ÊÓòÃû£¨IDN£©ÊµÊ©×Ö·û´®Ô¤´¦Àí¡¢PunycodeºÍIDNA¹æ¸ñ¶¨ÒåµÄ°ü",
+                        "lib_description": "GNU libidn2æ˜¯GNU libidnçš„åç»§è€…ã€‚standalone libã€‚åŒ…å«IDNA2008ï¼ŒPunycode å’Œ Unicode TR46 çš„å®ç°ã€‚é€šè¿‡IETFå›½é™…åŸŸåï¼ˆIDNï¼‰å®æ–½å­—ç¬¦ä¸²é¢„å¤„ç†ã€Punycodeå’ŒIDNAè§„æ ¼å®šä¹‰çš„åŒ…",
                         "version": {
                             "desktop": "2.0.5", 
                             "server": "2.0.5"
@@ -568,7 +568,7 @@
                     "ncurses": {
                         "lib_name": "ncurses",
                         "sections_number": "7.15",
-                        "lib_description": "ÖÕ¶Ë¿ØÖÆ¿â",
+                        "lib_description": "ç»ˆç«¯æ§åˆ¶åº“",
                         "version": {
                             "desktop": "6.1.1", 
                             "server": "6.1"
@@ -620,7 +620,7 @@
                     "xz": {
                         "lib_name": "xz",
                         "sections_number": "7.16",
-                        "lib_description": "Ò»¿îÃâ·ÑµÄÍ¨ÓÃÊı¾İÑ¹ËõÈí¼ş£¬²ÉÓÃ LZMA2 Ëã·¨",
+                        "lib_description": "ä¸€æ¬¾å…è´¹çš„é€šç”¨æ•°æ®å‹ç¼©è½¯ä»¶ï¼Œé‡‡ç”¨ LZMA2 ç®—æ³•",
                         "version": {
                             "desktop": "5.2.4", 
                             "server": "5.2.4"
@@ -654,7 +654,7 @@
                     "libcap": {
                         "lib_name": "libcap",
                         "sections_number": "7.17",
-                        "lib_description": "ÕâÊÇÒ»¸öÓÃÓÚ»ñÈ¡ºÍÉèÖÃ POSIX.1e£¨ÒÔÇ°µÄ POSIX 6£©²İ°¸ 15 ¹¦ÄÜµÄ¿â¡£",
+                        "lib_description": "è¿™æ˜¯ä¸€ä¸ªç”¨äºè·å–å’Œè®¾ç½® POSIX.1eï¼ˆä»¥å‰çš„ POSIX 6ï¼‰è‰æ¡ˆ 15 åŠŸèƒ½çš„åº“ã€‚",
                         "version": {
                             "desktop": "2.25", 
                             "server": "2.26"
@@ -688,7 +688,7 @@
                     "popt": {
                         "lib_name": "popt",
                         "sections_number": "7.18",
-                        "lib_description": "½âÎöÃüÁîĞĞÑ¡ÏîµÄ¿â¡£Ëü²»Ê¹ÓÃÈ«¾Ö±äÁ¿£¬Òò´Ë¿ÉÒÔÔÚ½âÎöargvÊ±½øĞĞ¶à´Î´«µİ£»Ëü¿ÉÒÔ½âÎöÈÎÒâargvÑùÊ½ÔªËØµÄÊı×é£¬ÔÊĞí½âÎöÀ´×ÔÈÎºÎÔ´µÄÃüÁîĞĞ×Ö·û´®£»ËüÌá¹©ÁËÑ¡Ïî±ğÃûµÄ±ê×¼·½·¨£»Ëü¿ÉÒÔÖ´ĞĞÍâ²¿Ñ¡Ïî¹ıÂËÆ÷£»Ëü¿ÉÒÔ×Ô¶¯ÎªÓ¦ÓÃ³ÌĞòÉú³É°ïÖúºÍÊ¹ÓÃĞÅÏ¢¡£",
+                        "lib_description": "è§£æå‘½ä»¤è¡Œé€‰é¡¹çš„åº“ã€‚å®ƒä¸ä½¿ç”¨å…¨å±€å˜é‡ï¼Œå› æ­¤å¯ä»¥åœ¨è§£æargvæ—¶è¿›è¡Œå¤šæ¬¡ä¼ é€’ï¼›å®ƒå¯ä»¥è§£æä»»æ„argvæ ·å¼å…ƒç´ çš„æ•°ç»„ï¼Œå…è®¸è§£ææ¥è‡ªä»»ä½•æºçš„å‘½ä»¤è¡Œå­—ç¬¦ä¸²ï¼›å®ƒæä¾›äº†é€‰é¡¹åˆ«åçš„æ ‡å‡†æ–¹æ³•ï¼›å®ƒå¯ä»¥æ‰§è¡Œå¤–éƒ¨é€‰é¡¹è¿‡æ»¤å™¨ï¼›å®ƒå¯ä»¥è‡ªåŠ¨ä¸ºåº”ç”¨ç¨‹åºç”Ÿæˆå¸®åŠ©å’Œä½¿ç”¨ä¿¡æ¯ã€‚",
                         "version": {
                             "desktop": "1.16", 
                             "server": "1.16"
@@ -714,7 +714,7 @@
                     "libnl3": {
                         "lib_name": "libnl3",
                         "sections_number": "7.19",
-                        "lib_description": "libnl Ì×¼şÊÇÒ»×é¿â£¬Îª»ùÓÚ netlink Ğ­ÒéµÄ Linux ÄÚºË½Ó¿ÚÌá¹© API¡£",
+                        "lib_description": "libnl å¥—ä»¶æ˜¯ä¸€ç»„åº“ï¼Œä¸ºåŸºäº netlink åè®®çš„ Linux å†…æ ¸æ¥å£æä¾› APIã€‚",
                         "version": {
                             "desktop": "3.4.0", 
                             "server": "3.5.0"
@@ -752,7 +752,7 @@
                     "libsecret": {
                         "lib_name": "libsecret",
                         "sections_number": "7.20",
-                        "lib_description": "libsecret ÊÇÒ»¸öÓÃÓÚ´æ´¢ºÍ¼ìË÷ÃÜÂëºÍÆäËû»úÃÜµÄ¿â¡£ËüÊ¹ÓÃ D-Bus Óë¡°Secret Service¡±Í¨ĞÅ¡£gnome-keyring ºÍ ksecretservice ¶¼ÊÇ Secret Service µÄÊµÏÖ¡£",
+                        "lib_description": "libsecret æ˜¯ä¸€ä¸ªç”¨äºå­˜å‚¨å’Œæ£€ç´¢å¯†ç å’Œå…¶ä»–æœºå¯†çš„åº“ã€‚å®ƒä½¿ç”¨ D-Bus ä¸â€œSecret Serviceâ€é€šä¿¡ã€‚gnome-keyring å’Œ ksecretservice éƒ½æ˜¯ Secret Service çš„å®ç°ã€‚",
                         "version": {
                             "desktop": "0.18.7", 
                             "server": "0.18.6"
@@ -778,7 +778,7 @@
                     "libIDL": {
                         "lib_name": "libIDL",
                         "sections_number": "7.21",
-                        "lib_description": "libIDLÊÇÒ»¸ö°üº¬½Ó¿Ú¶¨ÒåÓïÑÔÎÄ¼şµÄ¿â ¡£ÕâÊÇ¶¨Òå¿ÉÒÆÖ²½Ó¿ÚµÄ¹æ·¶¡£",
+                        "lib_description": "libIDLæ˜¯ä¸€ä¸ªåŒ…å«æ¥å£å®šä¹‰è¯­è¨€æ–‡ä»¶çš„åº“ ã€‚è¿™æ˜¯å®šä¹‰å¯ç§»æ¤æ¥å£çš„è§„èŒƒã€‚",
                         "version": {
                             "desktop": "0.8.14", 
                             "server": "0.8.14"
@@ -804,7 +804,7 @@
                     "libtalloc": {
                         "lib_name": "libtalloc",
                         "sections_number": "7.22",
-                        "lib_description": "libtalloc °üÌá¹©ÁËÒ»¸öÊ¹ÓÃÎö¹¹º¯ÊıÊµÏÖ·Ö²ãÄÚ´æ·ÖÅäÆ÷µÄ¿â¡£",
+                        "lib_description": "libtalloc åŒ…æä¾›äº†ä¸€ä¸ªä½¿ç”¨ææ„å‡½æ•°å®ç°åˆ†å±‚å†…å­˜åˆ†é…å™¨çš„åº“ã€‚",
                         "version": {
                             "desktop": "2.1.14", 
                             "server": "2.2.0"
@@ -830,7 +830,7 @@
                     "libtevent": {
                         "lib_name": "libtevent",
                         "sections_number": "7.23",
-                        "lib_description": "libtevent °üÌá¹© Tevent£¬Ò»¸ö»ùÓÚtalloc ÄÚ´æ¹ÜÀí¿âµÄÊÂ¼şÏµÍ³¡£Tevent Ö§³Ö¶àÖÖÊÂ¼şÀàĞÍ£¬°üÀ¨¶¨Ê±Æ÷¡¢ĞÅºÅºÍ¾­µäµÄÎÄ¼şÃèÊö·ûÊÂ¼ş¡£Tevent »¹Ìá¹©°ïÖúÆ÷À´´¦ÀíÌá¹© tevent_req£¨Tevent ÇëÇó£©º¯ÊıµÄÒì²½´úÂë¡£",
+                        "lib_description": "libtevent åŒ…æä¾› Teventï¼Œä¸€ä¸ªåŸºäºtalloc å†…å­˜ç®¡ç†åº“çš„äº‹ä»¶ç³»ç»Ÿã€‚Tevent æ”¯æŒå¤šç§äº‹ä»¶ç±»å‹ï¼ŒåŒ…æ‹¬å®šæ—¶å™¨ã€ä¿¡å·å’Œç»å…¸çš„æ–‡ä»¶æè¿°ç¬¦äº‹ä»¶ã€‚Tevent è¿˜æä¾›å¸®åŠ©å™¨æ¥å¤„ç†æä¾› tevent_reqï¼ˆTevent è¯·æ±‚ï¼‰å‡½æ•°çš„å¼‚æ­¥ä»£ç ã€‚",
                         "version": {
                             "desktop": "0.9.37", 
                             "server": "0.10.0"
@@ -856,7 +856,7 @@
                     "readline": {
                         "lib_name": "readline",
                         "sections_number": "7.24",
-                        "lib_description": "°üÀ¨GNU readline¿â ºÍÀúÊ·¿â¡£GNU readline ¿âÓĞÖúÓÚÔÚĞèÒªÌá¹©ÃüÁîĞĞ½çÃæµÄÀëÉ¢³ÌĞòÖ®¼ä±£³ÖÓÃ»§½çÃæµÄÒ»ÖÂĞÔ¡£ GNU ÀúÊ·¿âÌá¹©ÁËÒ»¸öÒ»ÖÂµÄÓÃ»§½çÃæ£¬ÓÃÓÚµ÷ÓÃÒÔÇ°¼üÈëµÄÊäÈëĞĞ¡£",
+                        "lib_description": "åŒ…æ‹¬GNU readlineåº“ å’Œå†å²åº“ã€‚GNU readline åº“æœ‰åŠ©äºåœ¨éœ€è¦æä¾›å‘½ä»¤è¡Œç•Œé¢çš„ç¦»æ•£ç¨‹åºä¹‹é—´ä¿æŒç”¨æˆ·ç•Œé¢çš„ä¸€è‡´æ€§ã€‚ GNU å†å²åº“æä¾›äº†ä¸€ä¸ªä¸€è‡´çš„ç”¨æˆ·ç•Œé¢ï¼Œç”¨äºè°ƒç”¨ä»¥å‰é”®å…¥çš„è¾“å…¥è¡Œã€‚",
                         "version": {
                             "desktop": "7.0", 
                             "server": "7.0"
@@ -884,7 +884,7 @@
                     "libmodulemd": {
                         "lib_name": "libmodulemd",
                         "sections_number": "7.25",
-                        "lib_description": "ÓÃÓÚ²Ù×÷Ä£¿éÔªÊı¾İÎÄ¼şµÄCº¯Êı¿â",
+                        "lib_description": "ç”¨äºæ“ä½œæ¨¡å—å…ƒæ•°æ®æ–‡ä»¶çš„Cå‡½æ•°åº“",
                         "version": {
                             "desktop": "", 
                             "server": "1.6.4"
@@ -910,7 +910,7 @@
                     "dbus-glib": {
                         "lib_name": "dbus-glib",
                         "sections_number": "7.26",
-                        "lib_description": "¶ÔDBusµÄGNOME GLib½Ó¿Ú¹¤¾ß¼°º¯Êı¿â",
+                        "lib_description": "å¯¹DBusçš„GNOME GLibæ¥å£å·¥å…·åŠå‡½æ•°åº“",
                         "version": {
                             "desktop": "0.110", 
                             "server": "0.110"
@@ -936,7 +936,7 @@
                     "attr": {
                         "lib_name": "attr",
                         "sections_number": "7.27",
-                        "lib_description": "ÎÄ¼şÏµÍ³¼°ÎÄ¼şÀ©Õ¹ÊôĞÔ¹ÜÀí¹¦ÄÜ¿â",
+                        "lib_description": "æ–‡ä»¶ç³»ç»ŸåŠæ–‡ä»¶æ‰©å±•å±æ€§ç®¡ç†åŠŸèƒ½åº“",
                         "version": {
                             "desktop": "2.4.48", 
                             "server": "2.4.48"
@@ -962,7 +962,7 @@
                     "libevent": {
                         "lib_name": "libevent",
                         "sections_number": "7.28",
-                        "lib_description": "µ±ÎÄ¼şÃèÊö·ûÉÏ·¢ÉúÌØ¶¨ÊÂ¼ş»ò´ïµ½³¬Ê±ºó£¬ libevent API Ìá¹©ÁËÒ»ÖÖÖ´ĞĞ»Øµ÷º¯ÊıµÄ»úÖÆ¡£´ËÍâ£¬libevent»¹Ö§³ÖÓÉÓÚĞÅºÅ»ò³£¹æ³¬Ê±¶øÒıÆğµÄ»Øµ÷¡£libeventÖ¼ÔÚÌæ»»ÊÂ¼şÇı¶¯ÍøÂç·şÎñÆ÷ÖĞµÄÊÂ¼şÑ­»·¡£",
+                        "lib_description": "å½“æ–‡ä»¶æè¿°ç¬¦ä¸Šå‘ç”Ÿç‰¹å®šäº‹ä»¶æˆ–è¾¾åˆ°è¶…æ—¶åï¼Œ libevent API æä¾›äº†ä¸€ç§æ‰§è¡Œå›è°ƒå‡½æ•°çš„æœºåˆ¶ã€‚æ­¤å¤–ï¼Œlibeventè¿˜æ”¯æŒç”±äºä¿¡å·æˆ–å¸¸è§„è¶…æ—¶è€Œå¼•èµ·çš„å›è°ƒã€‚libeventæ—¨åœ¨æ›¿æ¢äº‹ä»¶é©±åŠ¨ç½‘ç»œæœåŠ¡å™¨ä¸­çš„äº‹ä»¶å¾ªç¯ã€‚",
                         "version": {
                             "desktop": "2.1.8", 
                             "server": "2.1.8"
@@ -996,7 +996,7 @@
                     "accountsservice": {
                         "lib_name": "accountsservice",
                         "sections_number": "7.29",
-                        "lib_description": "ÓÃ»§¹ÜÀí£¨ÕË»§Î¬»¤£©",
+                        "lib_description": "ç”¨æˆ·ç®¡ç†ï¼ˆè´¦æˆ·ç»´æŠ¤ï¼‰",
                         "version": {
                             "desktop": "0.6.45", 
                             "server": "0.6.50"
@@ -1022,7 +1022,7 @@
                     "libmpc": {
                         "lib_name": "libmpc",
                         "sections_number": "7.30",
-                        "lib_description": "ÓÃÓÚ¶à¾«¶È¸´ÔÓËãÊõµÄ C ¿â",
+                        "lib_description": "ç”¨äºå¤šç²¾åº¦å¤æ‚ç®—æœ¯çš„ C åº“",
                         "version": {
                             "desktop": "1.1.0", 
                             "server": "1.0.2"
@@ -1056,7 +1056,7 @@
                     "mpfr": {
                         "lib_name": "mpfr",
                         "sections_number": "7.31",
-                        "lib_description": "¶à¾«¶È¸¡µã¼ÆËã C ¿â",
+                        "lib_description": "å¤šç²¾åº¦æµ®ç‚¹è®¡ç®— C åº“",
                         "version": {
                             "desktop": "4.0.2", 
                             "server": "3.1.6"
@@ -1090,7 +1090,7 @@
                     "ndctl": {
                         "lib_name": "ndctl",
                         "sections_number": "7.32",
-                        "lib_description": "DAX£¨Ö±½Ó·ÃÎÊ£©Ğ­ÒéÖ§³Ö¹¤¾ß",
+                        "lib_description": "DAXï¼ˆç›´æ¥è®¿é—®ï¼‰åè®®æ”¯æŒå·¥å…·",
                         "version": {
                             "desktop": "63", 
                             "server": "63"
@@ -1116,7 +1116,7 @@
                     "file": {
                         "lib_name": "file",
                         "sections_number": "7.33",
-                        "lib_description": "Ê¶±ğÌØ¶¨ÎÄ¼şÀàĞÍµÄ¹¤¾ß",
+                        "lib_description": "è¯†åˆ«ç‰¹å®šæ–‡ä»¶ç±»å‹çš„å·¥å…·",
                         "version": {
                             "desktop": "5.35", 
                             "server": "5.33"
@@ -1142,7 +1142,7 @@
                     "gdbm": {
                         "lib_name": "gdbm",
                         "sections_number": "7.34",
-                        "lib_description": "Ò»¸öÊ¹ÓÃ¿ÉÀ©Õ¹É¢ÁĞµÄÊı¾İ¿âº¯Êı¿â",
+                        "lib_description": "ä¸€ä¸ªä½¿ç”¨å¯æ‰©å±•æ•£åˆ—çš„æ•°æ®åº“å‡½æ•°åº“",
                         "version": {
                             "desktop": "1.18", 
                             "server": "1.18"
@@ -1170,7 +1170,7 @@
                     "keyutils": {
                         "lib_name": "keyutils",
                         "sections_number": "7.35",
-                        "lib_description": "Linux ÃÜÔ¿¹ÜÀí³ÌĞò",
+                        "lib_description": "Linux å¯†é’¥ç®¡ç†ç¨‹åº",
                         "version": {
                             "desktop": "1.6", 
                             "server": "1.5.10"
@@ -1196,7 +1196,7 @@
                     "libedit": {
                         "lib_name": "libedit",
                         "sections_number": "7.36",
-                        "lib_description": "Ìá¹©Í¨ÓÃĞĞ±à¼­¡¢ÀúÊ·¼ÇÂ¼ºÍ±ê¼Ç¹¦ÄÜ",
+                        "lib_description": "æä¾›é€šç”¨è¡Œç¼–è¾‘ã€å†å²è®°å½•å’Œæ ‡è®°åŠŸèƒ½",
                         "version": {
                             "desktop": "3.1", 
                             "server": "3.1"
@@ -1222,7 +1222,7 @@
                     "kcodecs": {
                         "lib_name": "kcodecs",
                         "sections_number": "7.37",
-                        "lib_description": "²Ù×÷×Ö·û´®µÄ·½·¨µÄ¼¯ºÏKCodecsÌá¹©ÁËÒ»×é²Ù×÷×Ö·û´®µÄ·½·¨Ê¹ÓÃ²»Í¬µÄ±àÂë¡£",
+                        "lib_description": "æ“ä½œå­—ç¬¦ä¸²çš„æ–¹æ³•çš„é›†åˆKCodecsæä¾›äº†ä¸€ç»„æ“ä½œå­—ç¬¦ä¸²çš„æ–¹æ³•ä½¿ç”¨ä¸åŒçš„ç¼–ç ã€‚",
                         "version": {
                             "desktop": "5.54.0", 
                             "server": ""
@@ -1248,7 +1248,7 @@
                     "fcitx": {
                         "lib_name": "fcitx",
                         "sections_number": "7.38",
-                        "lib_description": "fcitxÊäÈë·¨µÄºËĞÄ¹¦ÄÜ¿â",
+                        "lib_description": "fcitxè¾“å…¥æ³•çš„æ ¸å¿ƒåŠŸèƒ½åº“",
                         "version": {
                             "desktop": "4.2.9", 
                             "server": ""
@@ -1276,7 +1276,7 @@
                     "libsdl-ttf2.0": {
                         "lib_name": "libsdl-ttf2.0",
                         "sections_number": "7.39",
-                        "lib_description": "ÔÊĞíSDLÓ¦ÓÃ³ÌĞòÖĞÊ¹ÓÃTrueType×ÖÌå",
+                        "lib_description": "å…è®¸SDLåº”ç”¨ç¨‹åºä¸­ä½¿ç”¨TrueTypeå­—ä½“",
                         "version": {
                             "desktop": "2.0.11", 
                             "server": ""
@@ -1301,17 +1301,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "8 ÏµÍ³°²È«¿â",
+            "##ç« èŠ‚å": "8 ç³»ç»Ÿå®‰å…¨åº“",
             "security": {
                 "description": {
                     "chapters_number": "8",
-                    "chapters_Name": "ÏµÍ³°²È«"
+                    "chapters_Name": "ç³»ç»Ÿå®‰å…¨"
                 },
                 "packages": {
                     "acl": {
                         "lib_name": "acl",
                         "sections_number": "8.1",
-                        "lib_description": "¹ÜÀí·ÃÎÊ¿ØÖÆÁĞ±í¡£",
+                        "lib_description": "ç®¡ç†è®¿é—®æ§åˆ¶åˆ—è¡¨ã€‚",
                         "version": {
                             "desktop": "2.2.53", 
                             "server": "2.2.53"
@@ -1337,7 +1337,7 @@
                     "cyrus-sasl": {
                         "lib_name": "cyrus-sasl",
                         "sections_number": "8.2",
-                        "lib_description": "SASLÊÇ¼òµ¥µÄÈ¨ÏŞÑéÖ¤ºÍ°²È«²ã£¬¿ÉÌí¼Ó»ùÓÚÁ¬½ÓµÄĞ­ÒéµÄÑéÖ¤Ö§³Ö¡£",
+                        "lib_description": "SASLæ˜¯ç®€å•çš„æƒé™éªŒè¯å’Œå®‰å…¨å±‚ï¼Œå¯æ·»åŠ åŸºäºè¿æ¥çš„åè®®çš„éªŒè¯æ”¯æŒã€‚",
                         "version": {
                             "desktop": "2.1.27", 
                             "server": "2.1.27"
@@ -1370,7 +1370,7 @@
                                 "libcrammd5.so.2",
                                 "ibdigestmd5.so.2",
                                 "libgs2.so.2",
-                                "libgssapov2.so.2",
+                                "libgssapiv2.so.2",
                                 "libldapdb.so.2",
                                 "liblogin.so.2",
                                 "libntlm.so.2",
@@ -1393,7 +1393,7 @@
                     "libgcrypt": {
                         "lib_name": "libgcrypt",
                         "sections_number": "8.3",
-                        "lib_description": "Í¨ÓÃ¼ÓÃÜ¿â¡£",
+                        "lib_description": "é€šç”¨åŠ å¯†åº“ã€‚",
                         "version": {
                             "desktop": "1.8.4", 
                             "server": "1.8.3"
@@ -1427,7 +1427,7 @@
                     "liboauth": {
                         "lib_name": "liboauth",
                         "sections_number": "8.4",
-                        "lib_description": "oauthÊÇÒ»ÖÖ¹ØÓÚÊÚÈ¨·½Ê½µÄĞ­Òé±ê×¼¡£",
+                        "lib_description": "oauthæ˜¯ä¸€ç§å…³äºæˆæƒæ–¹å¼çš„åè®®æ ‡å‡†ã€‚",
                         "version": {
                             "desktop": "1.0.3", 
                             "server": "1.0.3"
@@ -1453,7 +1453,7 @@
                     "gnutls": {
                         "lib_name": "gnutls",
                         "sections_number": "8.5",
-                        "lib_description": "gnutlsÈ«³Æ GNU TransportLayerSecurity Library,¼´»ùÓÚGNU°æÈ¨Ğ­ÒéµÄ´«Êä²ã°²È«Ğ­Òé,ÊÇwgetÖ§³ÖhttpsÖĞµÄsslĞ­ÒéµÄ»ù´¡¿â¡£",
+                        "lib_description": "gnutlså…¨ç§° GNU TransportLayerSecurity Library,å³åŸºäºGNUç‰ˆæƒåè®®çš„ä¼ è¾“å±‚å®‰å…¨åè®®,æ˜¯wgetæ”¯æŒhttpsä¸­çš„sslåè®®çš„åŸºç¡€åº“ã€‚",
                         "version": {
                             "desktop": "3.6.7", 
                             "server": "3.6.8"
@@ -1491,7 +1491,7 @@
                     "libssh": {
                         "lib_name": "libssh",
                         "sections_number": "8.6",
-                        "lib_description": "libssh ÊÇÒ»¸öÓÃÒÔ·ÃÎÊSSH·şÎñµÄCÓïÑÔ¿ª·¢°ü£¬Í¨¹ıËü¿ÉÒÔÖ´ĞĞÔ¶³ÌÃüÁî¡¢ÎÄ¼ş´«Êä£¬Í¬Ê±ÎªÔ¶³ÌµÄ³ÌĞòÌá¹©°²È«µÄ´«ÊäÍ¨µÀ¡£",
+                        "lib_description": "libssh æ˜¯ä¸€ä¸ªç”¨ä»¥è®¿é—®SSHæœåŠ¡çš„Cè¯­è¨€å¼€å‘åŒ…ï¼Œé€šè¿‡å®ƒå¯ä»¥æ‰§è¡Œè¿œç¨‹å‘½ä»¤ã€æ–‡ä»¶ä¼ è¾“ï¼ŒåŒæ—¶ä¸ºè¿œç¨‹çš„ç¨‹åºæä¾›å®‰å…¨çš„ä¼ è¾“é€šé“ã€‚",
                         "version": {
                             "desktop": "0.8.7", 
                             "server": "0.8.3"
@@ -1518,7 +1518,7 @@
                     "libssh2": {
                         "lib_name": "libssh2",
                         "sections_number": "8.7",
-                        "lib_description": "libssh2ÊÇÒ»¸öC º¯Êı¿â£¬ÓÃÀ´ÊµÏÖSSH2Ğ­Òé¡£Ö÷Òª¹¦ÄÜ£ºKey Exchange Methods£¬Hostkey Type£¬Ciphers£¬Compression Schemes£¬MAC hashesµÈ",
+                        "lib_description": "libssh2æ˜¯ä¸€ä¸ªC å‡½æ•°åº“ï¼Œç”¨æ¥å®ç°SSH2åè®®ã€‚ä¸»è¦åŠŸèƒ½ï¼šKey Exchange Methodsï¼ŒHostkey Typeï¼ŒCiphersï¼ŒCompression Schemesï¼ŒMAC hashesç­‰",
                         "version": {
                             "desktop": "1.8.0", 
                             "server": "1.8.0"
@@ -1544,7 +1544,7 @@
                     "cracklib": {
                         "lib_name": "cracklib",
                         "sections_number": "8.8",
-                        "lib_description": "ÃÜÂë°²È«²âÊÔ¹¤¾ß¡£",
+                        "lib_description": "å¯†ç å®‰å…¨æµ‹è¯•å·¥å…·ã€‚",
                         "version": {
                             "desktop": "2.9.6", 
                             "server": "2.9.6"
@@ -1578,7 +1578,7 @@
                     "nspr": {
                         "lib_name": "nspr",
                         "sections_number": "8.9",
-                        "lib_description": "°üº¬Ïß³Ì¡¢ÎÄ¼şºÍÍøÂçI/O¡¢ÄÚ´æ¹ÜÀíµÈµÄÔËĞĞÊ±¿â¡£",
+                        "lib_description": "åŒ…å«çº¿ç¨‹ã€æ–‡ä»¶å’Œç½‘ç»œI/Oã€å†…å­˜ç®¡ç†ç­‰çš„è¿è¡Œæ—¶åº“ã€‚",
                         "version": {
                             "desktop": "4.20.1", 
                             "server": "4.20.0"
@@ -1608,7 +1608,7 @@
                     "openssl": {
                         "lib_name": "openssl",
                         "sections_number": "8.10",
-                        "lib_description": "¾ßÓĞ TLS ÊµÏÖµÄÍ¨ÓÃ¼ÓÃÜ¿âÖĞµÄÊµÓÃ³ÌĞò£¬Ìí¼Ó¹úÃÜËã·¨SM2 SM3 SMS4",
+                        "lib_description": "å…·æœ‰ TLS å®ç°çš„é€šç”¨åŠ å¯†åº“ä¸­çš„å®ç”¨ç¨‹åºï¼Œæ·»åŠ å›½å¯†ç®—æ³•SM2 SM3 SMS4",
                         "version": {
                             "desktop": "1.1.1d", 
                             "server": "1.1.1c"
@@ -1635,17 +1635,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "9 ÍøÂç·şÎñ¿â",
+            "##ç« èŠ‚å": "9 ç½‘ç»œæœåŠ¡åº“",
             "network": {
                 "description": {
                     "chapters_number": "9",
-                    "chapters_Name": "ÍøÂç·şÎñ"
+                    "chapters_Name": "ç½‘ç»œæœåŠ¡"
                 },
                 "packages": {
                     "Networkmanager": {
                         "lib_name": "Networkmanager",
                         "sections_number": "9.1",
-                        "lib_description": "ÍøÂçÁ´½Ó¹ÜÀíÆ÷ºÍÓÃ»§Ó¦ÓÃ³ÌĞò¡£",
+                        "lib_description": "ç½‘ç»œé“¾æ¥ç®¡ç†å™¨å’Œç”¨æˆ·åº”ç”¨ç¨‹åºã€‚",
                         "version": {
                             "desktop": "1.14.6", 
                             "server": "1.16.0"
@@ -1688,7 +1688,7 @@
                     "sssd": {
                         "lib_name": "sssd",
                         "sections_number": "9.2",
-                        "lib_description": "¹ÜÀí¶ÔÔ¶³ÌÄ¿Â¼µÄ·ÃÎÊºÍÈ¨ÏŞÑéÖ¤",
+                        "lib_description": "ç®¡ç†å¯¹è¿œç¨‹ç›®å½•çš„è®¿é—®å’Œæƒé™éªŒè¯",
                         "version": {
                             "desktop": "1.16.3", 
                             "server": "1.16.3"
@@ -1724,7 +1724,7 @@
                     "libtirpc": {
                         "lib_name": "libtirpc",
                         "sections_number": "9.3",
-                        "lib_description": "libtirpc°ü°üº¬Ö§³ÖÊ¹ÓÃÔ¶³Ì¹ı³Ìµ÷ÓÃ (RPC) API µÄ³ÌĞòµÄ¿â ¡£",
+                        "lib_description": "libtirpcåŒ…åŒ…å«æ”¯æŒä½¿ç”¨è¿œç¨‹è¿‡ç¨‹è°ƒç”¨ (RPC) API çš„ç¨‹åºçš„åº“ ã€‚",
                         "version": {
                             "desktop": "1.1.4", 
                             "server": "1.1.4"
@@ -1750,7 +1750,7 @@
                     "nss": {
                         "lib_name": "nss",
                         "sections_number": "9.4",
-                        "lib_description": "ÍøÂç°²È«·şÎñ¡£",
+                        "lib_description": "ç½‘ç»œå®‰å…¨æœåŠ¡ã€‚",
                         "version": {
                             "desktop": "3.42.1", 
                             "server": "3.40.1"
@@ -1781,7 +1781,7 @@
                     "libpcap": {
                         "lib_name": "libpcap",
                         "sections_number": "9.5",
-                        "lib_description": "libpcap£¨Packet Capture Library£©¼´Êı¾İ°ü²¶»ñº¯Êı¿â£¬ÊÇUnix/LinuxÆ½Ì¨ÏÂµÄÍøÂçÊı¾İ°ü²¶»ñº¯Êı¿â¡£ËüÊÇÒ»¸ö¶ÀÁ¢ÓÚÏµÍ³µÄÓÃ»§²ã°ü²¶»ñµÄAPI½Ó¿Ú£¬Îªµ×²ãÍøÂç¼à²âÌá¹©ÁËÒ»¸ö¿ÉÒÆÖ²µÄ¿ò¼Ü¡£ÖøÃûµÄÈí¼şTCPDUMP¾ÍÊÇÔÚlibpcapµÄµÄ»ù´¡ÉÏ¿ª·¢¶ø³ÉµÄ",
+                        "lib_description": "libpcapï¼ˆPacket Capture Libraryï¼‰å³æ•°æ®åŒ…æ•è·å‡½æ•°åº“ï¼Œæ˜¯Unix/Linuxå¹³å°ä¸‹çš„ç½‘ç»œæ•°æ®åŒ…æ•è·å‡½æ•°åº“ã€‚å®ƒæ˜¯ä¸€ä¸ªç‹¬ç«‹äºç³»ç»Ÿçš„ç”¨æˆ·å±‚åŒ…æ•è·çš„APIæ¥å£ï¼Œä¸ºåº•å±‚ç½‘ç»œç›‘æµ‹æä¾›äº†ä¸€ä¸ªå¯ç§»æ¤çš„æ¡†æ¶ã€‚è‘—åçš„è½¯ä»¶TCPDUMPå°±æ˜¯åœ¨libpcapçš„çš„åŸºç¡€ä¸Šå¼€å‘è€Œæˆçš„",
                         "version": {
                             "desktop": "1.8.1", 
                             "server": "1.9.0"
@@ -1807,7 +1807,7 @@
                     "curl": {
                         "lib_name": "curl",
                         "sections_number": "9.6",
-                        "lib_description": "ÃüÁîĞĞ»ò½Å±¾Êı¾İ´«Êä¹¤¾ß",
+                        "lib_description": "å‘½ä»¤è¡Œæˆ–è„šæœ¬æ•°æ®ä¼ è¾“å·¥å…·",
                         "version": {
                             "desktop": "7.64.1", 
                             "server": "7.61.1"
@@ -1833,7 +1833,7 @@
                     "iptables": {
                         "lib_name": "iptables",
                         "sections_number": "9.7",
-                        "lib_description": "IP°ü¹ıÂË¹ÜÀí¹¤¾ß",
+                        "lib_description": "IPåŒ…è¿‡æ»¤ç®¡ç†å·¥å…·",
                         "version": {
                             "desktop": "1.8.2", 
                             "server": "1.8.1"
@@ -2112,7 +2112,7 @@
                     "bind": {
                         "lib_name": "bind",
                         "sections_number": "9.8",
-                        "lib_description": "°üÀ¨²Ù×÷ DNS ·şÎñÆ÷µÄ×é¼ş",
+                        "lib_description": "åŒ…æ‹¬æ“ä½œ DNS æœåŠ¡å™¨çš„ç»„ä»¶",
                         "version": {
                             "desktop": "9.11.5", 
                             "server": "9.11.4"
@@ -2150,7 +2150,7 @@
                     "cifs-utils": {
                         "lib_name": "cifs-utils",
                         "sections_number": "9.9",
-                        "lib_description": "Í¨ÓÃÍøÂçÎÄ¼şÏµÍ³¡£",
+                        "lib_description": "é€šç”¨ç½‘ç»œæ–‡ä»¶ç³»ç»Ÿã€‚",
                         "version": {
                             "desktop": "6.8", 
                             "server": "6.8"
@@ -2178,7 +2178,7 @@
                     "atkmm": {
                         "lib_name": "atkmm",
                         "sections_number": "9.10",
-                        "lib_description": "atk¿âµÄC++°ó¶¨¡£",
+                        "lib_description": "atkåº“çš„C++ç»‘å®šã€‚",
                         "version": {
                             "desktop": "2.28.0", 
                             "server": "2.24.2"
@@ -2212,7 +2212,7 @@
                     "avahi": {
                         "lib_name": "avahi",
                         "sections_number": "9.11",
-                        "lib_description": "Í¨¹ımDNS/DNS-SDĞ­Òé·¢ÏÖ±¾µØÍøÂçÉÏµÄ·şÎñ¡£",
+                        "lib_description": "é€šè¿‡mDNS/DNS-SDåè®®å‘ç°æœ¬åœ°ç½‘ç»œä¸Šçš„æœåŠ¡ã€‚",
                         "version": {
                             "desktop": "0.7", 
                             "server": ""
@@ -2243,7 +2243,7 @@
                     "dhcp": {
                         "lib_name": "dhcp",
                         "sections_number": "9.12",
-                        "lib_description": "¶¯Ì¬·ÖÅäDHCP",
+                        "lib_description": "åŠ¨æ€åˆ†é…DHCP",
                         "version": {
                             "desktop": "", 
                             "server": "4.3.6"
@@ -2270,7 +2270,7 @@
                     "iproute": {
                         "lib_name": "iproute",
                         "sections_number": "9.13",
-                        "lib_description": "ÃüÁîĞĞÍøÂç¹¤¾ß",
+                        "lib_description": "å‘½ä»¤è¡Œç½‘ç»œå·¥å…·",
                         "version": {
                             "desktop": " 4.20.0", 
                             "server": ""
@@ -2303,17 +2303,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "10 Í¼ĞÎ¿â",
+            "##ç« èŠ‚å": "10 å›¾å½¢åº“",
             "graphic": {
                 "description": {
                     "chapters_number": "10",
-                    "chapters_Name": "Í¼ĞÎ"
+                    "chapters_Name": "å›¾å½¢"
                 },
                 "packages": {
                     "atk": {
                         "lib_name": "atk",
                         "sections_number": "10.1",
-                        "lib_description": "Ìá¹©¸øÓ¦ÓÃ³ÌĞòµÄ¿É·ÃÎÊĞÔµÄ±à³Ì½Ó¿Ú¡£",
+                        "lib_description": "æä¾›ç»™åº”ç”¨ç¨‹åºçš„å¯è®¿é—®æ€§çš„ç¼–ç¨‹æ¥å£ã€‚",
                         "version": {
                             "desktop": "2.30.0", 
                             "server": "2.28.1"
@@ -2347,7 +2347,7 @@
                     "gtk2": {
                         "lib_name": "gtk2",
                         "sections_number": "10.2",
-                        "lib_description": "GTK+ Í¼ĞÎÓÃ»§½çÃæ¿â",
+                        "lib_description": "GTK+ å›¾å½¢ç”¨æˆ·ç•Œé¢åº“",
                         "version": {
                             "desktop": "2.24.32", 
                             "server": "2.24.32"
@@ -2397,7 +2397,7 @@
                     "gtk3": {
                         "lib_name": "gtk3",
                         "sections_number": "10.3",
-                        "lib_description": "GTK+ Í¼ĞÎÓÃ»§½çÃæ¿â",
+                        "lib_description": "GTK+ å›¾å½¢ç”¨æˆ·ç•Œé¢åº“",
                         "version": {
                             "desktop": " 3.24.5", 
                             "server": "3.22.30"
@@ -2443,7 +2443,7 @@
                     "libICE": {
                         "lib_name": "libICE",
                         "sections_number": "10.4",
-                        "lib_description": "X.Org X11 ICE ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 ICE è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "1.0.9", 
                             "server": "1.0.9"
@@ -2477,7 +2477,7 @@
                     "libxext": {
                         "lib_name": "libxext",
                         "sections_number": "10.5",
-                        "lib_description": "X.Org ÏîÄ¿Ìá¹©ÁË X Window System.X.Org X11 libXext µÄ¿ªÔ´ÊµÏÖ£¬°üº¬ÔËĞĞÊ±¿â¡£",
+                        "lib_description": "X.Org é¡¹ç›®æä¾›äº† X Window System.X.Org X11 libXext çš„å¼€æºå®ç°ï¼ŒåŒ…å«è¿è¡Œæ—¶åº“ã€‚",
                         "version": {
                             "desktop": "1.3.3", 
                             "server": "1.3.3"
@@ -2511,7 +2511,7 @@
                     "libpng1.6": {
                         "lib_name": "libpng1.6",
                         "sections_number": "10.6",
-                        "lib_description": "libpng °ü°üº¬ÆäËû³ÌĞòÓÃÓÚ¶ÁÈ¡ºÍĞ´Èë PNG ¸ñÊ½ÎÄ¼şµÄ¿â¡£",
+                        "lib_description": "libpng åŒ…åŒ…å«å…¶ä»–ç¨‹åºç”¨äºè¯»å–å’Œå†™å…¥ PNG æ ¼å¼æ–‡ä»¶çš„åº“ã€‚",
                         "version": {
                             "desktop": "1.6.36", 
                             "server": "1.6.34"
@@ -2545,7 +2545,7 @@
                     "libx11": {
                         "lib_name": "libx11",
                         "sections_number": "10.7",
-                        "lib_description": "Core X11 Ğ­Òé¿Í»§¶Ë¿â",
+                        "lib_description": "Core X11 åè®®å®¢æˆ·ç«¯åº“",
                         "version": {
                             "desktop": "1.6.9", 
                             "server": "1.6.8"
@@ -2581,7 +2581,7 @@
                     "libsdl2": {
                         "lib_name": "libsdl2",
                         "sections_number": "10.8",
-                        "lib_description": "SDLµÄÖØ¹¹°æ",
+                        "lib_description": "SDLçš„é‡æ„ç‰ˆ",
                         "version": {
                             "desktop": "2.0.9", 
                             "server": ""
@@ -2615,7 +2615,7 @@
                     "libxau": {
                         "lib_name": "libxau",
                         "sections_number": "10.9",
-                        "lib_description": "ÓÃÓÚÌá¹©¶Ô X Window µÄµ¥¶À·ÃÎÊÏµÍ³ÏÔÊ¾¡£",
+                        "lib_description": "ç”¨äºæä¾›å¯¹ X Window çš„å•ç‹¬è®¿é—®ç³»ç»Ÿæ˜¾ç¤ºã€‚",
                         "version": {
                             "desktop": "1.0.8", 
                             "server": ""
@@ -2641,7 +2641,7 @@
                     "libxaw": {
                         "lib_name": "libxaw",
                         "sections_number": "10.10",
-                        "lib_description": "Xaw ÊÇÒ»¸ö»ùÓÚ X Toolkit Intrinsics (Xt) ¿âµÄĞ¡²¿¼ş¼¯¡£",
+                        "lib_description": "Xaw æ˜¯ä¸€ä¸ªåŸºäº X Toolkit Intrinsics (Xt) åº“çš„å°éƒ¨ä»¶é›†ã€‚",
                         "version": {
                             "desktop": "1.0.13", 
                             "server": ""
@@ -2667,7 +2667,7 @@
                     "fontconfig": {
                         "lib_name": "fontconfig",
                         "sections_number": "10.11",
-                        "lib_description": "Fontconfig ¸ù¾İÓ¦ÓÃ³ÌĞòÖ¸¶¨µÄÒªÇóÌá¹©²»Í¬µÄ×ÖÌå¡£",
+                        "lib_description": "Fontconfig æ ¹æ®åº”ç”¨ç¨‹åºæŒ‡å®šçš„è¦æ±‚æä¾›ä¸åŒçš„å­—ä½“ã€‚",
                         "version": {
                             "desktop": "2.13.1", 
                             "server": ""
@@ -2693,7 +2693,7 @@
                     "freetype": {
                         "lib_name": "freetype",
                         "sections_number": "10.12",
-                        "lib_description": "×ÖÌåäÖÈ¾Èí¼ş¿â¡£",
+                        "lib_description": "å­—ä½“æ¸²æŸ“è½¯ä»¶åº“ã€‚",
                         "version": {
                             "desktop": "2.9.1", 
                             "server": ""
@@ -2719,7 +2719,7 @@
                     "tiff": {
                         "lib_name": "tiff",
                         "sections_number": "10.13",
-                        "lib_description": "Ö§³Ö±ê¼ÇÍ¼ÏñÎÄ¼ş¸ñÊ½¡£",
+                        "lib_description": "æ”¯æŒæ ‡è®°å›¾åƒæ–‡ä»¶æ ¼å¼ã€‚",
                         "version": {
                             "desktop": "4.1.0", 
                             "server": ""
@@ -2746,7 +2746,7 @@
                     "libxpm": {
                         "lib_name": "libxpm",
                         "sections_number": "10.14",
-                        "lib_description": "X.Org X11 libXpm ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 libXpm è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "3.5.12", 
                             "server": ""
@@ -2772,7 +2772,7 @@
                     "libxdmcp": {
                         "lib_name": "libxdmcp",
                         "sections_number": "10.15",
-                        "lib_description": "X ÏÔÊ¾¹ÜÀíÆ÷¿ØÖÆĞ­Òé (XDMCP) Ìá¹©ÁËÒ»¸öÍ³Ò»µÄ×ÔÖ÷ÏÔÊ¾Æ÷ÏòÔ¶³ÌÖ÷»úÇëÇóµÇÂ¼·şÎñµÄ»úÖÆ¡£",
+                        "lib_description": "X æ˜¾ç¤ºç®¡ç†å™¨æ§åˆ¶åè®® (XDMCP) æä¾›äº†ä¸€ä¸ªç»Ÿä¸€çš„è‡ªä¸»æ˜¾ç¤ºå™¨å‘è¿œç¨‹ä¸»æœºè¯·æ±‚ç™»å½•æœåŠ¡çš„æœºåˆ¶ã€‚",
                         "version": {
                             "desktop": "1.1.2", 
                             "server": ""
@@ -2798,7 +2798,7 @@
                     "libxrandr": {
                         "lib_name": "libxrandr",
                         "sections_number": "10.16",
-                        "lib_description": "X.Org X11 libXrandr ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 libXrandr è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "1.5.1", 
                             "server": ""
@@ -2824,7 +2824,7 @@
                     "libglu": {
                         "lib_name": "libglu",
                         "sections_number": "10.17",
-                        "lib_description": "OpenGL ÊµÓÃ³ÌĞò¿â (GLU) £¬ËüÌá¹©ÁËĞí¶àº¯Êı£¬ÕâĞ©º¯ÊıÊ¹ÓÃ»ù±¾ OpenGL ¿â´Ó OpenGL Ìá¹©µÄ¸üÔ­Ê¼µÄÀı³ÌÖĞÌá¹©¸ü¸ß¼¶±ğµÄ»æÍ¼Àı³Ì¡£",
+                        "lib_description": "OpenGL å®ç”¨ç¨‹åºåº“ (GLU) ï¼Œå®ƒæä¾›äº†è®¸å¤šå‡½æ•°ï¼Œè¿™äº›å‡½æ•°ä½¿ç”¨åŸºæœ¬ OpenGL åº“ä» OpenGL æä¾›çš„æ›´åŸå§‹çš„ä¾‹ç¨‹ä¸­æä¾›æ›´é«˜çº§åˆ«çš„ç»˜å›¾ä¾‹ç¨‹ã€‚",
                         "version": {
                             "desktop": "9.0.0", 
                             "server": ""
@@ -2850,7 +2850,7 @@
                     "libdmx": {
                         "lib_name": "libdmx",
                         "sections_number": "10.18",
-                        "lib_description": "X.Org ÏîÄ¿Ìá¹©ÁË X Window ÏµÍ³µÄ¿ªÔ´ÊµÏÖ¡£",
+                        "lib_description": "X.Org é¡¹ç›®æä¾›äº† X Window ç³»ç»Ÿçš„å¼€æºå®ç°ã€‚",
                         "version": {
                             "desktop": "1.1.4", 
                             "server": ""
@@ -2876,7 +2876,7 @@
                     "libdrm": {
                         "lib_name": "libdrm",
                         "sections_number": "10.19",
-                        "lib_description": "libdrm Ìá¹©ÁËÒ»¸öÓÃ»§¿Õ¼ä¿â£¬ÓÃÓÚÔÚÖ§³Ö ioctl ½Ó¿ÚµÄ²Ù×÷ÏµÍ³ÉÏ·ÃÎÊ DRM£¨Ö±½ÓäÖÈ¾¹ÜÀíÆ÷£©¡£",
+                        "lib_description": "libdrm æä¾›äº†ä¸€ä¸ªç”¨æˆ·ç©ºé—´åº“ï¼Œç”¨äºåœ¨æ”¯æŒ ioctl æ¥å£çš„æ“ä½œç³»ç»Ÿä¸Šè®¿é—® DRMï¼ˆç›´æ¥æ¸²æŸ“ç®¡ç†å™¨ï¼‰ã€‚",
                         "version": {
                             "desktop": "2.4.99", 
                             "server": ""
@@ -2906,7 +2906,7 @@
                     "libxmu": {
                         "lib_name": "libxmu",
                         "sections_number": "10.20",
-                        "lib_description": "X.Org X11 libXmu/libXmuu ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 libXmu/libXmuu è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "1.1.2", 
                             "server": ""
@@ -2933,7 +2933,7 @@
                     "libxcb": {
                         "lib_name": "libxcb",
                         "sections_number": "10.21",
-                        "lib_description": "XĞ­ÒéCÓïÑÔ°ó¶¨ (XCB) £¬ÊÇ Xlib µÄÌæ´úÆ·¡£",
+                        "lib_description": "Xåè®®Cè¯­è¨€ç»‘å®š (XCB) ï¼Œæ˜¯ Xlib çš„æ›¿ä»£å“ã€‚",
                         "version": {
                             "desktop": "1.13.1", 
                             "server": ""
@@ -2982,7 +2982,7 @@
                     "libxrender": {
                         "lib_name": "libxrender",
                         "sections_number": "10.22",
-                        "lib_description": "X.Org X11 libXrender ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 libXrender è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "0.9.10", 
                             "server": ""
@@ -3008,7 +3008,7 @@
                     "xft": {
                         "lib_name": "xft",
                         "sections_number": "10.23",
-                        "lib_description": "Xft ÊÇÒ»¸ö½« X Ó¦ÓÃ³ÌĞòÓë FreeType ×ÖÌåÁ¬½ÓÆğÀ´µÄ¹âÕ¤»¯¿â¡£",
+                        "lib_description": "Xft æ˜¯ä¸€ä¸ªå°† X åº”ç”¨ç¨‹åºä¸ FreeType å­—ä½“è¿æ¥èµ·æ¥çš„å…‰æ …åŒ–åº“ã€‚",
                         "version": {
                             "desktop": "2.3.2", 
                             "server": ""
@@ -3034,7 +3034,7 @@
                     "gdk-pixbuf": {
                         "lib_name": "gdk-pixbuf",
                         "sections_number": "10.24",
-                        "lib_description": "´´½¨Í¼ĞÎÓÃ»§½çÃæµÄ¶àÆ½Ì¨¹¤¾ß°ü",
+                        "lib_description": "åˆ›å»ºå›¾å½¢ç”¨æˆ·ç•Œé¢çš„å¤šå¹³å°å·¥å…·åŒ…",
                         "version": {
                             "desktop": "2.38.1", 
                             "server": ""
@@ -3081,7 +3081,7 @@
                     "libfontenc": {
                         "lib_name": "libfontenc",
                         "sections_number": "10.25",
-                        "lib_description": "X.Org X11 libfontenc ÔËĞĞÊ±¿â¡£",
+                        "lib_description": "X.Org X11 libfontenc è¿è¡Œæ—¶åº“ã€‚",
                         "version": {
                             "desktop": "1.1.3", 
                             "server": ""
@@ -3107,7 +3107,7 @@
                     "libglvnd": {
                         "lib_name": "libglvnd",
                         "sections_number": "10.26",
-                        "lib_description": "libglvnd ÊÇÒ»¸ö¹©Ó¦ÉÌÖĞÁ¢µÄµ÷¶È²ã£¬ÓÃÓÚÖÙ²Ã¶à¸ö¹©Ó¦ÉÌÖ®¼äµÄ OpenGL API µ÷ÓÃ¡£",
+                        "lib_description": "libglvnd æ˜¯ä¸€ä¸ªä¾›åº”å•†ä¸­ç«‹çš„è°ƒåº¦å±‚ï¼Œç”¨äºä»²è£å¤šä¸ªä¾›åº”å•†ä¹‹é—´çš„ OpenGL API è°ƒç”¨ã€‚",
                         "version": {
                             "desktop": "1.1.0", 
                             "server": ""
@@ -3145,7 +3145,7 @@
                     "libjpeg-turbo": {
                         "lib_name": "libjpeg-turbo",
                         "sections_number": "10.27",
-                        "lib_description": "libjpeg-turbo ÊÇÒ»¸ö JPEG Í¼Ïñ±à½âÂëÆ÷¡£",
+                        "lib_description": "libjpeg-turbo æ˜¯ä¸€ä¸ª JPEG å›¾åƒç¼–è§£ç å™¨ã€‚",
                         "version": {
                             "desktop": "1.5.2", 
                             "server": ""
@@ -3172,7 +3172,7 @@
                     "libpciaccess": {
                         "lib_name": "libpciaccess",
                         "sections_number": "10.28",
-                        "lib_description": "Îª X Ìá¹©·ÃÎÊ PCI ×ÜÏßºÍÉè±¸µÄ¹¦ÄÜÆ½Ì¨ÎŞ¹ØµÄ·½Ê½¡£",
+                        "lib_description": "ä¸º X æä¾›è®¿é—® PCI æ€»çº¿å’Œè®¾å¤‡çš„åŠŸèƒ½å¹³å°æ— å…³çš„æ–¹å¼ã€‚",
                         "version": {
                             "desktop": "0.14", 
                             "server": ""
@@ -3198,7 +3198,7 @@
                     "libpng12": {
                         "lib_name": "libpng12",
                         "sections_number": "10.29",
-                        "lib_description": "±ãĞ¯Ê½ÍøÂçÍ¼ĞÎ¸ñÊ½¿â",
+                        "lib_description": "ä¾¿æºå¼ç½‘ç»œå›¾å½¢æ ¼å¼åº“",
                         "version": {
                             "desktop": "1.2.54", 
                             "server": ""
@@ -3224,7 +3224,7 @@
                     "libraw": {
                         "lib_name": "libraw",
                         "sections_number": "10.30",
-                        "lib_description": "LibRaw ÊÇÒ»¸öÓÃÓÚ´ÓÊıÂëÏà»ú¶ÁÈ¡ RAW ÎÄ¼şµÄ¿â¡£",
+                        "lib_description": "LibRaw æ˜¯ä¸€ä¸ªç”¨äºä»æ•°ç ç›¸æœºè¯»å– RAW æ–‡ä»¶çš„åº“ã€‚",
                         "version": {
                             "desktop": "0.19.2", 
                             "server": ""
@@ -3250,7 +3250,7 @@
                     "libSM": {
                         "lib_name": "libSM",
                         "sections_number": "10.31",
-                        "lib_description": "libSM Èí¼ş°üÖĞ°üº¬ X.Org X11 SM µÄÔËĞĞÊ±¿â¡£",
+                        "lib_description": "libSM è½¯ä»¶åŒ…ä¸­åŒ…å« X.Org X11 SM çš„è¿è¡Œæ—¶åº“ã€‚",
                         "version": {
                             "desktop": "1.2.3", 
                             "server": ""
@@ -3276,7 +3276,7 @@
                     "libwebp": {
                         "lib_name": "libwebp",
                         "sections_number": "10.32",
-                        "lib_description": "ÕâÊÇÒ»ÖÖ¶ÔÊıÂëÕÕÆ¬Í¼Ïñ½øĞĞÓĞËğÑ¹ËõµÄÍ¼Ïñ¸ñÊ½¡£",
+                        "lib_description": "è¿™æ˜¯ä¸€ç§å¯¹æ•°ç ç…§ç‰‡å›¾åƒè¿›è¡Œæœ‰æŸå‹ç¼©çš„å›¾åƒæ ¼å¼ã€‚",
                         "version": {
                             "desktop": "0.6.1", 
                             "server": ""
@@ -3304,7 +3304,7 @@
                     "libxres": {
                         "lib_name": "libxres",
                         "sections_number": "10.33",
-                        "lib_description": "X-Resource ÊÇÒ»¸öÀ©Õ¹£¬ËüÔÊĞí¿Í»§¶ËÏò X ·şÎñÆ÷²éÑ¯¸÷ÖÖ×ÊÔ´µÄÊ¹ÓÃÇé¿ö¡£",
+                        "lib_description": "X-Resource æ˜¯ä¸€ä¸ªæ‰©å±•ï¼Œå®ƒå…è®¸å®¢æˆ·ç«¯å‘ X æœåŠ¡å™¨æŸ¥è¯¢å„ç§èµ„æºçš„ä½¿ç”¨æƒ…å†µã€‚",
                         "version": {
                             "desktop": "1.2.0", 
                             "server": ""
@@ -3330,7 +3330,7 @@
                     "libxcomposite": {
                         "lib_name": "libxcomposite",
                         "sections_number": "10.34",
-                        "lib_description": "X ¸´ºÏÀ©Õ¹¿â",
+                        "lib_description": "X å¤åˆæ‰©å±•åº“",
                         "version": {
                             "desktop": "0.4.4", 
                             "server": ""
@@ -3356,7 +3356,7 @@
                     "libxcursor": {
                         "lib_name": "libxcursor",
                         "sections_number": "10.35",
-                        "lib_description": "libXcursor ÊÇÒ»¸öÖ¼ÔÚ°ïÖú¶¨Î»ºÍ¼ÓÔØÓÎ±êµÄ¿â¡£ÓÎ±ê¿ÉÒÔ´ÓÎÄ¼ş»òÄÚ´æÖĞ¼ÓÔØ¡£",
+                        "lib_description": "libXcursor æ˜¯ä¸€ä¸ªæ—¨åœ¨å¸®åŠ©å®šä½å’ŒåŠ è½½æ¸¸æ ‡çš„åº“ã€‚æ¸¸æ ‡å¯ä»¥ä»æ–‡ä»¶æˆ–å†…å­˜ä¸­åŠ è½½ã€‚",
                         "version": {
                             "desktop": "1.1.15", 
                             "server": ""
@@ -3382,7 +3382,7 @@
                     "libxdamage": {
                         "lib_name": "libxdamage",
                         "sections_number": "10.36",
-                        "lib_description": "X Damage Extension ÔÊĞíÓ¦ÓÃ³ÌĞò¸ú×Ù¿É»æÖÆ¶ÔÏóµÄĞŞ¸ÄÇøÓò¡£",
+                        "lib_description": "X Damage Extension å…è®¸åº”ç”¨ç¨‹åºè·Ÿè¸ªå¯ç»˜åˆ¶å¯¹è±¡çš„ä¿®æ”¹åŒºåŸŸã€‚",
                         "version": {
                             "desktop": "1.1.4", 
                             "server": ""
@@ -3408,7 +3408,7 @@
                     "libxfixes": {
                         "lib_name": "libxfixes",
                         "sections_number": "10.37",
-                        "lib_description": "X Fixes À©Õ¹ÎªÓ¦ÓÃ³ÌĞòÌá¹©ÁËÕë¶ÔºËĞÄĞ­ÒéÖĞ¸÷ÖÖÏŞÖÆµÄ±äÍ¨·½·¨¡£",
+                        "lib_description": "X Fixes æ‰©å±•ä¸ºåº”ç”¨ç¨‹åºæä¾›äº†é’ˆå¯¹æ ¸å¿ƒåè®®ä¸­å„ç§é™åˆ¶çš„å˜é€šæ–¹æ³•ã€‚",
                         "version": {
                             "desktop": "5.0.3", 
                             "server": ""
@@ -3434,7 +3434,7 @@
                     "libxfont": {
                         "lib_name": "libxfont",
                         "sections_number": "10.38",
-                        "lib_description": "libXfont Ìá¹©ÁËÒÅÁô X11 ×ÖÌåÏµÍ³µÄºËĞÄ¡£",
+                        "lib_description": "libXfont æä¾›äº†é—ç•™ X11 å­—ä½“ç³»ç»Ÿçš„æ ¸å¿ƒã€‚",
                         "version": {
                             "desktop": "2.0.3", 
                             "server": ""
@@ -3460,7 +3460,7 @@
                     "libxi": {
                         "lib_name": "libxi",
                         "sections_number": "10.39",
-                        "lib_description": "libXi ÊÇ X ÊäÈëÀ©Õ¹µÄ¿Í»§¶Ë¿â¡£",
+                        "lib_description": "libXi æ˜¯ X è¾“å…¥æ‰©å±•çš„å®¢æˆ·ç«¯åº“ã€‚",
                         "version": {
                             "desktop": "1.7.9", 
                             "server": ""
@@ -3486,7 +3486,7 @@
                     "libxinerama": {
                         "lib_name": "libxinerama",
                         "sections_number": "10.40",
-                        "lib_description": "Xinerama ÊÇ X Window System µÄÀ©Õ¹¡£",
+                        "lib_description": "Xinerama æ˜¯ X Window System çš„æ‰©å±•ã€‚",
                         "version": {
                             "desktop": "1.1.4", 
                             "server": ""
@@ -3512,7 +3512,7 @@
                     "libxkbcommon": {
                         "lib_name": "libxkbcommon",
                         "sections_number": "10.41",
-                        "lib_description": "xkbcommon ÊÇÒ»¸öÓÃÓÚ´¦Àí¼üÅÌÃèÊöµÄ¿â¡£",
+                        "lib_description": "xkbcommon æ˜¯ä¸€ä¸ªç”¨äºå¤„ç†é”®ç›˜æè¿°çš„åº“ã€‚",
                         "version": {
                             "desktop": "0.8.2", 
                             "server": ""
@@ -3538,7 +3538,7 @@
                     "libxkbfile": {
                         "lib_name": "libxkbfile",
                         "sections_number": "10.42",
-                        "lib_description": "X ·şÎñÆ÷ºÍÊµÓÃ³ÌĞòÊ¹ÓÃ Libxkbfile À´½âÎö XKB ÅäÖÃÊı¾İÎÄ¼ş¡£",
+                        "lib_description": "X æœåŠ¡å™¨å’Œå®ç”¨ç¨‹åºä½¿ç”¨ Libxkbfile æ¥è§£æ XKB é…ç½®æ•°æ®æ–‡ä»¶ã€‚",
                         "version": {
                             "desktop": "1.0.9", 
                             "server": ""
@@ -3564,7 +3564,7 @@
                     "libxklavier": {
                         "lib_name": "libxklavier",
                         "sections_number": "10.43",
-                        "lib_description": "Õâ¸ö°üÊÇÒ»¸öÎª X ¼üÅÌÀ©Õ¹Ìá¹©¸ß¼¶ API µÄ¿â£¬³ÆÎª XKB¡£",
+                        "lib_description": "è¿™ä¸ªåŒ…æ˜¯ä¸€ä¸ªä¸º X é”®ç›˜æ‰©å±•æä¾›é«˜çº§ API çš„åº“ï¼Œç§°ä¸º XKBã€‚",
                         "version": {
                             "desktop": "5.4", 
                             "server": ""
@@ -3590,7 +3590,7 @@
                     "cairo": {
                         "lib_name": "cairo",
                         "sections_number": "10.44",
-                        "lib_description": "Cairo ÊÇÒ»¸öÖ§³Ö¶àÖÖÊä³öÉè±¸µÄ 2D Í¼ĞÎ¿â¡£",
+                        "lib_description": "Cairo æ˜¯ä¸€ä¸ªæ”¯æŒå¤šç§è¾“å‡ºè®¾å¤‡çš„ 2D å›¾å½¢åº“ã€‚",
                         "version": {
                             "desktop": "1.16.0", 
                             "server": ""
@@ -3618,7 +3618,7 @@
                     "fltk1.3": {
                         "lib_name": "fltk1.3",
                         "sections_number": "10.45",
-                        "lib_description": "FLTKÊÇÒ»¸ö¿çÆ½Ì¨µÄ C++ GUI ¹¤¾ß°ü¡£",
+                        "lib_description": "FLTKæ˜¯ä¸€ä¸ªè·¨å¹³å°çš„ C++ GUI å·¥å…·åŒ…ã€‚",
                         "version": {
                             "desktop": "1.1.10", 
                             "server": ""
@@ -3647,7 +3647,7 @@
                     "libxss": {
                         "lib_name": "libxss",
                         "sections_number": "10.46",
-                        "lib_description": "´Ë°ü°üº¬ X.Org X11 libXss µÄÔËĞĞÊ±¿â¡£",
+                        "lib_description": "æ­¤åŒ…åŒ…å« X.Org X11 libXss çš„è¿è¡Œæ—¶åº“ã€‚",
                         "version": {
                             "desktop": "1.2.3", 
                             "server": ""
@@ -3673,7 +3673,7 @@
                     "libxshmfence": {
                         "lib_name": "libxshmfence",
                         "sections_number": "10.47",
-                        "lib_description": "X11 µÄ¹²ÏíÄÚ´æÕ¤À¸£¬ÔÚ DRI3 ÖĞÊ¹ÓÃ¡£",
+                        "lib_description": "X11 çš„å…±äº«å†…å­˜æ …æ ï¼Œåœ¨ DRI3 ä¸­ä½¿ç”¨ã€‚",
                         "version": {
                             "desktop": "1.3", 
                             "server": ""
@@ -3699,7 +3699,7 @@
                     "libxt": {
                         "lib_name": "libxt",
                         "sections_number": "10.48",
-                        "lib_description": "X.Org X11 libXt ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 libXt è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "1.1.5", 
                             "server": ""
@@ -3725,7 +3725,7 @@
                     "libxtst": {
                         "lib_name": "libxtst",
                         "sections_number": "10.49",
-                        "lib_description": "X.Org X11 libXtst ÔËĞĞÊ±¿â",
+                        "lib_description": "X.Org X11 libXtst è¿è¡Œæ—¶åº“",
                         "version": {
                             "desktop": "1.2.3", 
                             "server": ""
@@ -3751,7 +3751,7 @@
                     "libxvmc": {
                         "lib_name": "libxvmc",
                         "sections_number": "10.50",
-                        "lib_description": "XvMC ÊÇ X ´°¿ÚÏµÍ³µÄ X ÊÓÆµÀ©Õ¹ (Xv) µÄÀ©Õ¹¡£",
+                        "lib_description": "XvMC æ˜¯ X çª—å£ç³»ç»Ÿçš„ X è§†é¢‘æ‰©å±• (Xv) çš„æ‰©å±•ã€‚",
                         "version": {
                             "desktop": "1.0.10", 
                             "server": ""
@@ -3778,7 +3778,7 @@
                     "libxxf86dga": {
                         "lib_name": "libxxf86dga",
                         "sections_number": "10.51",
-                        "lib_description": "XFree86-DGA À©Õ¹µÄ¿Í»§¶Ë¿â",
+                        "lib_description": "XFree86-DGA æ‰©å±•çš„å®¢æˆ·ç«¯åº“",
                         "version": {
                             "desktop": "1.1.4", 
                             "server": ""
@@ -3804,7 +3804,7 @@
                     "libxxf86vm": {
                         "lib_name": "libxxf86vm",
                         "sections_number": "10.52",
-                        "lib_description": "Îª XFree86-VidModeExtension Ìá¹©Ò»¸öÀ©Õ¹¿â¡£",
+                        "lib_description": "ä¸º XFree86-VidModeExtension æä¾›ä¸€ä¸ªæ‰©å±•åº“ã€‚",
                         "version": {
                             "desktop": "1.1.4", 
                             "server": ""
@@ -3830,7 +3830,7 @@
                     "pango1.0": {
                         "lib_name": "pango1.0",
                         "sections_number": "10.53",
-                        "lib_description": "Pango ÊÇÒ»¸öÓÃÓÚ²¼¾ÖºÍäÖÈ¾ÎÄ±¾µÄ¿â£¬ÖØµãÊÇ¹ØÓÚ¹ú¼Ê»¯¡£",
+                        "lib_description": "Pango æ˜¯ä¸€ä¸ªç”¨äºå¸ƒå±€å’Œæ¸²æŸ“æ–‡æœ¬çš„åº“ï¼Œé‡ç‚¹æ˜¯å…³äºå›½é™…åŒ–ã€‚",
                         "version": {
                             "desktop": "1.42.4", 
                             "server": ""
@@ -3859,7 +3859,7 @@
                     "pixman": {
                         "lib_name": "pixman",
                         "sections_number": "10.54",
-                        "lib_description": "Pixman ÊÇÒ»¸öÓÃÓÚÏñËØ²Ù×÷µÄµÍ¼¶Èí¼ş¿â£¬Ìá¹©Í¼ÏñºÏ³ÉºÍÌİĞÎ¹âÕ¤»¯µÈ¹¦ÄÜ¡£",
+                        "lib_description": "Pixman æ˜¯ä¸€ä¸ªç”¨äºåƒç´ æ“ä½œçš„ä½çº§è½¯ä»¶åº“ï¼Œæä¾›å›¾åƒåˆæˆå’Œæ¢¯å½¢å…‰æ …åŒ–ç­‰åŠŸèƒ½ã€‚",
                         "version": {
                             "desktop": "0.36.0", 
                             "server": ""
@@ -3885,7 +3885,7 @@
                     "qt4-x11": {
                         "lib_name": "qt4-x11",
                         "sections_number": "10.55",
-                        "lib_description": "¿ª·¢Ó¦ÓÃ³ÌĞòµÄÈí¼ş¹¤¾ß°ü",
+                        "lib_description": "å¼€å‘åº”ç”¨ç¨‹åºçš„è½¯ä»¶å·¥å…·åŒ…",
                         "version": {
                             "desktop": "4.8.7", 
                             "server": ""
@@ -3920,7 +3920,7 @@
                     "qtbase-opensource-src": {
                         "lib_name": "qtbase-opensource-src",
                         "sections_number": "10.56",
-                        "lib_description": "Qt¹¤¾ß°üµÄºËĞÄ×é¼ş",
+                        "lib_description": "Qtå·¥å…·åŒ…çš„æ ¸å¿ƒç»„ä»¶",
                         "version": {
                             "desktop": "5.11.3", 
                             "server": ""
@@ -3956,7 +3956,7 @@
                     "qtx11extras-opensource-src": {
                         "lib_name": "qtx11extras-opensource-src",
                         "sections_number": "10.57",
-                        "lib_description": "Qt 5 X11¶îÍâ¹¦ÄÜQtÊÇÒ»¸ö¿çÆ½Ì¨µÄc++Ó¦ÓÃ³ÌĞò¿ò¼Ü¡£QtµÄÖ÷ÒªÌØĞÔÊÇËü·á¸»µÄwidget¼¯£¬Ìá¹©±ê×¼µÄGUI¹¦ÄÜ¡£Õâ¸ö°ü°üº¬ÁË´ÓQt 5ÖĞ·ÃÎÊX11ÄÚÈİµÄ¿â¡£",
+                        "lib_description": "Qt 5 X11é¢å¤–åŠŸèƒ½Qtæ˜¯ä¸€ä¸ªè·¨å¹³å°çš„c++åº”ç”¨ç¨‹åºæ¡†æ¶ã€‚Qtçš„ä¸»è¦ç‰¹æ€§æ˜¯å®ƒä¸°å¯Œçš„widgeté›†ï¼Œæä¾›æ ‡å‡†çš„GUIåŠŸèƒ½ã€‚è¿™ä¸ªåŒ…åŒ…å«äº†ä»Qt 5ä¸­è®¿é—®X11å†…å®¹çš„åº“ã€‚",
                         "version": {
                             "desktop": "5.11.3", 
                             "server": ""
@@ -3982,7 +3982,7 @@
                     "xcb-util": {
                         "lib_name": "xcb-util",
                         "sections_number": "10.58",
-                        "lib_description": "XCB ¹¤¾ßÄ£¿é",
+                        "lib_description": "XCB å·¥å…·æ¨¡å—",
                         "version": {
                             "desktop": "0.3.8", 
                             "server": ""
@@ -4008,7 +4008,7 @@
                     "xcb-util-image": {
                         "lib_name": "xcb-util-image",
                         "sections_number": "10.59",
-                        "lib_description": "Ìá¹©XImageºÍXShmImage¹¦ÄÜ¶Ë¿Ú",
+                        "lib_description": "æä¾›XImageå’ŒXShmImageåŠŸèƒ½ç«¯å£",
                         "version": {
                             "desktop": "0.4.0", 
                             "server": ""
@@ -4034,7 +4034,7 @@
                     "xcb-util-keysyms": {
                         "lib_name": "xcb-util-keysyms",
                         "sections_number": "10.60",
-                        "lib_description": "±ê×¼X¼üÖµ¶Ô×ª»»¹¤¾ß",
+                        "lib_description": "æ ‡å‡†Xé”®å€¼å¯¹è½¬æ¢å·¥å…·",
                         "version": {
                             "desktop": "0.4.0", 
                             "server": ""
@@ -4060,7 +4060,7 @@
                     "xcb-util-renderutil": {
                         "lib_name": "xcb-util-renderutil",
                         "sections_number": "10.61",
-                        "lib_description": "äÖÈ¾À©Õ¹¹¤¾ß",
+                        "lib_description": "æ¸²æŸ“æ‰©å±•å·¥å…·",
                         "version": {
                             "desktop": "0.3.9", 
                             "server": ""
@@ -4086,7 +4086,7 @@
                     "xcb-util-wm": {
                         "lib_name": "xcb-util-wm",
                         "sections_number": "10.62",
-                        "lib_description": "´°¿Ú¹ÜÀíÆ÷",
+                        "lib_description": "çª—å£ç®¡ç†å™¨",
                         "version": {
                             "desktop": "0.4.1", 
                             "server": ""
@@ -4113,7 +4113,7 @@
                     "xorg-x11-server": {
                         "lib_name": "xorg-x11-server",
                         "sections_number": "10.63",
-                        "lib_description": "X.Org X11 X ·şÎñÆ÷",
+                        "lib_description": "X.Org X11 X æœåŠ¡å™¨",
                         "version": {
                             "desktop": "1.20.4", 
                             "server": ""
@@ -4150,7 +4150,7 @@
                     "libsdl1.2": {
                         "lib_name": "libsdl1.2",
                         "sections_number": "10.64",
-                        "lib_description": "¿çÆ½Ì¨µÄ¶àÃ½Ìå¿ª·¢°ü£¬ÊÊÓÃÓÚÓÎÏ·¡¢ÓÎÏ·SDK¡¢ÑİÊ¾Èí¼ş¡¢Ä£ÄâÆ÷¡¢ MPEG²¥·ÅÆ÷ºÍÆäËûÓ¦ÓÃÈí¼ş",
+                        "lib_description": "è·¨å¹³å°çš„å¤šåª’ä½“å¼€å‘åŒ…ï¼Œé€‚ç”¨äºæ¸¸æˆã€æ¸¸æˆSDKã€æ¼”ç¤ºè½¯ä»¶ã€æ¨¡æ‹Ÿå™¨ã€ MPEGæ’­æ”¾å™¨å’Œå…¶ä»–åº”ç”¨è½¯ä»¶",
                         "version": {
                             "desktop": "1.2.15", 
                             "server": ""
@@ -4175,17 +4175,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "11 ¶àÃ½Ìå¿â",
+            "##ç« èŠ‚å": "11 å¤šåª’ä½“åº“",
             "multimedia": {
                 "description": {
                     "chapters_number": "11",
-                    "chapters_Name": "¶àÃ½Ìå"
+                    "chapters_Name": "å¤šåª’ä½“"
                 },
                 "packages": {
                     "alsa-lib": {
                         "lib_name": "alsa-lib",
                         "sections_number": "11.1",
-                        "lib_description": "±àÒë ALSA Ó¦ÓÃ³ÌĞòµÄÓÃ»§¿Õ¼ä¿â",
+                        "lib_description": "ç¼–è¯‘ ALSA åº”ç”¨ç¨‹åºçš„ç”¨æˆ·ç©ºé—´åº“",
                         "version": {
                             "desktop": "1.1.8", 
                             "server": ""
@@ -4211,7 +4211,7 @@
                     "ffmpeg": {
                         "lib_name": "ffmpeg",
                         "sections_number": "11.2",
-                        "lib_description": "LinuxÒôÊÓÆµ²¥·Å½â¾ö·½°¸",
+                        "lib_description": "LinuxéŸ³è§†é¢‘æ’­æ”¾è§£å†³æ–¹æ¡ˆ",
                         "version": {
                             "desktop": "4.1.8", 
                             "server": ""
@@ -4244,7 +4244,7 @@
                     "gstreamer1.0": {
                         "lib_name": "gstreamer1.0",
                         "sections_number": "11.3",
-                        "lib_description": "GStreamer Á÷Ã½Ìå¿ò¼ÜÔËĞĞÊ±",
+                        "lib_description": "GStreamer æµåª’ä½“æ¡†æ¶è¿è¡Œæ—¶",
                         "version": {
                             "desktop": "1.14.4", 
                             "server": ""
@@ -4276,7 +4276,7 @@
                     "libdvdnav": {
                         "lib_name": "libdvdnav",
                         "sections_number": "11.4",
-                        "lib_description": "ÏÔÊ¾ DVD ÊÓÆµ²Ëµ¥¹¦ÄÜ¿â",
+                        "lib_description": "æ˜¾ç¤º DVD è§†é¢‘èœå•åŠŸèƒ½åº“",
                         "version": {
                             "desktop": "6.0.0", 
                             "server": ""
@@ -4302,7 +4302,7 @@
                     "libdvdread": {
                         "lib_name": "libdvdread",
                         "sections_number": "11.5",
-                        "lib_description": "ÓÃÓÚ·ÃÎÊ DVD ´ÅÅÌµÄ¿â",
+                        "lib_description": "ç”¨äºè®¿é—® DVD ç£ç›˜çš„åº“",
                         "version": {
                             "desktop": "6.0.1", 
                             "server": ""
@@ -4328,7 +4328,7 @@
                     "pulseaudio": {
                         "lib_name": "pulseaudio",
                         "sections_number": "11.6",
-                        "lib_description": "LinuxÉùÒô·şÎñÆ÷",
+                        "lib_description": "Linuxå£°éŸ³æœåŠ¡å™¨",
                         "version": {
                             "desktop": "12.2", 
                             "server": ""
@@ -4368,17 +4368,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "12 ´òÓ¡É¨Ãè¿â",
+            "##ç« èŠ‚å": "12 æ‰“å°æ‰«æåº“",
             "print_scan": {
                 "description": {
                     "chapters_number": "12",
-                    "chapters_Name": "´òÓ¡É¨Ãè"
+                    "chapters_Name": "æ‰“å°æ‰«æ"
                 },
                 "packages": {
                     "cups-filters": {
                         "lib_name": "cups-filters",
                         "sections_number": "12.1",
-                        "lib_description": "CUPS ÊÇÆ»¹û¹«Ë¾Îª Mac OS X ºÍÆäËûÀà UNIX ²Ù×÷ÏµÍ³¿ª·¢µÄ»ùÓÚ±ê×¼µÄ¿ªÔ´´òÓ¡ÏµÍ³¡£CUPS Ê¹ÓÃ Internet ´òÓ¡Ğ­Òé (IPP) ²¢Ìá¹© System V ºÍ Berkeley ÃüÁîĞĞ½çÃæ¡¢Web ½çÃæºÍ C API À´¹ÜÀí´òÓ¡»úºÍ´òÓ¡×÷Òµ¡£¸ÃÏîÄ¿Ìá¹©ºó¶Ë¡¢¹ıÂËÆ÷ºÍÆäËûÈí¼ş£¬cups-filtersÊÇ¹ıÂËÆ÷¡£",
+                        "lib_description": "CUPS æ˜¯è‹¹æœå…¬å¸ä¸º Mac OS X å’Œå…¶ä»–ç±» UNIX æ“ä½œç³»ç»Ÿå¼€å‘çš„åŸºäºæ ‡å‡†çš„å¼€æºæ‰“å°ç³»ç»Ÿã€‚CUPS ä½¿ç”¨ Internet æ‰“å°åè®® (IPP) å¹¶æä¾› System V å’Œ Berkeley å‘½ä»¤è¡Œç•Œé¢ã€Web ç•Œé¢å’Œ C API æ¥ç®¡ç†æ‰“å°æœºå’Œæ‰“å°ä½œä¸šã€‚è¯¥é¡¹ç›®æä¾›åç«¯ã€è¿‡æ»¤å™¨å’Œå…¶ä»–è½¯ä»¶ï¼Œcups-filtersæ˜¯è¿‡æ»¤å™¨ã€‚",
                         "version": {
                             "desktop": "1.21.6", 
                             "server": "1.20.0"
@@ -4406,7 +4406,7 @@
                     "sane-backends": {
                         "lib_name": "sane-backends",
                         "sections_number": "12.2",
-                        "lib_description": "SANE Ó¦ÓÃ³ÌĞò±à³Ì½Ó¿Ú (API) £¬Ìá¹©¶ÔÈÎºÎ¹âÕ¤Í¼ÏñÉ¨ÃèÒÇÓ²¼ş£¨Æ½°åÉ¨ÃèÒÇ¡¢ÊÖ³ÖÊ½É¨ÃèÒÇ¡¢ÊÓÆµºÍÕÕÏà»ú¡¢Í¼Ïñ²É¼¯¿¨µÈ£©µÄ±ê×¼»¯·ÃÎÊ¡£",
+                        "lib_description": "SANE åº”ç”¨ç¨‹åºç¼–ç¨‹æ¥å£ (API) ï¼Œæä¾›å¯¹ä»»ä½•å…‰æ …å›¾åƒæ‰«æä»ªç¡¬ä»¶ï¼ˆå¹³æ¿æ‰«æä»ªã€æ‰‹æŒå¼æ‰«æä»ªã€è§†é¢‘å’Œç…§ç›¸æœºã€å›¾åƒé‡‡é›†å¡ç­‰ï¼‰çš„æ ‡å‡†åŒ–è®¿é—®ã€‚",
                         "version": {
                             "desktop": "1.0.27", 
                             "server": "1.0.27"
@@ -4431,11 +4431,11 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "13 ÔËĞĞÊ±ÓïÑÔ¿â",
+            "##ç« èŠ‚å": "13 è¿è¡Œæ—¶è¯­è¨€åº“",
             "runtime_language": {
                 "description": {
                     "chapters_number": "13",
-                    "chapters_Name": "ÔËĞĞÊ±ÓïÑÔ"
+                    "chapters_Name": "è¿è¡Œæ—¶è¯­è¨€"
                 },
                 "packages": {
                     "python2": {
@@ -4475,7 +4475,7 @@
                     "openjdk": {
                         "lib_name": "openjdk",
                         "sections_number": "13.2",
-                        "lib_description": "OpenJDK ÊÇ Java ±ê×¼°æ (Java SE) ºÍ Java ¿ª·¢¹¤¾ß°ü (JDK) µÄ¿ªÔ´ÊµÏÖ¡£OpenJDK Ô´´úÂëÊÇÕâĞ©ÉÌÒµ Java ²úÆ·µÄ»ù´¡¡£Ëü°üº¬ÁËJava ÔËĞĞÊ±»·¾³£¬ÓÃÒÔÔËĞĞ Java ³ÌĞò£¬Ò²°üº¬ÁË Java ĞéÄâ»úºÍÒ»Ğ©±ğµÄ×é³É¡£",
+                        "lib_description": "OpenJDK æ˜¯ Java æ ‡å‡†ç‰ˆ (Java SE) å’Œ Java å¼€å‘å·¥å…·åŒ… (JDK) çš„å¼€æºå®ç°ã€‚OpenJDK æºä»£ç æ˜¯è¿™äº›å•†ä¸š Java äº§å“çš„åŸºç¡€ã€‚å®ƒåŒ…å«äº†Java è¿è¡Œæ—¶ç¯å¢ƒï¼Œç”¨ä»¥è¿è¡Œ Java ç¨‹åºï¼Œä¹ŸåŒ…å«äº† Java è™šæ‹Ÿæœºå’Œä¸€äº›åˆ«çš„ç»„æˆã€‚",
                         "version": {
                             "desktop": "11.0.9", 
                             "server": "11.0.6"
@@ -4598,7 +4598,7 @@
                     "perl": {
                         "lib_name": "perl",
                         "sections_number": "13.3",
-                        "lib_description": "Perl¿â:¿ª·¢ÎÄ¼şÓÃÓÚ¿ª·¢Ç¶ÈëPerl½âÊÍÆ÷µÄÓ¦ÓÃ³ÌĞòµÄÎÄ¼ş¡£",
+                        "lib_description": "Perlåº“:å¼€å‘æ–‡ä»¶ç”¨äºå¼€å‘åµŒå…¥Perlè§£é‡Šå™¨çš„åº”ç”¨ç¨‹åºçš„æ–‡ä»¶ã€‚",
                         "version": {
                             "desktop": "5.28.1", 
                             "server": "5.26.3"
@@ -4638,17 +4638,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "14 ±à³Ì¿ª·¢¿â",
+            "##ç« èŠ‚å": "14 ç¼–ç¨‹å¼€å‘åº“",
             "development": {
                 "description": {
                     "chapters_number": "14",
-                    "chapters_Name": "±à³Ì¿ª·¢"
+                    "chapters_Name": "ç¼–ç¨‹å¼€å‘"
                 },
                 "packages": {
                     "libxml2": {
                         "lib_name": "libxml2",
                         "sections_number": "14.1",
-                        "lib_description": "Libxml2 ÊÇÒ»¸öxmlµÄcÓïÑÔ°æµÄ½âÎöÆ÷",
+                        "lib_description": "Libxml2 æ˜¯ä¸€ä¸ªxmlçš„cè¯­è¨€ç‰ˆçš„è§£æå™¨",
                         "version": {
                             "desktop": "2.9.4", 
                             "server": "2.9.7"
@@ -4674,7 +4674,7 @@
                     "libunwindb": {
                         "lib_name": "libunwindb",
                         "sections_number": "14.2",
-                        "lib_description": "¿ÉÒÆÖ²ÇÒ¸ßĞ§µÄ C ±à³Ì½Ó¿Ú (API)£¬ÓÃÓÚÈ·¶¨³ÌĞòµÄµ÷ÓÃÁ´¡£",
+                        "lib_description": "å¯ç§»æ¤ä¸”é«˜æ•ˆçš„ C ç¼–ç¨‹æ¥å£ (API)ï¼Œç”¨äºç¡®å®šç¨‹åºçš„è°ƒç”¨é“¾ã€‚",
                         "version": {
                             "desktop": "1.2.1", 
                             "server": "1.3.1"
@@ -4701,17 +4701,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "15 »ù´¡¼ÆËã¿â",
+            "##ç« èŠ‚å": "15 åŸºç¡€è®¡ç®—åº“",
             "basic_calculation": {
                 "description": {
                     "chapters_number": "15",
-                    "chapters_Name": "»ù´¡¼ÆËã"
+                    "chapters_Name": "åŸºç¡€è®¡ç®—"
                 },
                 "packages": {
                     "orbit2": {
                         "lib_name": "orbit2",
                         "sections_number": "15.1",
-                        "lib_description": "¸ßĞÔÄÜCORBAÊµÏÖCORBA£ºÒ»ÖÖÊ¹³ÌĞò¶ÔÏóÄÜ¹»ÔÚ²»Í¬µÄÓ¦ÓÃ³ÌĞòÖ®¼äÍ¨ĞÅ¡¢·¢ËÍÇëÇóºÍ½ÓÊÕ»Ø¸´µÄÌåÏµ½á¹¹£¬¶ø²»¹ÜËüÃÇµÄ±à³ÌÓïÑÔ¡¢²Ù×÷ÏµÍ³»òÍøÂçÎ»ÖÃÈçºÎ¡£",
+                        "lib_description": "é«˜æ€§èƒ½CORBAå®ç°CORBAï¼šä¸€ç§ä½¿ç¨‹åºå¯¹è±¡èƒ½å¤Ÿåœ¨ä¸åŒçš„åº”ç”¨ç¨‹åºä¹‹é—´é€šä¿¡ã€å‘é€è¯·æ±‚å’Œæ¥æ”¶å›å¤çš„ä½“ç³»ç»“æ„ï¼Œè€Œä¸ç®¡å®ƒä»¬çš„ç¼–ç¨‹è¯­è¨€ã€æ“ä½œç³»ç»Ÿæˆ–ç½‘ç»œä½ç½®å¦‚ä½•ã€‚",
                         "version": {
                             "desktop": "", 
                             "server": "2.14.19"
@@ -4739,7 +4739,7 @@
                     "atlas": {
                         "lib_name": "atlas",
                         "sections_number": "15.2",
-                        "lib_description": "×Ô¶¯µ÷ÕûÏßĞÔ´úÊıÈí¼ş£ºÊÇÒ»ÖÖ×Ô¶¯Éú³ÉºÍÓÅ»¯ÊıÖµÈí¼şµÄ·½·¨¡£Ä¿Ç°£¬ATLASÎª±»³ÆÎª»ù±¾ÏßĞÔ´úÊı×Ó³ÌĞò£¨BLAS£©µÄÍêÕûÏßĞÔ´úÊıÄÚºË¼¯ºÍLAPACK¿âÖĞµÄÏßĞÔ´úÊıÀı³Ì×Ó¼¯Ìá¹©ÁËÓÅ»¯°æ±¾¡£",
+                        "lib_description": "è‡ªåŠ¨è°ƒæ•´çº¿æ€§ä»£æ•°è½¯ä»¶ï¼šæ˜¯ä¸€ç§è‡ªåŠ¨ç”Ÿæˆå’Œä¼˜åŒ–æ•°å€¼è½¯ä»¶çš„æ–¹æ³•ã€‚ç›®å‰ï¼ŒATLASä¸ºè¢«ç§°ä¸ºåŸºæœ¬çº¿æ€§ä»£æ•°å­ç¨‹åºï¼ˆBLASï¼‰çš„å®Œæ•´çº¿æ€§ä»£æ•°å†…æ ¸é›†å’ŒLAPACKåº“ä¸­çš„çº¿æ€§ä»£æ•°ä¾‹ç¨‹å­é›†æä¾›äº†ä¼˜åŒ–ç‰ˆæœ¬ã€‚",
                         "version": {
                             "desktop": "", 
                             "server": "3.10.3"
@@ -4766,7 +4766,7 @@
                     "lapack": {
                         "lib_name": "lapack",
                         "sections_number": "15.3",
-                        "lib_description": "»ù±¾ÏßĞÔ´úÊı²Î¿¼ÊµÏÖBLAS£¨»ù±¾ÏßĞÔ´úÊı×Ó³ÌĞò£©ÊÇÒ»×éÓÃÓÚ´ó¶àÊı»ù±¾ÏòÁ¿ºÍ¾ØÕóÔËËãµÄ¸ßĞ§Àı³Ì¡£ËüÃÇ±»¹ã·ºÓÃ×÷ÆäËû¸ßÖÊÁ¿ÏßĞÔ´úÊıÈí¼şµÄ»ù´¡",
+                        "lib_description": "åŸºæœ¬çº¿æ€§ä»£æ•°å‚è€ƒå®ç°BLASï¼ˆåŸºæœ¬çº¿æ€§ä»£æ•°å­ç¨‹åºï¼‰æ˜¯ä¸€ç»„ç”¨äºå¤§å¤šæ•°åŸºæœ¬å‘é‡å’ŒçŸ©é˜µè¿ç®—çš„é«˜æ•ˆä¾‹ç¨‹ã€‚å®ƒä»¬è¢«å¹¿æ³›ç”¨ä½œå…¶ä»–é«˜è´¨é‡çº¿æ€§ä»£æ•°è½¯ä»¶çš„åŸºç¡€",
                         "version": {
                             "desktop": "", 
                             "server": "3.8.0"
@@ -4793,17 +4793,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "16 ´æ´¢¿â",
+            "##ç« èŠ‚å": "16 å­˜å‚¨åº“",
             "storage": {
                 "description": {
                     "chapters_number": "16",
-                    "chapters_Name": "´æ´¢"
+                    "chapters_Name": "å­˜å‚¨"
                 },
                 "packages": {
                     "ceph": {
                         "lib_name": "ceph",
                         "sections_number": "16.1",
-                        "lib_description": "CephÊÇÒ»¸ö¿ªÔ´Èí¼ş¶¨ÒåµÄ´æ´¢Æ½Ì¨£¬ËüÔÚµ¥¸ö·Ö²¼Ê½¼ÆËã»ú¼¯ÈºÉÏÊµÏÖ¶ÔÏó´æ´¢£¬²¢Ìá¹©ÓÃÓÚ¶ÔÏó£¬¿éºÍÎÄ¼ş¼¶´æ´¢µÄ3ºÏ1½Ó¿Ú¡£CephµÄÖ÷ÒªÄ¿±êÊÇÊµÏÖÎŞµ¥µã¹ÊÕÏµÄÍêÈ«·Ö²¼Ê½²Ù×÷£¬¿ÉÀ©Õ¹µ½°¬×Ö½Ú¼¶±ğ£¬²¢ÇÒ¿ÉÒÔÃâ·ÑÊ¹ÓÃ¡£",
+                        "lib_description": "Cephæ˜¯ä¸€ä¸ªå¼€æºè½¯ä»¶å®šä¹‰çš„å­˜å‚¨å¹³å°ï¼Œå®ƒåœ¨å•ä¸ªåˆ†å¸ƒå¼è®¡ç®—æœºé›†ç¾¤ä¸Šå®ç°å¯¹è±¡å­˜å‚¨ï¼Œå¹¶æä¾›ç”¨äºå¯¹è±¡ï¼Œå—å’Œæ–‡ä»¶çº§å­˜å‚¨çš„3åˆ1æ¥å£ã€‚Cephçš„ä¸»è¦ç›®æ ‡æ˜¯å®ç°æ— å•ç‚¹æ•…éšœçš„å®Œå…¨åˆ†å¸ƒå¼æ“ä½œï¼Œå¯æ‰©å±•åˆ°è‰¾å­—èŠ‚çº§åˆ«ï¼Œå¹¶ä¸”å¯ä»¥å…è´¹ä½¿ç”¨ã€‚",
                         "version": {
                             "desktop": "", 
                             "server": "2012/2/8"
@@ -4856,17 +4856,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "17 ĞéÄâ»¯¿â",
+            "##ç« èŠ‚å": "17 è™šæ‹ŸåŒ–åº“",
             "virtualization": {
                 "description": {
                     "chapters_number": "17",
-                    "chapters_Name": "ĞéÄâ»¯"
+                    "chapters_Name": "è™šæ‹ŸåŒ–"
                 },
                 "packages": {
                     "libvirt": {
                         "lib_name": "libvirt",
                         "sections_number": "17.1",
-                        "lib_description": "ÓÃÓÚ¹ÜÀíĞéÄâ»¯Æ½Ì¨µÄ¿ªÔ´µÄAPI£¬ºóÌ¨³ÌĞòºÍ¹ÜÀí¹¤¾ß¡£",
+                        "lib_description": "ç”¨äºç®¡ç†è™šæ‹ŸåŒ–å¹³å°çš„å¼€æºçš„APIï¼Œåå°ç¨‹åºå’Œç®¡ç†å·¥å…·ã€‚",
                         "version": {
                             "desktop": "", 
                             "server": "5.5.0"
@@ -4913,17 +4913,17 @@
                     }
                 }
             },
-            "##ÕÂ½ÚÃû": "18 ¼¯Èº¸ß¿ÉÓÃ¿â",
+            "##ç« èŠ‚å": "18 é›†ç¾¤é«˜å¯ç”¨åº“",
             "high_availability": {
                 "description": {
                     "chapters_number": "18",
-                    "chapters_Name": "¼¯Èº¸ß¿ÉÓÃ"
+                    "chapters_Name": "é›†ç¾¤é«˜å¯ç”¨"
                 },
                 "packages": {
                     "pacemaker": {
                         "lib_name": "pacemaker",
                         "sections_number": "18.1",
-                        "lib_description": "PacemakerÊÇÒ»ÖÖÏÈ½øµÄ¡¢¿ÉÀ©Õ¹µÄ¸ß¿ÉÓÃĞÔ¼¯Èº×ÊÔ´¹ÜÀíÆ÷",
+                        "lib_description": "Pacemakeræ˜¯ä¸€ç§å…ˆè¿›çš„ã€å¯æ‰©å±•çš„é«˜å¯ç”¨æ€§é›†ç¾¤èµ„æºç®¡ç†å™¨",
                         "version": {
                             "desktop": "", 
                             "server": "2.0.2"
@@ -4956,7 +4956,7 @@
                     "corosync": {
                         "lib_name": "corosync",
                         "sections_number": "18.2",
-                        "lib_description": "Corosync ¼¯ÈºÒıÇæºÍÓ¦ÓÃ³ÌĞò±à³Ì½Ó¿Ú",
+                        "lib_description": "Corosync é›†ç¾¤å¼•æ“å’Œåº”ç”¨ç¨‹åºç¼–ç¨‹æ¥å£",
                         "version": {
                             "desktop": "", 
                             "server": "3.0.2"
