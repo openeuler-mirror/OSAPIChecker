@@ -50,9 +50,14 @@ function mv_register_file()
   cd ${socket_file}
   # install go-systemd库 activation
   export GO111MODULE=auto
-  go get github.com/coreos/go-systemd/activation
-
   # git clone https://github.com/coreos/go-systemd.git ~/go/src/github.com/coreos/go-systemd
+  go get github.com/coreos/go-systemd/activation
+  if [ $? -ne 0 ]; then
+    go env -w GOPROXY=https://goproxy.cn,direct
+    go env -w GOPRIVATE=git.mycompany.com,github.com/my/private
+
+    go get github.com/coreos/go-systemd/activation
+  fi
 
   go build service_client.go
   go build service_server.go
@@ -111,11 +116,11 @@ function verify_socket()
   fi
   log_info "请等待socket单元测试应用运行..."
   sleep 10
-  log_info "显示客户端服务通信日志信息：\n`journalctl -u service_verify_client.service -n 10`"
-  log_info "显示服务端服务通信日志信息：\n`journalctl -u service_verify_server.service -n 5`"
+  log_info "显示客户端服务通信日志信息：\n`journalctl -u service_verify_client.service -n 5`"
+  log_info "显示服务端服务通信日志信息：\n`journalctl -u service_verify_server.service -n 3`"
 
-  journalctl -u service_verify_client.service -n 10 | grep "The client is starting" >/dev/null 2>&1 &&
-  journalctl -u service_verify_server.service -n 5 | grep "service server start" >/dev/null 2>&1
+  journalctl -u service_verify_client.service -n 5 | grep "The client is starting" >/dev/null 2>&1 &&
+  journalctl -u service_verify_server.service -n 3 | grep "service server start" >/dev/null 2>&1
   if [ $? -eq 0 ]; then
     log_info "***** socket单元功能验证成功！*****"
   else

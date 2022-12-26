@@ -5,9 +5,7 @@ import (
     "net"
 	"fmt"
 	"flag"
-	"time"
 	"bufio"
-	"strconv"
 	"strings"
 )
 
@@ -25,7 +23,7 @@ func main() {
 	if addr == "" {
 		flag.Usage()
 	} else {
-		fmt.Println("Connect server by socket:" + addr)
+		fmt.Println("Connect server by:" + addr)
 	}
 	conn, e := net.Dial("unix", addr)
     if e != nil {
@@ -33,16 +31,9 @@ func main() {
     }
     defer conn.Close()
     read := bufio.NewReader(conn)
-	num := 0
-	var content string
+	var content string = "Verify socket client"
     for {
-		if num == 6 {
-			content = "closed"
-		} else {
-			num += 3
-			content = strconv.Itoa(num)
-		}
-		fmt.Print("Input content: " + content + "\n")
+		fmt.Print("Client input content: " + content + "\n")
 		conn.Write([]byte(content + "\n"))
 		returnData, e := read.ReadString('\n')
 		if e != nil {
@@ -50,8 +41,8 @@ func main() {
 			break
 		}
 		fmt.Println("Client receive:" + returnData)
-		time.Sleep(time.Duration(1) * time.Second)
-		if strings.Contains(returnData, "closed"){
+		if strings.Contains(returnData, "server"){
+		    fmt.Println("The client is end !")
 			break
 		}
     }
