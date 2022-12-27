@@ -326,6 +326,9 @@ def libchecker_checking_loop():
         g_test_dict.update({key4 : "wwww"})
         g_genresults_to_json.update({ key4 : "gen" })
         
+    with open("Outputs/libchecker-output.json","w") as f:
+        json.dump(g_genresults_to_json,f)
+
     for last_key in g_storejsondict:
         if (g_storejsondict[last_key]['necessity'][g_ostype]['level'] == "L1"):
             g_counter_flags['pkg_counter']['total']['l1'] += 1
@@ -372,70 +375,16 @@ def libchecker_checking_loop():
                         else:
                             g_counter_flags['lib_counter']['warning'] += 1
                             g_subresults_to_json[list1_item] = "compatible bigger"
-            #g_test_dict.update({last_key : g_subresults_to_json})
-            #print("G_Subresults_To_Json")
-            #print(g_subresults_to_json)
 
-            #g_genresults_to_json[last_key] = g_test_dict.pop(last_key)
-            #print("last_key")
-            #print(last_key)
-            g_genresults_to_json[last_key] = g_subresults_to_json
-            #g_test_list.append(g_subresults_to_json)
+                g_genresults_to_json.update({last_key:g_subresults_to_json})
 
-        #print("G_Subresults_to_Json")
-        #print(g_subresults_to_json)
-        
-        #print("Last Key")
-        #print(last_key)
-        
-        #g_genresults_to_json.update({last_key : g_subresults_to_json})
-        #print(g_genresults_to_json)
+        with open("Outputs/libchecker-output.json", 'r') as fr:
+            json_all = json.load(fr)
+            json_all[last_key]=g_subresults_to_json
+        with open("Outputs/libchecker-output.json", 'w+') as fw:
+            json.dump(json_all,fw,ensure_ascii=False,indent=4)
 
 
-
-                #print(g_genresults_to_json)
-                #g_genresults_to_json.update({key_b : g_subresults_to_json})
-                #g_test_list.append({ key_b : g_subresults_to_json })i
-                #g_test_list.append({ key_b : g_subresults_to_json })i
-
-            #print(g_test_dict)
-            #g_genresults_to_json[last_key] = g_subresults_to_json
-            
-            #del g_test_dict[last_key]
-            #print(g_test_dict.keys())
-
-            #if last_key in g_test_dict:
-             #   g_genresults_to_json.update({last_key : g_subresults_to_json})
-            #g_test_list.append(g_test_dict.pop(last_key))
-                
-            #print("g_test_dict")
-            #print(g_test_dict)
-
-
-            #print("g_test_list")
-            #print(g_test_list)
-                #print(g_genresults_to_json)
-
-                #print(g_pkgflag_dict)
-
-        #g_test_list.append({ last_key : g_subresults_to_json })
-
-        #g_genresults_to_json.update({last_key : g_subresults_to_json})
-        #print("G_Test_List")
-        #print(g_test_list)
-
-    #g_test_dict = g_pkgversiodict
-    #g_pkgversiodict[g_storejsondict[last_key]['lib_name']] = g_storejsondict[last_key]['version'][g_ostype]
-
-
-
-
-
-
-
-
-    #print("G_Genbresults_to_Json")
-    #print(g_genresults_to_json)
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     print("")
@@ -1332,7 +1281,7 @@ def libchecker_json_file_output():
 libchecker_environment_init()
 libchecker_checking_loop()
 
-libchecker_output_json_file()
+#libchecker_output_json_file()
 libchecker_over_jobs()
 
 #check_sharelib_info('/lib', 'libanl.so.1' )
