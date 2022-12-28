@@ -114,6 +114,29 @@ def get_platform_info():
     g_ostype = g_inputostype
     # print(g_ostype)
 
+def get_env_info():
+    #p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+    #info_list = [x for x in subprocess.getoutput('cat /etc/os-release').split('\n') if '=' in x]
+    #info_list = os.popen('cat /etc/os-release')
+    
+    print("系统信息:")
+
+    #l1 = os.system("cat /etc/os-release")
+    str1 = os.popen("cat /etc/os-release").read()
+    str2 = str1.split("\n")
+
+    for s1 in str2:
+        print("\t", s1)
+
+    #info = dict()
+    #for i in info_list:
+        #info[i.split('=')[0].strip()] = i.split('=')[-1].strip().replace('\"', '').replace('\"', '')
+
+    #print(info_list)
+
+    #return info
+
+
 def get_stdjsons_info(json_file_path):
     with open(json_file_path) as f:
         f_dict = json.load(f)
@@ -124,6 +147,7 @@ def get_stdjsons_info(json_file_path):
 
     # print(type(f_dict.keys()))
     # print(f_dict)
+    print("标准信息:")
     print("\t标准简要信息:")
     print("\t\t标准号: %s" % f_dict['std_description']['std_number'])
     print("\t\t文件名: %s" % f_dict['std_description']['std_name'])
@@ -143,7 +167,10 @@ def libchecker_environment_init():
     # g_counter_flags = {'pkg_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0, 'l1': 0, 'l2': 0, 'l3':0}, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
     g_counter_flags = {'pkg_counter': {'total': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} , 'passed': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'warning': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'failed': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} }, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
 
-    get_platform_info()
+    #get_platform_info()
+
+    get_env_info()
+
     # get_stdjsons_info('../Jsons/lib_list_1.0I-20220914-uos.json')
     # get_stdjsons_info('Jsons/lib_list_1.0I-20220914-uos.json')
     get_stdjsons_info('Jsons/lib_list.json')
@@ -1280,6 +1307,8 @@ def libchecker_json_file_output():
 
 libchecker_environment_init()
 libchecker_checking_loop()
+#print(get_env_info())
+#get_env_info()
 
 #libchecker_output_json_file()
 libchecker_over_jobs()
