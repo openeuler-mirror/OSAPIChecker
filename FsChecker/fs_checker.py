@@ -55,10 +55,11 @@ class Result:
     def __init__(self):
         self.result = []
 
-    def add(self, stand, exist_result):
+    def add(self, stand, exist_result, file_permissions):
         self.result.append({
             'FS_name': stand.get('FS_name'),
             'exist_check': exist_result,
+            'file_permissions': file_permissions,
             'result': exist_result.get('result')
         })
 
@@ -99,6 +100,13 @@ class FSChecker:
         self.standard = Standard(fs_json).get_list()
         self.result = Result()
 
+    @staticmethod
+    def _get_file_permissions(file):
+        if os.path.exists(file):
+            return oct(os.stat(file).st_mode)[-4:]
+        else:
+            return "not found"
+
     def check(self):
         """
         fs的测试方法，遍历标准中的fs进行存在性检测
@@ -110,9 +118,11 @@ class FSChecker:
             exist_result = {
                 'result': 'pass' if os.path.isdir(stand.get('FS_name')) else 'fail'
             }
-            self.result.add(stand=stand, exist_result=exist_result)
+            file_permissions = self._get_file_permissions(stand.get('FS_name'))
+            self.result.add(stand=stand, exist_result=exist_result, file_permissions=file_permissions)
             logger.info(f"\ncmd: {stand.get('FS_name')},\n"
-                        f"exist_check: {exist_result}\n")
+                        f"exist_check: {exist_result}\n"
+                        f"file_permissions: {file_permissions}\n")
 
         # fs权限暂时不做处理
         #     permission = oct(os.stat(stand.get('FS_name')).st_mode)[-4:]

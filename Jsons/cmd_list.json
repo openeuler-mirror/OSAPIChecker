@@ -2,40 +2,16 @@
  "std_name": "信息技术应用创新  操作系统应用编程接口要求",
  "system_cmds": [
   {
-   "name": "at"
+   "name": "ar"
   },
   {
    "name": "awk"
   },
   {
-   "name": "batch"
-  },
-  {
-   "name": "sh"
-  },
-  {
-   "name": "bc"
-  },
-  {
-   "name": "ar"
-  },
-  {
-   "name": "strings"
-  },
-  {
-   "name": "strip"
-  },
-  {
-   "name": "brctl"
-  },
-  {
-   "name": "chkconfig"
-  },
-  {
-   "name": "["
-  },
-  {
    "name": "basename"
+  },
+  {
+   "name": "batch"
   },
   {
    "name": "cat"
@@ -53,10 +29,10 @@
    "name": "chown"
   },
   {
-   "name": "cksum"
+   "name": "chsh"
   },
   {
-   "name": "cmake"
+   "name": "cksum"
   },
   {
    "name": "cmp"
@@ -74,9 +50,6 @@
    "name": "crontab"
   },
   {
-   "name": "csplit"
-  },
-  {
    "name": "cut"
   },
   {
@@ -89,7 +62,10 @@
    "name": "df"
   },
   {
-   "name": "dirname"
+   "name": "diff"
+  },
+  {
+   "name": "dmesg"
   },
   {
    "name": "du"
@@ -98,28 +74,16 @@
    "name": "dumpe2fs"
   },
   {
-   "name": "diff"
-  },
-  {
-   "name": "ed"
-  },
-  {
    "name": "e2fsck"
   },
   {
    "name": "echo"
   },
   {
+   "name": "egrep"
+  },
+  {
    "name": "env"
-  },
-  {
-   "name": "expand"
-  },
-  {
-   "name": "expr"
-  },
-  {
-   "name": "false"
   },
   {
    "name": "file"
@@ -128,16 +92,37 @@
    "name": "find"
   },
   {
-   "name": "firewall-cmd"
+   "name": "fgrep"
   },
   {
-   "name": "fold"
+   "name": "getconf"
+  },
+  {
+   "name": "grep"
+  },
+  {
+   "name": "groupadd"
+  },
+  {
+   "name": "groupdel"
+  },
+  {
+   "name": "groupmod"
   },
   {
    "name": "groups"
   },
   {
+   "name": "gunzip"
+  },
+  {
+   "name": "gzip"
+  },
+  {
    "name": "head"
+  },
+  {
+   "name": "hostname"
   },
   {
    "name": "id"
@@ -146,13 +131,31 @@
    "name": "install"
   },
   {
-   "name": "join"
+   "name": "ipcrm"
+  },
+  {
+   "name": "ipcs"
+  },
+  {
+   "name": "kill"
+  },
+  {
+   "name": "killall"
+  },
+  {
+   "name": "less"
   },
   {
    "name": "ln"
   },
   {
-   "name": "lsattr"
+   "name": "locale"
+  },
+  {
+   "name": "localedef"
+  },
+  {
+   "name": "logger"
   },
   {
    "name": "logname"
@@ -161,10 +164,13 @@
    "name": "ls"
   },
   {
-   "name": "lp"
+   "name": "lsattr"
   },
   {
-   "name": "lpr"
+   "name": "make"
+  },
+  {
+   "name": "man"
   },
   {
    "name": "md5sum"
@@ -182,199 +188,22 @@
    "name": "mknod"
   },
   {
-   "name": "mktemp"
+   "name": "more"
+  },
+  {
+   "name": "mount"
   },
   {
    "name": "mv"
   },
   {
+   "name": "newgrp"
+  },
+  {
    "name": "nice"
   },
   {
-   "name": "nl"
-  },
-  {
    "name": "nohup"
-  },
-  {
-   "name": "od"
-  },
-  {
-   "name": "paste"
-  },
-  {
-   "name": "pathchk"
-  },
-  {
-   "name": "pr"
-  },
-  {
-   "name": "printf"
-  },
-  {
-   "name": "pwd"
-  },
-  {
-   "name": "rm"
-  },
-  {
-   "name": "rmdir"
-  },
-  {
-   "name": "seq"
-  },
-  {
-   "name": "sleep"
-  },
-  {
-   "name": "sort"
-  },
-  {
-   "name": "split"
-  },
-  {
-   "name": "stty"
-  },
-  {
-   "name": "sync"
-  },
-  {
-   "name": "scp"
-  },
-  {
-   "name": "sftp"
-  },
-  {
-   "name": "ssh"
-  },
-  {
-   "name": "ssh-add"
-  },
-  {
-   "name": "ssh-agent"
-  },
-  {
-   "name": "ssh-askpass"
-  },
-  {
-   "name": "ssh-keygen"
-  },
-  {
-   "name": "ssh-keyscan"
-  },
-  {
-   "name": "ssh-keysign"
-  },
-  {
-   "name": "tail"
-  },
-  {
-   "name": "tee"
-  },
-  {
-   "name": "test"
-  },
-  {
-   "name": "touch"
-  },
-  {
-   "name": "tr"
-  },
-  {
-   "name": "true"
-  },
-  {
-   "name": "tsort"
-  },
-  {
-   "name": "tty"
-  },
-  {
-   "name": "tune2fs"
-  },
-  {
-   "name": "uname"
-  },
-  {
-   "name": "unexpand"
-  },
-  {
-   "name": "uniq"
-  },
-  {
-   "name": "wc"
-  },
-  {
-   "name": "xargs"
-  },
-  {
-   "name": "gettext"
-  },
-  {
-   "name": "msgfmt"
-  },
-  {
-   "name": "gencat"
-  },
-  {
-   "name": "getconf"
-  },
-  {
-   "name": "iconv"
-  },
-  {
-   "name": "locale"
-  },
-  {
-   "name": "localedef"
-  },
-  {
-   "name": "egrep"
-  },
-  {
-   "name": "fgrep"
-  },
-  {
-   "name": "grep"
-  },
-  {
-   "name": "gunzip"
-  },
-  {
-   "name": "gzip"
-  },
-  {
-   "name": "zcat"
-  },
-  {
-   "name": "hostname"
-  },
-  {
-   "name": "lsb_release"
-  },
-  {
-   "name": "less"
-  },
-  {
-   "name": "m4"
-  },
-  {
-   "name": "mailx"
-  },
-  {
-   "name": "make"
-  },
-  {
-   "name": "man"
-  },
-  {
-   "name": "infocmp"
-  },
-  {
-   "name": "tput"
-  },
-  {
-   "name": "ping"
   },
   {
    "name": "passwd"
@@ -386,31 +215,91 @@
    "name": "pidof"
   },
   {
+   "name": "ping"
+  },
+  {
+   "name": "printf"
+  },
+  {
    "name": "ps"
   },
   {
-   "name": "fuser"
+   "name": "pwd"
   },
   {
-   "name": "killall"
+   "name": "renice"
+  },
+  {
+   "name": "rm"
+  },
+  {
+   "name": "rmdir"
+  },
+  {
+   "name": "scp"
   },
   {
    "name": "sed"
   },
   {
-   "name": "sendmail"
+   "name": "sh"
   },
   {
-   "name": "groupadd"
+   "name": "shutdown"
   },
   {
-   "name": "groupdel"
+   "name": "sleep"
   },
   {
-   "name": "groupmod"
+   "name": "sort"
   },
   {
-   "name": "newgrp"
+   "name": "split"
+  },
+  {
+   "name": "ssh"
+  },
+  {
+   "name": "ssh-keygen"
+  },
+  {
+   "name": "stty"
+  },
+  {
+   "name": "su"
+  },
+  {
+   "name": "sync"
+  },
+  {
+   "name": "tail"
+  },
+  {
+   "name": "tar"
+  },
+  {
+   "name": "tee"
+  },
+  {
+   "name": "time"
+  },
+  {
+   "name": "touch"
+  },
+  {
+   "name": "tr"
+  },
+  {
+   "name": "tsort"
+  },
+  {
+   "name": "tune2fs"
+  },
+  {
+   "name": "umount"
+  },
+  {
+   "name": "uname"
   },
   {
    "name": "useradd"
@@ -422,58 +311,13 @@
    "name": "usermod"
   },
   {
-   "name": "pax"
-  },
-  {
-   "name": "shutdown"
-  },
-  {
-   "name": "tar"
-  },
-  {
-   "name": "time"
-  },
-  {
-   "name": "col"
-  },
-  {
-   "name": "dmesg"
-  },
-  {
-   "name": "ipcrm"
-  },
-  {
-   "name": "ipcs"
-  },
-  {
-   "name": "kill"
-  },
-  {
-   "name": "logger"
-  },
-  {
-   "name": "more"
-  },
-  {
-   "name": "mount"
-  },
-  {
-   "name": "renice"
-  },
-  {
-   "name": "su"
-  },
-  {
-   "name": "umount"
-  },
-  {
-   "name": "chfn"
-  },
-  {
-   "name": "chsh"
-  },
-  {
    "name": "which"
+  },
+  {
+   "name": "xargs"
+  },
+  {
+   "name": "["
   }
  ]
 }

@@ -103,15 +103,19 @@ class CMD:
         }
 
     @staticmethod
-    def _get_os_cmd_version(cmd):
+    def get_os_cmd_version(cmd):
         re_str = r'\b\d+\.[\d\.a-z]+'
-        if cmd == 'pax':
-            po = os.popen(f'{cmd} --version')
-            fetch = po.readline()
-            version_by_version = re.search(re_str, fetch)
-            if version_by_version:
-                os_version = version_by_version.group()
-                return os_version
+        if cmd == 'sh':
+            po = os.popen(f'echo $SHELL')
+            cmd = po.readline()
+            cmd = cmd[:-1]
+        # if cmd == 'pax':
+        #     po = os.popen(f'{cmd} --version')
+        #     fetch = po.readline()
+        #     version_by_version = re.search(re_str, fetch)
+        #     if version_by_version:
+        #         os_version = version_by_version.group()
+        #         return os_version
         #
         # fetch = os.popen(f'{cmd} -V').readline()
         # version_by_V = re.search(re_str, fetch)
@@ -153,7 +157,7 @@ class Result:
     def __init__(self):
         self.result = []
 
-    def add(self, stand, exist_result, run_result):
+    def add(self, stand, exist_result, run_result, cmd_version):
 
         if run_result.get('result') == 'pass':
             result = 'pass'
@@ -168,6 +172,7 @@ class Result:
             'name': stand.get('name'),
             'exist_check': exist_result,
             'run_check': run_result,
+            'cmd_version': cmd_version,
             'result': result
         })
 
@@ -216,10 +221,13 @@ class CmdChecker:
             logger.info(f'cmd running...{stand}...')
             exist_result = self.os_cmd.is_exist(stand.get('name'))
             run_result = self.os_cmd.check_run(stand.get('name'))
-            self.result.add(stand=stand, exist_result=exist_result, run_result=run_result)
+            cmd_version = CMD.get_os_cmd_version(stand.get('name'))
+            #cmd_version = "xxx"
+            self.result.add(stand=stand, exist_result=exist_result, run_result=run_result, cmd_version=cmd_version)
             logger.info(f"\ncmd: {stand.get('name')},\n"
                         f"exist_check: {exist_result}\n"
-                        f"version_result: {run_result}")
+                        f"run_result: {run_result}\n"
+                        f"cmd_version: {cmd_version}\n")
             # tmp.append({
             #     "name": stand.get('name'),
             #     "version": os_V
