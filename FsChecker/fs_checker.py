@@ -103,7 +103,7 @@ class FSChecker:
     @staticmethod
     def _get_file_permissions(file):
         if os.path.exists(file):
-            return oct(os.stat(file).st_mode)[-4:]
+            return oct(os.lstat(file).st_mode)[-4:]
         else:
             return "not found"
 

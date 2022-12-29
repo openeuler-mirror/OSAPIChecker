@@ -314,7 +314,7 @@
     {
       "FS_name": "/var/run",
       "type": "link file",
-      "permission": "0755"
+      "permission": "0777"
     }
   ]
 }
