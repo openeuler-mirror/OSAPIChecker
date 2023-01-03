@@ -212,18 +212,6 @@ def check_per_pkg_info(src_pkgname):
 #    vc = apt_pkg.version_compare(a,b)
 
  #       if(srcpkgver > g_pkgversiodict[src_pkgname]):
-        if (apt_pkg.version_compare(srcpkgver,g_pkgversiodict[src_pkgname]) > 0):
-            print("\t\t状态信息: ")
-            print("\t\t\t\t兼容")
-        else:
-            if (apt_pkg.version_compare(srcpkgver,g_pkgversiodict[src_pkgname]) == 0):
-                print("\t\t状态信息: ")
-                print("\t\t\t\t兼容")
-            else:
-                print("\t\t状态信息: ")
-                print("\t\t\t\t不兼容")
-                g_counter_flags['pkg_counter']['warning']['all'] += 1
-
         print("\t\t共享库信息:")
 
         g_counter_flags['pkg_counter']['passed']['all'] += 1    
