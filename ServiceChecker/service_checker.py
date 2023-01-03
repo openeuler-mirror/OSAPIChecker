@@ -1,5 +1,7 @@
+import json
 import logging
 import os
+import re
 import stat
 import sys
 import argparse
@@ -27,9 +29,9 @@ class ServiceChecker(object):
 
     def __init__(self):
         self.systemd_path = "/usr/lib/systemd/system"
-        self.sh_path = os.path.realpath(os.path.join(os.path.dirname(__file__), "service_verify.sh"))
-        self.dir_path = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        self.log_path = os.path.join(self.dir_path, 'Logs/service_checker.log')
+        self.dir_path = os.path.realpath(os.path.join(os.path.dirname(__file__)))
+        self.sh_path = os.path.join(self.dir_path, "service_verify.sh")
+        self.log_path = os.path.join(os.path.dirname(self.dir_path), 'Logs/service_checker.log')
         self.reboot = "verify_reboot.service"
 
     @staticmethod
@@ -42,23 +44,87 @@ class ServiceChecker(object):
             if out:
                 logger.info(f"Systemd 版本检查信息为:\n{out.splitlines()[0]}")
 
+    @staticmethod
+    def export_verify_result(path, result):
+
+        with open(path, "w", encoding='utf-8') as f:
+            json.dump(result, f, indent=4)
+
     def service_register_check(self, model='start'):
+        result_path = os.path.join(os.path.dirname(self.dir_path), 'Outputs/service_result.json')
         os.chmod(self.sh_path, stat.S_IXUSR)
 
         try:
             os.system(f"/bin/bash {self.sh_path} {model} 2>&1 | tee -a {self.log_path}")
-            if model == "reboot":
-                logger.info("service_checker 检测完成!")
-                # 删除reboot.service配置文件
-                self.clear_reboot_service()
-        except Exception as err:
-            logger.error(f"检测出错：{err}")
+            if model == "start":
+                result = {}
+                start_result = self.verify_all_item(model, result)
 
-    def clear_reboot_service(self):
+                self.export_verify_result(result_path, start_result)
+
+            elif model == "reboot":
+                logger.info("service_checker 检测完成!")
+                with open(result_path, "r") as f:
+                    start_result = json.load(f)
+
+                final_result = self.verify_all_item(model, start_result)
+                self.export_verify_result(result_path, final_result)
+
+                self.clear_environment('clear')
+        except Exception as err:
+            logger.error(f"检测过程出现错误：{err}")
+
+    def clear_environment(self, clear):
+        """
+        关闭并删除测试单元自定义配置文件，恢复测试环境初始配置
+        """
         try:
-            os.system(f"rm -f {os.path.join(self.systemd_path, self.reboot)}")
+            os.system(f"/bin/bash {self.sh_path} {clear}")
         except Exception as err:
             logger.error(f"删除reboot.service错误：{err}")
+
+    def get_verify_result_config(self):
+        verify_path = os.path.join(self.dir_path, 'config/verify_result.json')
+        with open(verify_path, "r") as rf:
+            verify_config = json.load(rf)
+
+        return verify_config
+
+    def verify_all_item(self, model, result):
+        """
+        根据model来对所有systemd的待检测单元进行检测结果校验，输出汇总结果。
+        @param model: 区分重启前（start）及重启后(reboot)检测的Unit.
+        @param result: 检测结果
+        @return: 检测结果
+        """
+        v_config = self.get_verify_result_config()
+        verify_item = v_config.get(model)
+        result_str = "Check result"
+        for unit, test_config in verify_item.items():
+            result.setdefault(unit, {})
+            verify_shell = test_config.get('test')
+            verify_str = test_config.get('str')
+            ret, out, err = shell_cmd(verify_shell.split())
+            if not ret and out:
+                unit_result = result.get(unit)
+                if model == 'reboot':
+                    status_row = out.split('\n')[1]
+                    status = status_row.split()[1]
+                    if status == verify_str:
+                        unit_result.setdefault(result_str, 'pass')
+                    else:
+                        unit_result.setdefault(result_str, 'fail')
+                else:
+                    match = re.search(verify_str, out)
+                    if match:
+                        unit_result.setdefault(result_str, 'pass')
+                    else:
+                        unit_result.setdefault(result_str, 'fail')
+            else:
+                result.get(unit).setdefault(result_str, 'fail')
+                logger.debug(f"验证检测单元输出信息错误：{err}")
+
+        return result
 
     def collect_runlevel_target(self):
         run_level_cmd = ['find', self.systemd_path, '-name', "runlevel*.target"]

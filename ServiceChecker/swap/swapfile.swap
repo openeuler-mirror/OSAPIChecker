@@ -4,3 +4,4 @@ SourcePath=/etc/fstab
 
 [Swap]
 What=/swapfile
+TimeoutSec=2min

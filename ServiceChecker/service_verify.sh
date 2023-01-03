@@ -21,6 +21,7 @@ Description=service verify reboot
 [Service]
 Type=oneshot
 ExecStart=python3 ${dir_path}/service_checker.py -m reboot
+ExecStop=/bin/bash -c "echo Stop verify_reboot.servic"
 
 [Install]
 WantedBy=multi-user.target" >${dir_systemd}/verify_reboot.service
@@ -79,8 +80,6 @@ function mv_register_file() {
       log_error "自动安装失败，请先安装golang。"
     fi
     log_info "golang 安装完成！"
-  else
-    log_info "已安装 golang。"
   fi
 
   cd ${socket_file}
@@ -118,10 +117,9 @@ function verify_service() {
   # 添加或修改配置文件后，需要重新加载
   systemctl daemon-reload
   if [ $? -eq 0 ]; then
-    log_info "'systemctl daemon-reload' 重新加载配置文件成功。"
+    log_info "'systemctl daemon-reload' 重新加载配置文件成功。\n"
   fi
 
-  log_info "查询service_reboot服务设置开机启动状态为：`systemctl list-unit-files --type=service|grep verify_reboot.service|awk -F " " '{print $2}'`"
   # 验证path服务功能
   verify_path
 }
@@ -133,7 +131,7 @@ function verify_path() {
   if [ $? -ne 0 ]; then
     log_warn "path 单元启动失败。"
   fi
-
+  log_info "查看path单元服务状态：\n`systemctl status service_verify_path.path`"
   if [[ ! -d $monitor_path ]]; then
     mkdir $monitor_path
   fi
@@ -141,7 +139,6 @@ function verify_path() {
   if [[ -f test_path.log ]]; then
     rm -f test_path.log
   fi
-  log_info "查询path服务启动状态为: \n$(systemctl status service_verify_path.path)\n"
 
   touch tem_verify.txt
   log_info "在${monitor_path}目录下添加一个临时文件."
@@ -166,10 +163,12 @@ function verify_path() {
 function verify_socket() {
   # 启动客户端服务，强依赖服务端服务
   log_info "***** 启动service_verify_socket单元 *****"
+
   systemctl start service_verify_client.service
   if [ $? -ne 0 ]; then
     log_warn "socket 客户端服务启动失败。"
   fi
+  log_info "查看客户端服务状态：\n`systemctl status service_verify_client.service`"
 
   log_info "请等待socket单元测试应用运行..."
   sleep 10
@@ -199,6 +198,9 @@ function verify_timer() {
   else
     log_warn "service_verify_timer.timer单元启动失败。"
   fi
+
+  log_info "查看timer单元服务状态：\n`systemctl status service_verify_timer.timer`"
+
   sleep 70
   if [[ -f ${monitor_path}/test_timer.log ]]; then
     log_info "service_verify_timer.service服务启动输出为：\n$(cat ${monitor_path}/test_timer.log)"
@@ -233,6 +235,9 @@ function verify_swap() {
   else
     log_warn "启动swap单元失败"
   fi
+
+  log_info "查看swap单元服务状态：\n`systemctl status swapfile.swap`"
+
   log_info "查看交换空间使用详细信息："
   swapon --show
   if [ $? -eq 0 ]; then
@@ -262,8 +267,8 @@ function verify_target() {
   fi
 
   # 重启系统
-  log_info "请等待5秒后将重启系统..."
-  sleep 5
+  log_info "请等待3秒后将重启系统...\n"
+  sleep 3
   reboot
 }
 
@@ -279,8 +284,6 @@ function verify_reboot_service() {
     log_info "***** 禁止开机自启动服务单元（service_verify_disable.service）执行成功！*****"
   fi
 
-  # 清理环境
-  clear_environment
 }
 
 
@@ -306,6 +309,9 @@ function clear_environment() {
 
   export GO111MODULE=""
 
+  systemctl stop verify_reboot.service &&
+  rm -f ${dir_systemd}/verify_reboot.service
+
 }
 
 # 执行入口
@@ -319,6 +325,10 @@ start)
 reboot)
   # 验证重启系统后部分功能
   verify_reboot_service
+  ;;
+clear)
+  # 清理环境
+  clear_environment
   ;;
 *)
   echo 'unknown comand,try again start or reboot'
