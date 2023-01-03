@@ -121,29 +121,6 @@ def get_platform_info():
     g_ostype = g_inputostype
     # print(g_ostype)
 
-def get_env_info():
-    #p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
-    #info_list = [x for x in subprocess.getoutput('cat /etc/os-release').split('\n') if '=' in x]
-    #info_list = os.popen('cat /etc/os-release')
-    
-    print("系统信息:")
-
-    #l1 = os.system("cat /etc/os-release")
-    str1 = os.popen("cat /etc/os-release").read()
-    str2 = str1.split("\n")
-
-    for s1 in str2:
-        print("\t", s1)
-
-    #info = dict()
-    #for i in info_list:
-        #info[i.split('=')[0].strip()] = i.split('=')[-1].strip().replace('\"', '').replace('\"', '')
-
-    #print(info_list)
-
-    #return info
-
-
 def get_stdjsons_info(json_file_path):
     with open(json_file_path) as f:
         f_dict = json.load(f)
@@ -198,12 +175,12 @@ def check_per_pkg_info(src_pkgname):
 
     if(g_inputostype == "desktop"):
         if (g_inputpkgmngr == "apt-deb"):
-            p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+            p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
         elif (g_inputpkgmngr == "yum-rpm"):
             p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
     elif(g_inputostype == "server"):
         if (g_inputpkgmngr == "apt-deb"):
-            p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+            p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
         elif (g_inputpkgmngr == "yum-rpm"):
             p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
     else:
@@ -272,7 +249,7 @@ def check_pkginfo_for_desktop(src_pkgname):
         # print(type(src_pkgname))
 
 
-def check_sharelib_info(path_dir, lib_soname):
+def check_sharelib_info(lib_soname):
 
     global g_lib_location_path
     global g_counter_flags
@@ -280,21 +257,19 @@ def check_sharelib_info(path_dir, lib_soname):
 
     global g_counter_flags
     g_counter_flags['lib_counter']['total'] += 1
+    l_list = ["/lib", "/lib64", "/usr/lib"]
 
-
-    for realpath, dirs, files in os.walk(path_dir):
-        if lib_soname in files:
-            full_path = os.path.join(path_dir, realpath, lib_soname)
-            g_lib_location_path = (os.path.normpath(os.path.abspath(full_path)))
-        # if len(g_lib_location_path) == "0":
-        #    g_lib_location_path = "no exist"
-
+    for path_tmp in l_list:
+        for realpath, dirs, files in os.walk(path_tmp):
+            if lib_soname in files:
+                full_path = os.path.join(path_tmp, realpath, lib_soname)
+                g_lib_location_path = (os.path.normpath(os.path.abspath(full_path)))
+        if g_lib_location_path != "0":
+            break
+        
     if g_lib_location_path == "0":
-        # g_counter_flags['lib_counter']['warning'] += 1
         return "not found"
     else:
-        # g_counter_flags['lib_counter']['passed'] += 1
-        # return "(\""+ g_lib_location_path + "\")"
         return g_lib_location_path
 
 # def libchecker_checking_loop():
@@ -394,10 +369,7 @@ def libchecker_checking_loop():
                 for list1_item in g_storejsondict[last_key]['share_objs'][g_ostype]:
                     print("\t\t\t\t名称 -> ",list1_item)
                     print("\t\t\t\t\t标准约定 -> ",list1_item, )
-                    if(g_ostype == "desktop"):
-                        lib_result = check_sharelib_info('/lib', list1_item)
-                    else:
-                        lib_result = check_sharelib_info('/usr/lib64', list1_item)
+                    lib_result = check_sharelib_info(list1_item)
                     print("\t\t\t\t\t系统存在 -> ",lib_result, )
                     temp_libsoname = lib_result.split('/')[-1]
                     if (lib_result == "not found"):
@@ -433,10 +405,10 @@ def libchecker_checking_loop():
                     elif (get_rpmpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
                         l_pkgresult_to_json[binary_name] = "incompatible", ver_local
             else:
-                pkg_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s | gawk -F" " \'{print $1}\' | head -n 1' %(str(binary_name), str(binary_name))).read().rstrip('\n')
+                pkg_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | gawk -F" " \'{print $1}\' | head -n 1' %(str(binary_name), str(binary_name))).read().rstrip('\n')
                 if (pkg_install_status == "ii"):
                     ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
-                    ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s | gawk -F" " \'{print $3}\' | head -n 1' %(binary_name, binary_name)).read().rstrip('\n') #获取本地库包版本
+                    ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | gawk -F" " \'{print $3}\' | head -n 1' %(binary_name, binary_name)).read().rstrip('\n') #获取本地库包版本
                     if (get_debpkg_ver_contrast(ver_local, ver_required) == "compatible"):
                         l_pkgresult_to_json[binary_name] = "compatible", ver_local
                     elif (get_debpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
@@ -724,7 +696,7 @@ def get_srcver_form_srcname(src_pkgname):
     # return:
     #           @ srcpkgver
     print("Enter function: get_srcver_from_srcname(%s)" %(src_pkgname))
-    p_srcpkgver = os.popen('apt-cache showsrc %s | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+    p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null| grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
     srcpkgver = p_srcpkgver.read().rstrip('\n')
     p_srcpkgver.close()
 
@@ -739,10 +711,10 @@ def get_pkginfo_from_srcpkg(src_pkgname):
     # return:
     #           @ srcpkg_info_dict
     print("Enter function: get_pkginfo_from_srcpkg(%s)" %(src_pkgname))
-    p_srcpkgnam = os.popen('apt-cache show %s | grep Package | cut -d '"\ "' -f 2 ' %(src_pkgname))
+    p_srcpkgnam = os.popen('apt-cache show %s 2>/dev/null | grep Package | cut -d '"\ "' -f 2 ' %(src_pkgname))
     srcpkgnam = p_srcpkgnam.read().rstrip('\n')
     p_srcpkgnam.close()
-    p_srcpkgver = os.popen('apt-cache show %s | grep Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+    p_srcpkgver = os.popen('apt-cache show %s 2>/dev/null | grep Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
     srcpkgver = p_srcpkgver.read().rstrip('\n')
     p_srcpkgver.close()
 
@@ -809,7 +781,7 @@ def get_debpkg_from_srcpkg(src_pkgname):
     #           @ 
     # return:
     #           @ debpkgs
-    p_debpkgs = os.popen('apt-cache showsrc %s | grep Binary | cut -d '"\:"' -f 2- | cut -d '"\ "' -f 2- ' %(src_pkgname))
+    p_debpkgs = os.popen('apt-cache showsrc %s 2>/dev/null | grep Binary | cut -d '"\:"' -f 2- | cut -d '"\ "' -f 2- ' %(src_pkgname))
     debpkgs = p_debpkgs.read().split("\n")[0].split(", ")
     p_debpkgs.close()
 
