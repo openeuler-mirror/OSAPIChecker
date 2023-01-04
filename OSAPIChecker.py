@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-
+# -*- coding: utf-8 -*-
 import argparse
 import os
+import json
 import sys
+import platform
 import logging
+import time
+
+timestamp = int(time.time())
 #import tkinter # for graphical user interface
 
 # import libchecker # import libhecker module
@@ -63,6 +68,27 @@ def input_valid_check():
 
     # Json check
 
+# 2. Check Environment Info
+def gen_envinfo_json():
+    l_osname = platform.system()
+    l_osversion = platform.version()
+    l_company = "Unknonwn"
+    l_osmachine = platform.machine()
+    l_osarchitecture = platform.architecture()
+    l_osprocessor = platform.processor()
+    l_kernel = os.popen("uname -r").read().rstrip("\n")
+    l_compver = os.popen("gcc --version | awk 'NR==1'").read().rstrip("\n")
+    l_pythonver = os.popen("python --version").read().rstrip("\n")
+    l_meminfo = os.popen("free -g | grep Mem | awk '{print $2}'").read().rstrip("\n")
+    l_firmwareinfo = os.popen("dmidecode -s bios-version").read().rstrip("\n")
+    l_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp)) 
+
+    l_envinfodict = {"测试对象" : {"系统名称" : l_osname, "版本" : l_osversion}, "送测单位" : l_company , "系统环境" : {"内核版本" : l_kernel , "编译器版本" : l_compver , "Python版本" : l_pythonver} , "环境配置" : {"机器型号" : l_osmachine , "CPU指令集" : l_osarchitecture , "CPU型号" : l_osprocessor , "内存" : l_meminfo , "硬盘" : "345", "固件" : l_firmwareinfo} , "测试工具" : {"名称" : "OSAPIChecker", "版本" : "0.0.0" } , "测试时间" : l_time }
+
+    with open("Outputs/environments-info.json","w+") as fw:
+        json.dump(l_envinfodict,fw,ensure_ascii=False,indent=4)
+
+
 
 # 2. Call Subchecker's Handler
     # --channel:    [cmdchecker,fschecker,libchecker]
@@ -71,6 +97,7 @@ def input_valid_check():
     # --ostype      [desktop,server,embed]
     # --pkgmngr     [apt-deb,yum-rpm,src-bin,other]
 def checker_call_handler():
+    gen_envinfo_json()
     if (args.channel == "libchecker"):
         print("进入 LibChecker 处理程序 . . .")
         if (args.strategy == "with-expand"):

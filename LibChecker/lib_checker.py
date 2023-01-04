@@ -363,7 +363,7 @@ def libchecker_checking_loop():
                 pkg_install_status = os.system('rpm -qi %s 2>/dev/null 1>/dev/null' %(binary_name))
                 if (pkg_install_status == 0):
                     ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
-                    ver_local = os.popen('rpm -qi %s 2>/dev/null 1>/dev/null| grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(binary_name)).read().rstrip('\n') #获取本地库包版本
+                    ver_local = os.popen('rpm -qi %s 2>/dev/null | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(binary_name)).read().rstrip('\n') #获取本地库包版本
                     if (get_rpmpkg_ver_contrast(ver_local, ver_required) == "compatible"):
                         l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
                     elif (get_rpmpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
