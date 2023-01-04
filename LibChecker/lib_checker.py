@@ -52,7 +52,6 @@ class Logger(object):
     def flush(self):
         pass
 
-    # print("Beginning check at [",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()),"")
 sys.stdout = Logger("Logs/libchecker-tmp.log", sys.stdout)
 #sys.stderr = Logger("Logs/a.log_file", sys.stderr)
 
@@ -119,7 +118,6 @@ def get_platform_info():
     # else:
         # g_ostype = "server"
     g_ostype = g_inputostype
-    # print(g_ostype)
 
 def get_stdjsons_info(json_file_path):
     with open(json_file_path) as f:
@@ -129,8 +127,6 @@ def get_stdjsons_info(json_file_path):
     g_jsonfile_dict = f_dict
     lib_basedict = f_dict['libs']['category']['base']['packages']
 
-    # print(type(f_dict.keys()))
-    # print(f_dict)
     print("标准信息:")
     print("\t标准简要信息:")
     print("\t\t标准号: %s" % f_dict['std_description']['std_number'])
@@ -141,37 +137,25 @@ def get_stdjsons_info(json_file_path):
     # print("Start Checking: .....: Chapter: %s Category: %s;" %(f_dict['libs']['category']['base']['description']['chapters_number'], f_dict['libs']['category']['base']['description']['chapters_Name']))
 
 def libchecker_environment_init():
-    # print("Enter function: libchecker_environment_init")
     global g_counter_flags
     # g_inputstrategy = args.strategy
     # g_inputlevel = args.level
     # g_inputostype = args.ostype
     # g_inputpkgmngr = args.pkgmngr
     
-    # g_counter_flags = {'pkg_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0, 'l1': 0, 'l2': 0, 'l3':0}, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
     g_counter_flags = {'pkg_counter': {'total': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} , 'passed': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'warning': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'failed': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} }, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
-
-    #get_platform_info()
 
     get_env_info()
 
-    # get_stdjsons_info('../Jsons/lib_list_1.0I-20220914-uos.json')
-    # get_stdjsons_info('Jsons/lib_list_1.0I-20220914-uos.json')
     get_stdjsons_info('Jsons/lib_list.json')
     
     if (g_inputpkgmngr == "apt-deb"):
         apt_pkg.init_system()
 
-    # gen_mainscrn_init()
-
 def check_per_pkg_info(src_pkgname):
     global g_notfind_set_flag
     global g_genresults_to_json
     global g_test_dict 
-
-    # p_srcpkgnam = os.popen('apt-cache showsrc %s | grep Package | cut -d '"\ "' -f 2 ' %(src_pkgname))
-    # srcpkgnam = p_srcpkgnam.read().rstrip('\n')
-    # p_srcpkgnam.close()
 
     if(g_inputostype == "desktop"):
         if (g_inputpkgmngr == "apt-deb"):
@@ -186,8 +170,6 @@ def check_per_pkg_info(src_pkgname):
     else:
         print("Please input --ostype=[desktop,server,embde,...] and --pkgmngr=[apt-deb,yum-rpm,src-bin,...]")
 
-    # yum list gcc | awk '{print $2}' | sed -n '3p'
-
     srcpkgver = p_srcpkgver.read().rstrip('\n')
     p_srcpkgver.close()
 
@@ -196,46 +178,20 @@ def check_per_pkg_info(src_pkgname):
     g_counter_flags['pkg_counter']['total']['all'] += 1
 
     print("\t\t系统实现: ")
-    # print(g_pkgversiodict)
 
     if (len(srcpkgver) == 0):
         print("\t\t\t\t没有发现")
-        # print("\t\t共享库信息:")
         g_notfind_set_flag = 1
     else:
         print("\t\t\t\t实现包名 -> ", src_pkgname.ljust(20),"实现版本 -> ",srcpkgver)
 
-        # if(len(srcpkgver.split(':')) > 1):
-        #       print("\t\t状态信息: L1L2 报错置位！", compare_version_serial_number(srcpkgver.split(':')[1], g_pkgversiodict[src_pkgname]))
-        # else:
-        #       print("\t\t状态信息: L1L2 报错置位！", compare_version_serial_number(srcpkgver, g_pkgversiodict[src_pkgname]))
-#    vc = apt_pkg.version_compare(a,b)
-
- #       if(srcpkgver > g_pkgversiodict[src_pkgname]):
         print("\t\t共享库信息:")
 
         g_counter_flags['pkg_counter']['passed']['all'] += 1    
 
-        # print("\t\tsections_number -->", g_jsonfile_dict[src_pkgname]['sections_number'])
-        # print(l_tmp_dict[key]['alias'][0]['name'])
-        # print(g_jsonfile_dict['libs']['category']['base']['packages'].keys())
-
-        # for list_item in g_jsonfile_dict['libs']['category']['base']['packages'][src_pkgname]['share_objs']['desktop']
-        # print("\t\t\t\tlib_soname -> ", list_item,";  " "location -> ",check_sharelib_info('/lib', list_item))
-
 def check_pkginfo_for_desktop(src_pkgname):
     for src_pkgname in g_jsonfile_dict:
         check_per_pkg_info(g_jsonfile_dict['libs']['category']['base']['packages'][src_pkgname]['alias'][0]['name'])
-
-        # print(g_jsonfile_dict['libs']['category']['base']['packages'][src_pkgname]['alias'][0]['name'])
-        # print(g_jsonfile_dict['libs']['category']['base']['packages'].keys())
-        # print(g_jsonfile_dict[src_pkgname]['libs']['alias'][0]['name'])
-        # print(g_jsonfile_dict[src_pkgname])
-        # print(type(g_jsonfile_dict['libs'][src_pkgname]))
-        # print(g_jsonfile_dict['libs']['category']['base']['packages']['glibc']['alias'][0]['name'])
-        # print(src_pkgname)
-        # print(type(src_pkgname))
-
 
 def check_sharelib_info(lib_soname):
 
@@ -260,7 +216,6 @@ def check_sharelib_info(lib_soname):
     else:
         return g_lib_location_path
 
-# def libchecker_checking_loop():
 def libchecker_checking_loop():
     global g_notfind_set_flag 
     global g_chapter_dict
@@ -362,19 +317,19 @@ def libchecker_checking_loop():
                     temp_libsoname = lib_result.split('/')[-1]
                     if (lib_result == "not found"):
                         print("\t\t\t\t\t检测结果 ->  未检测到存在")
-                        g_subresults_to_json[list1_item] = "not found","-"
+                        g_subresults_to_json[list1_item] = {'status': 'not found', 'path':'-'}
                         g_counter_flags['lib_counter']['failed'] += 1
                     else:
                         print("\t\t\t\t\t检测结果 -> ", compare_library_version(temp_libsoname, str(list1_item)))
                         if (compare_library_version(temp_libsoname, str(list1_item)) == "equal" ):
                             g_counter_flags['lib_counter']['passed'] += 1
-                            g_subresults_to_json[list1_item] = "compatible",g_lib_location_path
+                            g_subresults_to_json[list1_item] = {'status': 'compatible', 'path':lib_result}
                         elif (compare_library_version(temp_libsoname, str(list1_item)) == "smaller" ):
                             g_counter_flags['lib_counter']['failed'] += 1
-                            g_subresults_to_json[list1_item] = "incompatible"
+                            g_subresults_to_json[list1_item] = {'status': 'incompatible', 'path':lib_result}
                         else:
                             g_counter_flags['lib_counter']['warning'] += 1
-                            g_subresults_to_json[list1_item] = "compatible bigger"
+                            g_subresults_to_json[list1_item] = {'status': 'compatible bigger', 'path':lib_result}
 
         #Traverse the binary package of the source package
         if (g_inputpkgmngr == "yum-rpm"):
@@ -389,18 +344,18 @@ def libchecker_checking_loop():
                     ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
                     ver_local = os.popen('rpm -qi %s | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(binary_name)).read().rstrip('\n') #获取本地库包版本
                     if (get_rpmpkg_ver_contrast(ver_local, ver_required) == "compatible"):
-                        l_pkgresult_to_json[binary_name] = "compatible", ver_local
+                        l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
                     elif (get_rpmpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
-                        l_pkgresult_to_json[binary_name] = "incompatible", ver_local
+                        l_pkgresult_to_json[binary_name] = {'status': 'incompatible', 'local version': ver_local}
             else:
                 pkg_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | gawk -F" " \'{print $1}\' | head -n 1' %(str(binary_name), str(binary_name))).read().rstrip('\n')
                 if (pkg_install_status == "ii"):
                     ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
                     ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | gawk -F" " \'{print $3}\' | head -n 1' %(binary_name, binary_name)).read().rstrip('\n') #获取本地库包版本
                     if (get_debpkg_ver_contrast(ver_local, ver_required) == "compatible"):
-                        l_pkgresult_to_json[binary_name] = "compatible", ver_local
+                        l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
                     elif (get_debpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
-                        l_pkgresult_to_json[binary_name] = "incompatible", ver_local
+                        l_pkgresult_to_json[binary_name] = {'status': 'incompatible', 'local version': ver_local}
                 else:
                     continue
 
@@ -440,11 +395,7 @@ def libchecker_checking_loop():
     print("\t\t通过:", g_counter_flags['pkg_counter']['passed']['all'])
     print("\t\t警告:", g_counter_flags['pkg_counter']['warning']['all'])
     print("\t\t报错:", g_counter_flags['pkg_counter']['failed']['all'])
-    # print("\t\tL1:", g_counter_flags['pkg_counter']['total']['l1'], "|警告：", g_counter_flags['pkg_counter']['warning']['l1'], "| 报错：", g_counter_flags['pkg_counter']['failed']['l1'])
-    # print("\t\tL2:", g_counter_flags['pkg_counter']['total']['l2'], "|警告：", g_counter_flags['pkg_counter']['warning']['l2'], "| 报错：", g_counter_flags['pkg_counter']['failed']['l2'])
-    # print("\t\tL3:", g_counter_flags['pkg_counter']['total']['l3'], "|警告：", g_counter_flags['pkg_counter']['warning']['l3'], "| 报错：", g_counter_flags['pkg_counter']['failed']['l3'])
     print("\t动态库:")
-    # print("\t\t\ttotal:", g_counter_flags['lib_counter']['total'], "|  passed:", g_counter_flags['lib_counter']['passed'])
     print("\t\t总计:", g_counter_flags['lib_counter']['total'])
     print("\t\t通过:", g_counter_flags['lib_counter']['passed'])
     print("\t\t警告:", g_counter_flags['lib_counter']['warning'])
@@ -643,11 +594,9 @@ def libchecker_read_std_json(json_file_path):
     for key in objs_dict:
         print(key)
 
-        #g_pkginfodict_from_json[key['lib_name']] = key['version']    # write pkginfo to dict: g_pkginfodict_from_json
         aliasname = objs_dict[key]['aliasname']
         g_pkginfodict_from_json.update({ aliasname : objs_dict[key]['version']['desktop_version']}) # src package name : pkg version
         
-#        print(objs_dict[key]['aliasname'])
         g_bind_pkglib_from_json.update({ key : objs_dict[key]['desktop-share_objs']}) # src package name : library soname
 
     print(g_pkginfodict_from_json)
@@ -657,11 +606,6 @@ def libchecker_read_std_json(json_file_path):
         print(g_bind_pkglib_from_json[i])
 
     fobj.close()
-
-
-#    print(f_dict['libs']['base']['glibc']['necessity'].keys())
-#    print(f_dict["libchecker"][1])
-#    print(f_dict["libchecker"][1]['name'])
 
 # 3. Find Meatdate Info from Current OS
 ## 3.1 get src package info
@@ -1011,10 +955,6 @@ def get_libinfo_from_os():
                 g_libinfodict_from_os[i] = max([s for s in lib_soname_lists if i in s])
     return g_libinfodict_from_os
 
-#print(g_pkginfodict_from_json)
-#print(g_libinfodict_from_json)
-#print(g_bind_pkglib_from_json)
-
 def get_liblists_from_os():
     print("Enter function: get_liblist_from_os")
     global g_liblist_from_os 
@@ -1050,31 +990,9 @@ def get_libinfo_from_os_by_srcpkg():
     print("Overring Test")
     return g_libinfodict_from_os
 
-
-#g_pkginfodict_from_os = {}
-#g_libinfodict_from_os = {}
-
-#g_libchecker_comp_status = {}
-#print(get_realname_from_srcpkg('ncurses'))
-#print(get_soname_from_srcpkg('ncurses'))
-#print(get_linkname_from_srcpkg('ncurses'))
-#print(read_pkginfo_from_json('std-lib.json'))
-#print(read_libinfo_from_json('std-lib.json'))
-#print(read_pkginfo_from_json('std-lib.json'))
-
-#get_libinfo_from_os()
-#print(get_libinfo_from_os())
-
-#pick_linkname_from_soname('ncurses')
-#print(get_soname_from_srcpkg('ncurses'))
-#print(pick_linkname_from_soname('ncurses.so.1.9'))
-#print(compare_version_serial_number("1.4.3", "2.4.3"))
-#libchecker_compare_metainfo()
-
 # 4. Compare Package and Libraries Info
 ## 4.1 comapre packages between os and json-dict g_pkginfodict_from_json
 def get_pkg_compare_info():
-
     # it always not equla, ex: lib1-1.0 vs lib1-1.0+deb10u1, so give up!
     # only compare shared library object files ***.so
     
@@ -1082,7 +1000,6 @@ def get_pkg_compare_info():
 
 ## 4.2 comapre librarie between os and json-dict g_libinfodict_from_json
 def get_lib_compare_info():
-
     # only compare soname by linkname
     # only compare lib***.so.X, 'X' is a key value for compare,
     # because for linkname:libc6.so, soname:libc.so.6, realname:libc-2.28
@@ -1104,7 +1021,6 @@ def libchecker_compare_metainfo():
     liblists = []
     global g_libchecker_comp_status
 
-    # init the g_libchecker_comp_status[] to "false"
     for key in g_libinfodict_from_json:
         g_libchecker_comp_status[key] = "false"
 
@@ -1141,7 +1057,6 @@ def libchecker_compare_liblist():
 
     for i in liblist_json:
         for j in liblist_os:
-#            if j >= i
             compare_dict[i] = compare_library_version(i, j)
 
     return compare_dict
@@ -1175,70 +1090,15 @@ def gen_json_file():
         json.dump(oschecker,f,indent = 4)
 
 def libchecker_output_json_file():
-    # global g_chapter_dict
-    # global g_jsonfile_dict
-
-    # print("Enter function: libchecker_output_json_file()")
     output_info = {}
     output_data = json.loads(json.dumps(output_info))
-    
-    # mateinfo = {}
-    # mateinfo_sections_number = {}
-    # mateinfo_pkgcheck_result = {}
-    # mateinfo_objcheck_result = {}
-    # mateinfo_packages_dict = {}
-    # mateinfo_share_libs = {}
-    # mateinfo_all_info = {}
+
     out_data_deep = {}
-    
-    # result_dict = libchecker_compare_liblist()
-
-
-    # for chapter_class in g_jsonfile_dict['libs']['category']: # chapter_class
-        # print(chapter_class)
-        # for key in g_jsonfile_dict['libs']['category'][chapter_class]['packages']: # package_class
-            # print("\t", key)
-            #mateinfo.update = { key : g_jsonfile_dict['libs']['category'][chapter_class][key]['packages']['sections_number'] }
-            # for key1 in g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]: # sections_number class
-                # print("\t\t", key1)
-                # print("\t\t", key1)
-                # print("\t\t\t",g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number'])
-#                print("\t\t\t", key1)
-                # mateinfo_sections_number.update({ key :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number']})
-#            for key1 in g_jsonfile_dict['libs']['category'][chapter_class]['packages']:
-#                mateinfo_pkgcheck_result.update({ key1 :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key1]['version']['desktop']})
-#            for key1 in g_jsonfile_dict['libs']['category'][chapter_class]['packages']:
-#                mateinfo_objcheck_result.update({ key1 :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key1]['share_objs']['desktop']})
-            #, "Chapter " : g_jsonfile_dict['libs']['category'][chapter_class][key]['packages']['sections_number']}
-            #, "Necessity" : chapter_class['packages']['necessity'], "Share Objs" : chapter_class['packages']['share_objs'], "Otherinfo" : "none"}
-            # mateinfo = { "Package ":  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]}i
-                # mateinfo_sections_number.update({ key1 :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number']})
-
-            # mateinfo_packages_dict.update({key : mateinfo_sections_number})
-            # mateinfo_packages_dict.update({key : mateinfo_sections_number})
-            # mateinfo_sections_number.clear()
-            
-            # mateinfo_all_info.update({ key :  g_jsonfile_dict['libs']['category'][chapter_class]['packages'][key]['sections_number']})
-        #mateinfo_packages_dict.update({key : "test"})
-
-        # mateinfo_all_info.update({chapter_class : mateinfo_packages_dict})
-
-        #out_data_deep.update({chapter_class : mateinfo_packages_dict})
-        # out_data_deep.update({chapter_class : g_genresults_to_json})
-        #mateinfo_packages_dict.clear()
-        
-    #output_data = {"LibChecker Result" : out_data_deep}
     output_data = {"LibChecker Result" : g_genresults_to_json}
-
-
-
-
     json_output = json.dumps(out_data_deep, ensure_ascii = False)
 
     with open("Outputs/libchecker-output.json","w") as f:
         json.dump(output_data,f)
-        #json.dump(out_data_deep,f)
-
 
 def libchecker_json_file_output():
     # this function generate a json file for libchecker
@@ -1250,16 +1110,7 @@ def libchecker_json_file_output():
     # return:
     #           @
     print("Enter function: gen_json_file_output()")
-    # {
-    #   "libchecker" {
-    #       "linkname" : {
-    #           "name" : "******"
-    #           "version" : "******"
-    #           "status" : "******"
-    #           "category" : "******"
-    #           "otherinfo" : "******"
-    #       },
-    # }
+
     output_info = {}
     output_data = json.loads(json.dumps(output_info))
     
@@ -1272,7 +1123,6 @@ def libchecker_json_file_output():
         else:
             mateinfo = {"name" : pick_linkname_from_soname(key), "version" : key, "status" : g_libchecker_comp_status[key], "category" : "library", "otherinfo" : "none"}
         
-        #out_data_deep = {key : mateinfo}
         out_data_deep.update({key : mateinfo})
         output_data = {"libchecker": out_data_deep}
 
@@ -1281,85 +1131,7 @@ def libchecker_json_file_output():
     with open("Output/libchecker-output.json","w") as f:
         json.dump(output_data,f)
 
-#print(get_realname_from_debpkg('libncurses5'))
-#print(get_soname_from_debpkg('libncurses5'))
-#print(get_linkname_from_debpkg('libncurses5'))
-#print(get_debpkg_from_srcpkg('ncurses'))
-#get_pkginfo_from_os('libc6')
-#libchecker_read_json_file('std-lib.json')
-
-#gen_json_file()
-#read_json_file('std-lib.json')
-#read_json_file('libchecker-out.json')
-#libchecker_json_file_output()
-#print(compare_library_version("lib.so.6", "lib.so.6"))
-#test_function()
-
-#for key in g_pkginfodict_from_json:
-#        liblists = get_linkname_from_srcpkg(key)
-#        for i in g_libinfodict_from_json.keys():
-
-#read_json_file('../StdLists/lib_list_1.0I-20220826.json')
-
-#print(read_pkginfo_from_stdjson('../StdLists/lib_list_1.0I-20220830-uos.json'))
-#print(read_libinfo_from_stdjson('../StdLists/lib_list_1.0I-20220830-uos.json'))
-#libchecker_read_stdjson('../StdLists/lib_list_1.0I-20220830-uos.json')i
-
-##libchecker_read_stdjson('StdLists/lib_list_1.0I-20220830-uos.json')
-#print(g_pkginfodict_from_json)
-#print(g_libinfodict_from_json)
-#print(g_bind_pkglib_from_json)
-
-#g_pkginfodict_from_os = {}
-#g_libinfodict_from_os = {}
-
-#g_libchecker_comp_status = {}
-#print(get_realname_from_srcpkg('ncurses'))
-#print(get_soname_from_srcpkg('ncurses'))
-#print(get_linkname_from_srcpkg('ncurses'))
-#print(read_pkginfo_from_json('std-lib.json'))
-#print(read_libinfo_from_json('std-lib.json'))
-#print(read_pkginfo_from_json('std-lib.json'))
-
-#get_libinfo_from_os()
-#print(get_libinfo_from_os())
-
-#pick_linkname_from_soname('ncurses')
-#print(get_soname_from_srcpkg('ncurses'))
-#print(pick_linkname_from_soname('ncurses.so.1.9'))
-#print(compare_version_serial_number("1.4.3", "2.4.3"))
-#libchecker_compare_metainfo()
-#libchecker_read_std_json('stdlists/lib_list_1.0I.json')
-#def read_pkginfo_from_json(json_file_path):
-#print(get_pkginfo_from_os())
-#print(get_libinfo_from_os())
-
-
-#print(get_libinfo_from_os_by_srcpkg())
-#print(g_libinfodict_from_json)
-##get_liblists_from_os()
-#print(get_liblists_from_stdjson('../StdLists/lib_list_1.0I-20220830-uos.json'))
-##get_liblists_from_stdjson('StdLists/lib_list_1.0I-20220830-uos.json')
-
-#print("g_liblist_from_json")
-#print(g_liblist_from_json)
-#print("g_liblist_from_os")
-#print(g_liblist_from_os)
-
-##libchecker_compare_liblist()
-##libchecker_output_json_file()
-
-
 libchecker_environment_init()
 libchecker_checking_loop()
-#print(get_env_info())
-#get_env_info()
 
-#libchecker_output_json_file()
 libchecker_over_jobs()
-
-#check_sharelib_info('/lib', 'libanl.so.1' )
-
-#print(g_jsonfile_dict['glibc']['share_objs']['desktop'])
-#        for list_item in g_jsonfile_dict['libs']['category']['base']['packages'][src_pkgname]['share_objs']['desktop']
- 
