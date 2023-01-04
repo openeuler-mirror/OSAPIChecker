@@ -152,6 +152,27 @@ def libchecker_environment_init():
     if (g_inputpkgmngr == "apt-deb"):
         apt_pkg.init_system()
 
+def check_srcname(realname):
+    if(len(g_storejsondict[realname]['alias']) == 0):
+        return realname
+    else:
+        alias_list = g_storejsondict[realname]['alias'][0]['name'].split('/')
+        if(realname not in alias_list):
+            alias_list.append(realname)
+
+        if (g_inputpkgmngr == "yum-rpm"):
+            for alias_tmp in alias_list:
+                l_1 = os.system('dnf info %s 2>/dev/null 1>/dev/null' %(alias_tmp))
+                if(l_1 == 0):
+                    break
+            return alias_tmp
+        else:
+            for alias_tmp in alias_list:
+                l_1 = os.popen('apt-cache showsrc %s 2>/dev/null | grep "^Version:"' %(alias_tmp)).read().split('\n')
+                if(len(l_1) != 0):
+                    break
+            return alias_tmp
+
 def check_per_pkg_info(src_pkgname):
     global g_notfind_set_flag
     global g_genresults_to_json
@@ -161,12 +182,12 @@ def check_per_pkg_info(src_pkgname):
         if (g_inputpkgmngr == "apt-deb"):
             p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
         elif (g_inputpkgmngr == "yum-rpm"):
-            p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
+            p_srcpkgver = os.popen('yum list %s 2>/dev/null | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
     elif(g_inputostype == "server"):
         if (g_inputpkgmngr == "apt-deb"):
             p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
         elif (g_inputpkgmngr == "yum-rpm"):
-            p_srcpkgver = os.popen('yum list %s | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
+            p_srcpkgver = os.popen('yum list %s 2>/dev/null | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
     else:
         print("Please input --ostype=[desktop,server,embde,...] and --pkgmngr=[apt-deb,yum-rpm,src-bin,...]")
 
@@ -303,7 +324,7 @@ def libchecker_checking_loop():
             print("\t\t系统实现:")
             print("\t\t\t\t没有发现")
         else:
-            check_per_pkg_info(g_storejsondict[last_key]['lib_name'])
+            check_per_pkg_info(check_srcname(last_key))
             g_subresults_to_json.clear()
             if (g_notfind_set_flag == 1 ):
                 g_counter_flags['pkg_counter']['failed']['all'] += 1
@@ -339,10 +360,10 @@ def libchecker_checking_loop():
 
         for binary_name in binary_list:
             if (g_inputpkgmngr == "yum-rpm"):
-                pkg_install_status = os.system('rpm -qi %s' %(binary_name))
+                pkg_install_status = os.system('rpm -qi %s 2>/dev/null 1>/dev/null' %(binary_name))
                 if (pkg_install_status == 0):
                     ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
-                    ver_local = os.popen('rpm -qi %s | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(binary_name)).read().rstrip('\n') #获取本地库包版本
+                    ver_local = os.popen('rpm -qi %s 2>/dev/null 1>/dev/null| grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(binary_name)).read().rstrip('\n') #获取本地库包版本
                     if (get_rpmpkg_ver_contrast(ver_local, ver_required) == "compatible"):
                         l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
                     elif (get_rpmpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
