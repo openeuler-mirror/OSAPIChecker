@@ -342,6 +342,17 @@ def libchecker_checking_loop():
             if (g_notfind_set_flag == 1 ):
                 g_counter_flags['pkg_counter']['failed']['all'] += 1
                 g_notfind_set_flag = 0
+                with open("Outputs/libchecker-output.json", 'r') as fr:
+                    json_so = json.load(fr)
+                    json_so[last_key]['Shared library'] = "-"
+                with open("Outputs/libchecker-output.json", 'w+') as fw:
+                    json.dump(json_so,fw,ensure_ascii=False,indent=4)
+                with open("Outputs/libchecker-output.json", 'r') as fr:
+                    json_local_ver = json.load(fr)
+                    json_local_ver[last_key]['Binary package'] = "-"
+                with open("Outputs/libchecker-output.json", 'w+') as fw:
+                    json.dump(json_local_ver,fw,ensure_ascii=False,indent=4)
+                continue
             else:
                 for list1_item in g_storejsondict[last_key]['share_objs'][g_ostype]:
                     print("\t\t\t\t名称 -> ",list1_item)
@@ -353,20 +364,6 @@ def libchecker_checking_loop():
                         print("\t\t\t\t\t检测结果 ->  未检测到存在")
                         g_subresults_to_json[list1_item] = {'status': 'not found', 'path':'-'}
                         g_counter_flags['lib_counter']['failed'] += 1
-
-                        with open("Outputs/libchecker-output.json", 'r') as fr:
-                            json_so = json.load(fr)
-                            json_so[last_key]['Shared library'] = "-"
-                        with open("Outputs/libchecker-output.json", 'w+') as fw:
-                            json.dump(json_so,fw,ensure_ascii=False,indent=4)
-
-                        with open("Outputs/libchecker-output.json", 'r') as fr:
-                            json_local_ver = json.load(fr)
-                            json_local_ver[last_key]['Binary package'] = "-"
-                        with open("Outputs/libchecker-output.json", 'w+') as fw:
-                            json.dump(json_local_ver,fw,ensure_ascii=False,indent=4)
-
-                        continue
                     else:
                         print("\t\t\t\t\t检测结果 -> ", compare_library_version(temp_libsoname, str(list1_item)))
                         if (compare_library_version(temp_libsoname, str(list1_item)) == "equal" ):

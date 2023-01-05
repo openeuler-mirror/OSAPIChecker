@@ -30,8 +30,8 @@ Operating system API compliance check tool.
       ```
    2. 典型示例
       ```shell
-      # 1. (OSAPIChecker)/$: ./OSAPIChecker.py --channel=libchecker --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb
-      # 2. (OSAPIChecker)/$: ./OSAPIChecker.py --channel=libchecker --strategy=base --level=l1l2 --ostype=server --pkgmngr=yum-rpm
+      # 1. (OSAPIChecker)/$: ./OSAPIChecker.py --channel=libchecker --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=统信软件
+      # 2. (OSAPIChecker)/$: ./OSAPIChecker.py --channel=libchecker --strategy=base --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=统信软件
       ```
 
 2. FsChecker
