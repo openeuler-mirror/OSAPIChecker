@@ -393,10 +393,10 @@ def libchecker_checking_loop():
                     elif (get_rpmpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
                         l_pkgresult_to_json[binary_name] = {'status': 'incompatible', 'local version': ver_local}
             else:
-                pkg_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | gawk -F" " \'{print $1}\' | head -n 1' %(str(binary_name), str(binary_name))).read().rstrip('\n')
+                pkg_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $1}\' | head -n 1' %(str(binary_name), str(binary_name))).read().rstrip('\n')
                 if (pkg_install_status == "ii"):
                     ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
-                    ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | gawk -F" " \'{print $3}\' | head -n 1' %(binary_name, binary_name)).read().rstrip('\n') #获取本地库包版本
+                    ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $3}\' | head -n 1' %(binary_name, binary_name)).read().rstrip('\n') #获取本地库包版本
                     if (get_debpkg_ver_contrast(ver_local, ver_required) == "compatible"):
                         l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
                     elif (get_debpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
