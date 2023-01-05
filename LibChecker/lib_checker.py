@@ -309,6 +309,19 @@ def libchecker_checking_loop():
     for last_key in g_storejsondict:
         l_pkgresult_to_json.clear()
 
+        #向json文件写入库包级别
+        with open("Outputs/libchecker-output.json", 'r') as fr:
+            json_level = json.load(fr)
+            json_level[last_key]['Level'] = g_storejsondict[last_key]['necessity'][g_inputostype]['level']
+        with open("Outputs/libchecker-output.json", 'w+') as fw:
+            json.dump(json_level,fw,ensure_ascii=False,indent=4)
+        #向json文件写入库包需求版本
+        with open("Outputs/libchecker-output.json", 'r') as fr:
+            json_required_ver = json.load(fr)
+            json_required_ver[last_key]['Required version'] = g_storejsondict[last_key]['version'][g_inputostype]
+        with open("Outputs/libchecker-output.json", 'w+') as fw:
+            json.dump(json_required_ver,fw,ensure_ascii=False,indent=4)
+
         if (g_storejsondict[last_key]['necessity'][g_ostype]['level'] == "L1"):
             g_counter_flags['pkg_counter']['total']['l1'] += 1
         if (g_storejsondict[last_key]['necessity'][g_ostype]['level'] == "L2"):
@@ -340,6 +353,20 @@ def libchecker_checking_loop():
                         print("\t\t\t\t\t检测结果 ->  未检测到存在")
                         g_subresults_to_json[list1_item] = {'status': 'not found', 'path':'-'}
                         g_counter_flags['lib_counter']['failed'] += 1
+
+                        with open("Outputs/libchecker-output.json", 'r') as fr:
+                            json_so = json.load(fr)
+                            json_so[last_key]['Shared library'] = "-"
+                        with open("Outputs/libchecker-output.json", 'w+') as fw:
+                            json.dump(json_so,fw,ensure_ascii=False,indent=4)
+
+                        with open("Outputs/libchecker-output.json", 'r') as fr:
+                            json_local_ver = json.load(fr)
+                            json_local_ver[last_key]['Binary package'] = "-"
+                        with open("Outputs/libchecker-output.json", 'w+') as fw:
+                            json.dump(json_local_ver,fw,ensure_ascii=False,indent=4)
+
+                        continue
                     else:
                         print("\t\t\t\t\t检测结果 -> ", compare_library_version(temp_libsoname, str(list1_item)))
                         if (compare_library_version(temp_libsoname, str(list1_item)) == "equal" ):
@@ -380,18 +407,6 @@ def libchecker_checking_loop():
                 else:
                     continue
 
-        #向json文件写入库包级别
-        with open("Outputs/libchecker-output.json", 'r') as fr:
-            json_level = json.load(fr)
-            json_level[last_key]['Level'] = g_storejsondict[last_key]['necessity'][g_inputostype]['level']
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
-            json.dump(json_level,fw,ensure_ascii=False,indent=4)
-        #向json文件写入库包需求版本
-        with open("Outputs/libchecker-output.json", 'r') as fr:
-            json_required_ver = json.load(fr)
-            json_required_ver[last_key]['Required version'] = g_storejsondict[last_key]['version'][g_inputostype]
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
-            json.dump(json_required_ver,fw,ensure_ascii=False,indent=4)
         #向json文件写入共享库兼容信息
         with open("Outputs/libchecker-output.json", 'r') as fr:
             json_so = json.load(fr)
@@ -404,7 +419,6 @@ def libchecker_checking_loop():
             json_local_ver[last_key]['Binary package'] = l_pkgresult_to_json
         with open("Outputs/libchecker-output.json", 'w+') as fw:
             json.dump(json_local_ver,fw,ensure_ascii=False,indent=4)
-
 
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
