@@ -55,6 +55,12 @@ parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package M
 # 
 #parser.add_argument('-j', '--stdjson', action='store', type=str, help='Choice OSAPIChecker standard json templete file', required=True)
 
+parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Organize')
+
+# --ostype:
+#       desktop
+#       service
+#       embed
 
 args = parser.parse_args()
 
@@ -70,20 +76,20 @@ def input_valid_check():
 
 # 2. Check Environment Info
 def gen_envinfo_json():
+    l_organize = args.organize 
     l_osname = platform.system()
     l_osversion = platform.version()
-    l_company = "Unknonwn"
     l_osmachine = platform.machine()
     l_osarchitecture = platform.architecture()
     l_osprocessor = platform.processor()
     l_kernel = os.popen("uname -r").read().rstrip("\n")
     l_compver = os.popen("gcc --version | awk 'NR==1'").read().rstrip("\n")
-    l_pythonver = os.popen("python --version").read().rstrip("\n")
+    l_pythonver = os.popen("python -V").read().rstrip("\n")
     l_meminfo = os.popen("free -g | grep Mem | awk '{print $2}'").read().rstrip("\n")
     l_firmwareinfo = os.popen("dmidecode -s bios-version").read().rstrip("\n")
     l_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp)) 
 
-    l_envinfodict = {"测试对象" : {"系统名称" : l_osname, "版本" : l_osversion}, "送测单位" : l_company , "系统环境" : {"内核版本" : l_kernel , "编译器版本" : l_compver , "Python版本" : l_pythonver} , "环境配置" : {"机器型号" : l_osmachine , "CPU指令集" : l_osarchitecture , "CPU型号" : l_osprocessor , "内存" : l_meminfo , "硬盘" : "345", "固件" : l_firmwareinfo} , "测试工具" : {"名称" : "OSAPIChecker", "版本" : "0.0.0" } , "测试时间" : l_time }
+    l_envinfodict = {"测试对象" : {"系统名称" : l_osname, "版本" : l_osversion}, "送测单位" : l_organize , "系统环境" : {"内核版本" : l_kernel , "编译器版本" : l_compver , "Python版本" : l_pythonver} , "环境配置" : {"机器型号" : l_osmachine , "CPU指令集" : l_osarchitecture , "CPU型号" : l_osprocessor , "内存" : l_meminfo , "硬盘" : "345", "固件" : l_firmwareinfo} , "测试工具" : {"名称" : "OSAPIChecker", "版本" : "0.0.0" } , "测试时间" : l_time }
 
     with open("Outputs/environments-info.json","w+") as fw:
         json.dump(l_envinfodict,fw,ensure_ascii=False,indent=4)
