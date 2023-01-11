@@ -336,36 +336,39 @@ def libchecker_checking_loop():
         with open("Outputs/libchecker-output.json", 'w+') as fw:
             json.dump(json_required_ver,fw,ensure_ascii=False,indent=4)
 
-        for l_src_name in list(l_dict_alias_info.keys()):
-            l_src_status = 0
+        if (len(g_storejsondict[last_key]['version'][g_ostype]) != 0):
+            for l_src_name in list(l_dict_alias_info.keys()):
+                l_src_status = 0
 
-            if (l_dict_alias_info[l_src_name] != "-"):
-                l_dict_binary_list.clear()
-                l_dict_binary_list = l_dict_alias_info[l_src_name]
-                for l_binary_name in list(l_dict_binary_list.keys()):
-                    if (g_inputpkgmngr == "yum-rpm"):
-                        l_rpm_local_version = get_rpmpkg_local_verison(l_binary_name)
-                        if (l_rpm_local_version == "-"):
-                            del l_dict_alias_info[l_src_name][l_binary_name]
+                if (l_dict_alias_info[l_src_name] != "-"):
+                    l_dict_binary_list.clear()
+                    l_dict_binary_list = l_dict_alias_info[l_src_name]
+                    for l_binary_name in list(l_dict_binary_list.keys()):
+                        if (g_inputpkgmngr == "yum-rpm"):
+                            l_rpm_local_version = get_rpmpkg_local_verison(l_binary_name)
+                            if (l_rpm_local_version == "-"):
+                                del l_dict_alias_info[l_src_name][l_binary_name]
+                            else:
+                                l_src_status += 1
+                                l_binary_version_status = get_rpmpkg_ver_contrast(l_rpm_local_version, l_require_version)
+                                l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
                         else:
-                            l_src_status += 1
-                            l_binary_version_status = get_rpmpkg_ver_contrast(l_rpm_local_version, l_require_version)
-                            l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
+                            l_deb_local_version = get_debpkg_local_version(l_binary_name, l_src_name)
+                            if (l_deb_local_version == "-"):
+                                del l_dict_binary_list[l_binary_name]
+                            else:
+                                l_src_status += 1
+                                l_binary_version_status = get_debpkg_ver_contrast(l_deb_local_version, l_require_version)
+                                l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
+
+                    if (l_src_status == 0):
+                        l_dict_alias_info[l_src_name] = "Don`t find installed packages"
                     else:
-                        l_deb_local_version = get_debpkg_local_version(l_binary_name, l_src_name)
-                        if (l_deb_local_version == "-"):
-                            del l_dict_binary_list[l_binary_name]
-                        else:
-                            l_src_status += 1
-                            l_binary_version_status = get_debpkg_ver_contrast(l_deb_local_version, l_require_version)
-                            l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
-
-                if (l_src_status == 0):
-                    l_dict_alias_info[l_src_name] = "Don`t find installed packages"
+                        l_dict_alias_info[l_src_name] = l_dict_binary_list
                 else:
-                    l_dict_alias_info[l_src_name] = l_dict_binary_list
-            else:
-                l_dict_alias_info[l_src_name] = "None"
+                    l_dict_alias_info[l_src_name] = "None"
+        else:  
+            l_dict_alias_info[l_src_name] = "None"
 
         ###向json文件写入'Binary package'信息
         with open("Outputs/libchecker-output.json", 'r') as fr:
