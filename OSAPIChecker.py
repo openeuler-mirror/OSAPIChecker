@@ -28,7 +28,7 @@ parser.add_argument('-c', '--channel', action='store', type=str, help='Choice OS
 #       base (default)
 #       only-expand
 #       with-expand
-parser.add_argument('-s', '--strategy', action='store', type=str, help='Choice OSAPIChecker strategy: base,onyl-expand,with-expand', default="base")
+parser.add_argument('-s', '--strategy', action='store', type=str, help='Choice OSAPIChecker strategy: base,only-expand,with-expand', default="base")
 
 # --level:
 #       l1
@@ -84,7 +84,7 @@ def gen_envinfo_json():
     l_osprocessor = platform.processor()
     l_kernel = os.popen("uname -r").read().rstrip("\n")
     l_compver = os.popen("gcc --version | awk 'NR==1'").read().rstrip("\n")
-    l_pythonver = os.popen("python --version").read().rstrip("\n")
+    l_pythonver = "test" # os.popen("python --version").read().rstrip("\n")
     l_meminfo = os.popen("free -g | grep Mem | awk '{print $2}'").read().rstrip("\n")
     l_firmwareinfo = os.popen("dmidecode -s bios-version").read().rstrip("\n")
     l_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp)) 
@@ -262,7 +262,6 @@ def checker_call_handler():
             elif (args.level == "l1l2"):
                 if (args.ostype == "desktop"):
                     if (args.pkgmngr == "apt-deb"):
-                        print("51")
                         os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
                     elif (args.pkgmngr == "yum-rpm"):
                         os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))

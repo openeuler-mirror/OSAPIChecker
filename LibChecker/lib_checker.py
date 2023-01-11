@@ -24,6 +24,7 @@ parser.add_argument('-s', '--strategy', action='store', type=str, help='Choice O
 parser.add_argument('-l', '--level', action='store', type=str, help='Choice OSAPIChecker level: l1,l2,l3,l1l2,l1l2l3', default="l1l2")
 parser.add_argument('-t', '--ostype', action='store', type=str, help='OSType of current OS: desktop, server, embed，other', default="desktop")
 parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package Manager of current OS: apt-deb, yum-rpm, src-bin, other', default="apt-deb")
+parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Organize or Company')
 parser.add_argument('-j', '--json', action='store', type=str, help='Choice OSChecker Json templete file', required=False) # this line use for dect the json file.
 args = parser.parse_args() # write arguments to struct
 
@@ -31,6 +32,7 @@ g_inputstrategy = args.strategy
 g_inputlevel = args.level
 g_inputostype = args.ostype
 g_inputpkgmngr = args.pkgmngr
+g_inputorganize = args.organize
 g_inputjson = args.json
 
 
@@ -443,7 +445,7 @@ def libchecker_checking_loop():
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     print("")
-    print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "\"")
+    print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "--organize =", args.organize, "\"")
     print("")
     print("\t软件包:")
     print("\t\t总计:", g_counter_flags['pkg_counter']['total']['all'], "{" ,"l1->",g_counter_flags['pkg_counter']['total']['l1'],";", "l2->", g_counter_flags['pkg_counter']['total']['l2'], ";", "l3->", g_counter_flags['pkg_counter']['total']['l3'],  "}")
