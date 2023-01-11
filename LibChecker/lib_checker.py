@@ -78,8 +78,8 @@ g_chapter_dict = {}
 g_genresults_to_json = {}
 g_subresults_to_json = {}
 g_pkgflag_dict = {}
-g_ostype = "desktop"            # global magic string for OS type
-g_pkgmgr = "apt-deb"            # global magic string for OS type
+g_ostype = g_inputostype        # global magic string for OS type
+g_pkgmgr = g_inputpkgmngr       # global magic string for OS type
 g_test_dict = {}
 g_test_list = []
 
@@ -351,7 +351,7 @@ def libchecker_checking_loop():
                             else:
                                 l_src_status += 1
                                 l_binary_version_status = get_rpmpkg_ver_contrast(l_rpm_local_version, l_require_version)
-                                l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
+                                l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_rpm_local_version}
                         else:
                             l_deb_local_version = get_debpkg_local_version(l_binary_name, l_src_name)
                             if (l_deb_local_version == "-"):
