@@ -24,7 +24,6 @@ parser.add_argument('-s', '--strategy', action='store', type=str, help='Choice O
 parser.add_argument('-l', '--level', action='store', type=str, help='Choice OSAPIChecker level: l1,l2,l3,l1l2,l1l2l3', default="l1l2")
 parser.add_argument('-t', '--ostype', action='store', type=str, help='OSType of current OS: desktop, server, embed，other', default="desktop")
 parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package Manager of current OS: apt-deb, yum-rpm, src-bin, other', default="apt-deb")
-parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Company or Organize')
 parser.add_argument('-j', '--json', action='store', type=str, help='Choice OSChecker Json templete file', required=False) # this line use for dect the json file.
 args = parser.parse_args() # write arguments to struct
 
@@ -32,13 +31,13 @@ g_inputstrategy = args.strategy
 g_inputlevel = args.level
 g_inputostype = args.ostype
 g_inputpkgmngr = args.pkgmngr
-g_inputorganize = args.organize
 g_inputjson = args.json
 
 
 # option module import
 if (g_inputpkgmngr == "apt-deb"):
     import apt_pkg # import for apt-deb package management tools
+
 
 # for logger handler
 class Logger(object):
@@ -88,6 +87,7 @@ def libchecker_over_jobs():
     log_file_name = "Logs/libchecker-" + time_now + ".log"
     # os.system("cp Logs/libchecker-tmp.log Outputs/libchecker-output.txt")
     os.rename("Logs/libchecker-tmp.log", log_file_name)
+
 ## 0.3 platform info
 def get_env_info():
     print("系统信息:")
@@ -111,15 +111,9 @@ def get_stdjsons_info(json_file_path):
     print("\t库检查器信息:")
     print("\t\t检查位置: %s" % f_dict['libs']['lib_location'])
 
-    # print("Start Checking: .....: Chapter: %s Category: %s;" %(f_dict['libs']['category']['base']['description']['chapters_number'], f_dict['libs']['category']['base']['description']['chapters_Name']))
-
 def libchecker_environment_init():
     global g_counter_flags
-    # g_inputstrategy = args.strategy
-    # g_inputlevel = args.level
-    # g_inputostype = args.ostype
-    # g_inputpkgmngr = args.pkgmngr
-    
+
     g_counter_flags = {'pkg_counter': {'total': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} , 'passed': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'warning': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'failed': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} }, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
 
     get_env_info()
@@ -129,68 +123,103 @@ def libchecker_environment_init():
     if (g_inputpkgmngr == "apt-deb"):
         apt_pkg.init_system()
 
-def check_srcname(realname):
-    if(len(g_storejsondict[realname]['alias']) == 0):
-        return realname
-    else:
-        alias_list = g_storejsondict[realname]['alias'][0]['name'].split('/')
-        if(realname not in alias_list):
-            alias_list.append(realname)
+##====获取别名信息字典====##
+def get_alias_dcit(l_realname):
+    
+    l_dict_alias_info = {}
+    l_dict_binary_name = {}
+    l_dict_tmp = {}
 
+    l_list_binary_name = []
+    l_list_alias = []
+    l_list_tmp = []
+
+    
+    if(len(g_storejsondict[l_realname]['alias']) == 0):
+        l_list_binary_name.clear()
+        
         if (g_inputpkgmngr == "yum-rpm"):
-            for alias_tmp in alias_list:
-                l_1 = os.system('dnf info %s 2>/dev/null 1>/dev/null' %(alias_tmp))
-                if(l_1 == 0):
-                    break
-            return alias_tmp
+            l_list_binary_name = get_rpmpkg_from_srcpkg(l_realname)
         else:
-            for alias_tmp in alias_list:
-                l_1 = os.popen('apt-cache showsrc %s 2>/dev/null | grep "^Version:"' %(alias_tmp)).read().split('\n')
-                if(len(l_1) != 0):
-                    break
-            return alias_tmp
+            l_list_binary_name = get_debpkg_from_srcpkg(l_realname)
 
+        if(len(l_list_binary_name) != 0):
+            for i in range(0, len(l_list_binary_name)):
+                l_dict_binary_name.update({l_list_binary_name[i]: '-'})
+            l_dict_alias_info.update({l_realname: l_dict_binary_name})
+        else:
+            l_dict_alias_info.update({l_realname: "-"})
+    else:
+        l_list_alias.clear()
+        l_list_tmp.clear()
+
+        for i in range(0, len(g_storejsondict[l_realname]['alias'])):
+            if "/" in g_storejsondict[l_realname]['alias'][i]['name']:
+                l_list_tmp = g_storejsondict[l_realname]['alias'][i]['name'].split('/')
+                for num in range(0, len(l_list_tmp)):
+                    l_list_alias.append(l_list_tmp[num])
+            else:
+                l_list_alias.append(g_storejsondict[l_realname]['alias'][i]['name'])
+
+        if l_realname not in l_list_alias:
+            l_list_alias.append(l_realname)
+
+        for k in range(0, len(l_list_alias)):
+            l_list_binary_name.clear()
+            l_dict_binary_name.clear()
+
+            if (g_inputpkgmngr == "yum-rpm"):
+                l_list_binary_name = get_rpmpkg_from_srcpkg(l_list_alias[k])
+            else:
+                l_list_binary_name = get_debpkg_from_srcpkg(l_list_alias[k])
+
+            if(len(l_list_binary_name) != 0):
+                for j in range(0, len(l_list_binary_name)):
+                    l_dict_binary_name.update({l_list_binary_name[j]: '-'})
+
+                l_dict_tmp = dict.fromkeys(l_dict_binary_name.keys(), None)
+                l_dict_alias_info[l_list_alias[k]] = l_dict_tmp
+            else:
+                l_dict_alias_info[l_list_alias[k]] = "-"
+
+    return l_dict_alias_info
+
+##====检查源码包仓库是否存在====##
 def check_per_pkg_info(src_pkgname):
     global g_notfind_set_flag
     global g_genresults_to_json
     global g_test_dict 
+    global g_counter_flags
 
-    if(g_inputostype == "desktop"):
+    srcpkgver = []
+
+    if g_inputostype == "desktop" or g_inputostype == "server":
         if (g_inputpkgmngr == "apt-deb"):
-            p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+            l_search_pname = os.popen('apt-cache showsrc %s 2>/dev/null | grep ^Package: | awk -F": " \'{print $2}\'' %(src_pkgname))
+            l_pname = l_search_pname.read().split("\n")[0]
+            l_search_pname.close()
+            if(l_pname == src_pkgname):
+                p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
+                srcpkgver = p_srcpkgver.read().rstrip('\n')
+                p_srcpkgver.close()
         elif (g_inputpkgmngr == "yum-rpm"):
             p_srcpkgver = os.popen('yum list %s 2>/dev/null | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
-    elif(g_inputostype == "server"):
-        if (g_inputpkgmngr == "apt-deb"):
-            p_srcpkgver = os.popen('apt-cache showsrc %s 2>/dev/null | grep \^Version | cut -d '"\ "' -f 2 ' %(src_pkgname))
-        elif (g_inputpkgmngr == "yum-rpm"):
-            p_srcpkgver = os.popen('yum list %s 2>/dev/null | awk \'{print $2}\' | sed -n \'3p\'  ' %(src_pkgname))
+            srcpkgver = p_srcpkgver.read().rstrip('\n')
+            p_srcpkgver.close()
     else:
         print("Please input --ostype=[desktop,server,embde,...] and --pkgmngr=[apt-deb,yum-rpm,src-bin,...]")
-
-    srcpkgver = p_srcpkgver.read().rstrip('\n')
-    p_srcpkgver.close()
-
-    global g_counter_flags
 
     g_counter_flags['pkg_counter']['total']['all'] += 1
 
     print("\t\t系统实现: ")
-
     if (len(srcpkgver) == 0):
-        print("\t\t\t\t没有发现")
-        g_notfind_set_flag = 1
+        print("\t\t\t\t未发现  -> ", src_pkgname.ljust(20))
     else:
         print("\t\t\t\t实现包名 -> ", src_pkgname.ljust(20),"实现版本 -> ",srcpkgver)
+        g_counter_flags['pkg_counter']['passed']['all'] += 1   
+        g_notfind_set_flag = 1 
 
-        print("\t\t共享库信息:")
-
-        g_counter_flags['pkg_counter']['passed']['all'] += 1    
-
-def check_pkginfo_for_desktop(src_pkgname):
-    for src_pkgname in g_jsonfile_dict:
-        check_per_pkg_info(g_jsonfile_dict['libs']['category']['base']['packages'][src_pkgname]['alias'][0]['name'])
-
+##====查询共享库路径信息====##
 def check_sharelib_info(lib_soname):
 
     global g_lib_location_path
@@ -199,7 +228,7 @@ def check_sharelib_info(lib_soname):
 
     global g_counter_flags
     g_counter_flags['lib_counter']['total'] += 1
-    l_list = ["/lib", "/lib64", "/usr/lib"]
+    l_list = ["/lib", "/lib64", "/usr/lib", "/usr/lib64"]
 
     for path_tmp in l_list:
         for realpath, dirs, files in os.walk(path_tmp):
@@ -214,6 +243,7 @@ def check_sharelib_info(lib_soname):
     else:
         return g_lib_location_path
 
+##====主函数====##
 def libchecker_checking_loop():
     global g_notfind_set_flag 
     global g_chapter_dict
@@ -226,6 +256,8 @@ def libchecker_checking_loop():
 
     l_dict_to_json = {}
     l_pkgresult_to_json = {}
+    l_dict_alias_info = {}      #存储写入json文件Binary package信息的字典
+    l_dict_binary_list = {}
 
     del g_jsonfile_dict['libs']['category']['##章节名']
     print("")
@@ -286,18 +318,59 @@ def libchecker_checking_loop():
     for last_key in g_storejsondict:
         l_pkgresult_to_json.clear()
 
-        #向json文件写入库包级别
+        l_dict_alias_info = get_alias_dcit(last_key)
+        l_require_version = g_storejsondict[last_key]['version'][g_inputostype]  #源码包需求版本
+
+        ###向json文件写入'Level'信息
         with open("Outputs/libchecker-output.json", 'r') as fr:
             json_level = json.load(fr)
             json_level[last_key]['Level'] = g_storejsondict[last_key]['necessity'][g_inputostype]['level']
         with open("Outputs/libchecker-output.json", 'w+') as fw:
             json.dump(json_level,fw,ensure_ascii=False,indent=4)
-        #向json文件写入库包需求版本
+        ###向json文件写入'Required version'信息
         with open("Outputs/libchecker-output.json", 'r') as fr:
             json_required_ver = json.load(fr)
-            json_required_ver[last_key]['Required version'] = g_storejsondict[last_key]['version'][g_inputostype]
+            json_required_ver[last_key]['Required version'] = l_require_version
         with open("Outputs/libchecker-output.json", 'w+') as fw:
             json.dump(json_required_ver,fw,ensure_ascii=False,indent=4)
+
+        for l_src_name in list(l_dict_alias_info.keys()):
+            l_src_status = 0
+
+            if (l_dict_alias_info[l_src_name] != "-"):
+                l_dict_binary_list.clear()
+                l_dict_binary_list = l_dict_alias_info[l_src_name]
+                for l_binary_name in list(l_dict_binary_list.keys()):
+                    if (g_inputpkgmngr == "yum-rpm"):
+                        l_rpm_local_version = get_rpmpkg_local_verison(l_binary_name)
+                        if (l_rpm_local_version == "-"):
+                            del l_dict_alias_info[l_src_name][l_binary_name]
+                        else:
+                            l_src_status += 1
+                            l_binary_version_status = get_rpmpkg_ver_contrast(l_rpm_local_version, l_require_version)
+                            l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
+                    else:
+                        l_deb_local_version = get_debpkg_local_version(l_binary_name, l_src_name)
+                        if (l_deb_local_version == "-"):
+                            del l_dict_binary_list[l_binary_name]
+                        else:
+                            l_src_status += 1
+                            l_binary_version_status = get_debpkg_ver_contrast(l_deb_local_version, l_require_version)
+                            l_dict_binary_list[l_binary_name] = {'status': l_binary_version_status, 'local version': l_deb_local_version}
+
+                if (l_src_status == 0):
+                    l_dict_alias_info[l_src_name] = "Don`t find installed packages"
+                else:
+                    l_dict_alias_info[l_src_name] = l_dict_binary_list
+            else:
+                l_dict_alias_info[l_src_name] = "None"
+
+        ###向json文件写入'Binary package'信息
+        with open("Outputs/libchecker-output.json", 'r') as fr:
+            json_alias_info = json.load(fr)
+            json_alias_info[last_key]['Binary package'] =  l_dict_alias_info
+        with open("Outputs/libchecker-output.json", 'w+') as fw:
+            json.dump(json_alias_info,fw,ensure_ascii=False,indent=4)
 
         if (g_storejsondict[last_key]['necessity'][g_ostype]['level'] == "L1"):
             g_counter_flags['pkg_counter']['total']['l1'] += 1
@@ -314,21 +387,22 @@ def libchecker_checking_loop():
             print("\t\t系统实现:")
             print("\t\t\t\t没有发现")
         else:
-            check_per_pkg_info(check_srcname(last_key))
             g_subresults_to_json.clear()
-            if (g_notfind_set_flag == 1 ):
+
+            g_notfind_set_flag = 0
+            for l_alias_name in list(l_dict_alias_info.keys()):
+                check_per_pkg_info(l_alias_name)  #待修改
+
+            print("\t\t共享库信息:")
+            if (g_notfind_set_flag == 0):
                 g_counter_flags['pkg_counter']['failed']['all'] += 1
-                g_notfind_set_flag = 0
+
+                ###向json文件写入'Shared library'信息
                 with open("Outputs/libchecker-output.json", 'r') as fr:
                     json_so = json.load(fr)
                     json_so[last_key]['Shared library'] = "-"
                 with open("Outputs/libchecker-output.json", 'w+') as fw:
                     json.dump(json_so,fw,ensure_ascii=False,indent=4)
-                with open("Outputs/libchecker-output.json", 'r') as fr:
-                    json_local_ver = json.load(fr)
-                    json_local_ver[last_key]['Binary package'] = "-"
-                with open("Outputs/libchecker-output.json", 'w+') as fw:
-                    json.dump(json_local_ver,fw,ensure_ascii=False,indent=4)
                 continue
             else:
                 for list1_item in g_storejsondict[last_key]['share_objs'][g_ostype]:
@@ -342,62 +416,34 @@ def libchecker_checking_loop():
                         g_subresults_to_json[list1_item] = {'status': 'not found', 'path':'-'}
                         g_counter_flags['lib_counter']['failed'] += 1
                     else:
+                        if (g_inputpkgmngr == "yum-rpm"):
+                            l_file_belongs = get_rpm_file_belongs_package(lib_result)
+                        else:
+                            l_file_belongs = get_deb_file_belongs_package(lib_result)
+
                         print("\t\t\t\t\t检测结果 -> ", compare_library_version(temp_libsoname, str(list1_item)))
+                        print("\t\t\t\t\t文件所属 -> ", l_file_belongs)
                         if (compare_library_version(temp_libsoname, str(list1_item)) == "equal" ):
                             g_counter_flags['lib_counter']['passed'] += 1
-                            g_subresults_to_json[list1_item] = {'status': 'compatible', 'path':lib_result}
+                            g_subresults_to_json[list1_item] = {'status': 'compatible', 'path':lib_result, 'belongs':l_file_belongs}
                         elif (compare_library_version(temp_libsoname, str(list1_item)) == "smaller" ):
                             g_counter_flags['lib_counter']['failed'] += 1
-                            g_subresults_to_json[list1_item] = {'status': 'incompatible', 'path':lib_result}
+                            g_subresults_to_json[list1_item] = {'status': 'incompatible', 'path':lib_result, 'belongs':l_file_belongs}
                         else:
                             g_counter_flags['lib_counter']['warning'] += 1
-                            g_subresults_to_json[list1_item] = {'status': 'compatible bigger', 'path':lib_result}
+                            g_subresults_to_json[list1_item] = {'status': 'compatible bigger', 'path':lib_result, 'belongs':l_file_belongs}
 
-        #Traverse the binary package of the source package
-        if (g_inputpkgmngr == "yum-rpm"):
-            binary_list = get_rpmpkg_from_srcpkg(last_key)
-        else:
-            binary_list = get_debpkg_from_srcpkg(last_key)
-
-        for binary_name in binary_list:
-            if (g_inputpkgmngr == "yum-rpm"):
-                pkg_install_status = os.system('rpm -qi %s 2>/dev/null 1>/dev/null' %(binary_name))
-                if (pkg_install_status == 0):
-                    ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
-                    ver_local = os.popen('rpm -qi %s 2>/dev/null | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(binary_name)).read().rstrip('\n') #获取本地库包版本
-                    if (get_rpmpkg_ver_contrast(ver_local, ver_required) == "compatible"):
-                        l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
-                    elif (get_rpmpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
-                        l_pkgresult_to_json[binary_name] = {'status': 'incompatible', 'local version': ver_local}
-            else:
-                pkg_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $1}\' | head -n 1' %(str(binary_name), str(binary_name))).read().rstrip('\n')
-                if (pkg_install_status == "ii"):
-                    ver_required = g_storejsondict[last_key]['version'][g_inputostype] #获取要求的库包版本
-                    ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $3}\' | head -n 1' %(binary_name, binary_name)).read().rstrip('\n') #获取本地库包版本
-                    if (get_debpkg_ver_contrast(ver_local, ver_required) == "compatible"):
-                        l_pkgresult_to_json[binary_name] = {'status': 'compatible', 'local version': ver_local}
-                    elif (get_debpkg_ver_contrast(ver_local, ver_required) == "incompatible"):
-                        l_pkgresult_to_json[binary_name] = {'status': 'incompatible', 'local version': ver_local}
-                else:
-                    continue
-
-        #向json文件写入共享库兼容信息
+        ###向json文件写入'Shared library'信息
         with open("Outputs/libchecker-output.json", 'r') as fr:
             json_so = json.load(fr)
             json_so[last_key]['Shared library'] = g_subresults_to_json
         with open("Outputs/libchecker-output.json", 'w+') as fw:
             json.dump(json_so,fw,ensure_ascii=False,indent=4)
-        #向json文件写入库包本地版本
-        with open("Outputs/libchecker-output.json", 'r') as fr:
-            json_local_ver = json.load(fr)
-            json_local_ver[last_key]['Binary package'] = l_pkgresult_to_json
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
-            json.dump(json_local_ver,fw,ensure_ascii=False,indent=4)
 
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     print("")
-    print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "--organize =", args.organize, "\"")
+    print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "\"")
     print("")
     print("\t软件包:")
     print("\t\t总计:", g_counter_flags['pkg_counter']['total']['all'], "{" ,"l1->",g_counter_flags['pkg_counter']['total']['l1'],";", "l2->", g_counter_flags['pkg_counter']['total']['l2'], ";", "l3->", g_counter_flags['pkg_counter']['total']['l3'],  "}")
@@ -411,71 +457,158 @@ def libchecker_checking_loop():
     print("\t\t报错:", g_counter_flags['lib_counter']['failed'])
     print("=============================================================================================================")
 
-def get_debpkg_ver_contrast(ver_local, ver_required):
+##====deb查询文件所属二进制包====##
+def get_deb_file_belongs_package(l_deb_file_name):
+    # this function for get deb pacgakes to which the file belongs
+    # input: 
+    #           @ l_deb_file_name
+    # return:
+    #           @ l_deb_binary_name
+    l_deb_realpath = os.path.realpath(l_deb_file_name)
+    l_file_belongs_deb = os.popen('dpkg -S %s 2>/dev/null | awk -F": " \'{print $1}\'' %(l_deb_realpath))
+    l_belongs_deb = l_file_belongs_deb.read().rsplit('\n')
+    l_file_belongs_deb.close()
+
+    if (len(l_belongs_deb[0]) == 0):
+        l_belongs_deb = "None"
+
+    return l_belongs_deb 
+
+##====rpm查询文件所属二进制包====##
+def get_rpm_file_belongs_package(l_rpm_file_name):
+    # this function for get rpm pacgakes to which the file belongs
+    # input: 
+    #           @ l_deb_file_name
+    # return:
+    #           @ l_rpm_binary_name
+    print("makeing")
+
+
+##====deb对比版本大小====##
+def get_debpkg_ver_contrast(l_local_ver, l_required_ver):
     # --compare-version ver_local op ver_required
     # op: lt le eq ne ge gt
     # sn:  < <= == != >= > 
-    compare_result = os.system('dpkg --compare-versions %s ge %s' %(str(ver_local), str(ver_required)))
+    compare_result = os.system('dpkg --compare-versions %s ge %s' %(str(l_local_ver), str(l_required_ver)))
     if(compare_result == 0):
         return "compatible"
     else:
         return "incompatible"
 
-def get_rpmpkg_ver_contrast(ver_local, ver_required):
+##====rpm对比版本大小====##
+def get_rpmpkg_ver_contrast(l_local_ver, l_required_ver):
     # compare ver_local op ver_required
-    if ver_local < ver_required:
+    if l_local_ver < l_required_ver:
         return "incompatible"
     else:
         return "compatible"
 
-def compare_library_version(str1, str2):
+##====比较共享库版本大小====##
+def compare_library_version(l_local_ver, l_required_ver):
     # this function compare soname for number
     # input: 
-    #           @ str1 
-    #           @ str2
-    # output:
-    #           @ 
+    #           @ l_local_ver
+    #           @ l_required_ver
     # return:
     #           @ ret:  string: >
     #           @ ret:  string: =
     #           @ ret:  string: <
-
-    if str1 == str2:
+    if l_local_ver == l_required_ver:
         return "equal"
-    elif str(str1) < str(str2):
+    elif str(l_local_ver) < str(l_required_ver):
         return "smaller"
     else:
         return "bigger"
 
 ## 3.2 get deb package info 
-def get_debpkg_from_srcpkg(src_pkgname):
+##====apt获取二进制包列表====##
+def get_debpkg_from_srcpkg(l_deb_srcname):
     # this function for get deb pacgakes from package name in current os
     # input: 
-    #           @ src_pkgname
-    # output:
-    #           @ 
+    #           @ l_deb_srcname
     # return:
-    #           @ debpkgs
-    p_debpkgs = os.popen('apt-cache showsrc %s 2>/dev/null | grep Binary | cut -d '"\:"' -f 2- | cut -d '"\ "' -f 2- ' %(src_pkgname))
-    debpkgs = p_debpkgs.read().split("\n")[0].split(", ")
-    p_debpkgs.close()
+    #           @ l_list_debpkgs
+    l_list_debpkgs = []
+    l_list_debpkgs.clear()
 
-    return debpkgs
+    l_package_name = os.popen('apt-cache showsrc %s 2>/dev/null | grep ^Package: | awk -F": " \'{print $2}\'' %(l_deb_srcname))
+    l_pname = l_package_name.read().split("\n")[0]
+    l_package_name.close()
+    if(l_pname == l_deb_srcname):
+        l_debpkgs = os.popen('apt-cache showsrc %s 2>/dev/null | grep Binary | cut -d '"\:"' -f 2- | cut -d '"\ "' -f 2- ' %(l_deb_srcname))
+        l_list_debpkgs = l_debpkgs.read().split("\n")[0].split(", ")
+        l_debpkgs.close()
+
+    return l_list_debpkgs
     
-def get_rpmpkg_from_srcpkg(src_pkgname):
+##====yum获取二进制包列表====##    
+def get_rpmpkg_from_srcpkg(l_rpm_srcname):
     # this function for get rpm pacgakes from package name in current os
     # input: 
-    #           @ src_pkgname
-    # output:
-    #           @ 
+    #           @ l_rpm_srcname
     # return:
-    #           @ debpkgs
+    #           @ l_list_rpmpkgs
+    l_rpmpkgs = os.popen('dnf info | grep -B 5 -E "%s.*.src.rpm" | grep "名称" | awk -F" " \'{ print $3 }\' | sort -n | uniq | sed \':label;N;s/\\n/ /;t label\'' %(l_rpm_srcname))
+    l_list_rpmpkgs = l_rpmpkgs.read().split("\n")[0].split(" ")
+    l_rpmpkgs.close()
 
-    p_rpmpkgs = os.popen('dnf info | grep -B 5 -E "%s.*.src.rpm" | grep "名称" | awk -F" " \'{ print $3 }\' | sort -n | uniq | sed \':label;N;s/\\n/ /;t label\'' %(src_pkgname))
-    debpkgs = p_rpmpkgs.read().split("\n")[0].split(" ")
-    p_rpmpkgs.close()
+    return l_list_rpmpkgs
 
-    return debpkgs
+##====deb获取二进制包版本====##  
+def get_debpkg_local_version(l_deb_binary_name, l_deb_src_name):
+    # this function for get deb pacgakes local verison
+    # input: 
+    #           @ l_deb_binary_name
+    # return:
+    #           @ l_ver_local
+    l_ver_local = "-"
+
+    l_file_deb_install_status = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $1}\' | head -n 1' %(l_deb_binary_name, l_deb_binary_name))
+    l_deb_install_status = l_file_deb_install_status.read().rstrip('\n')
+    l_file_deb_install_status.close()
+
+    if(l_deb_install_status == "ii"):
+        l_file_src_name = os.popen('dpkg --status %s 2>/dev/null|grep ^Source:|awk -F": " \'{print $2}\'' %(l_deb_binary_name))
+        l_src_name = l_file_src_name.read().rstrip('\n')
+        l_file_src_name.close()
+
+        if (len(l_src_name) == 0):
+            l_file_src_name = os.popen('dpkg --status %s 2>/dev/null|grep ^Package:|awk -F": " \'{print $2}\'' %(l_deb_binary_name))
+            l_src_name = l_file_src_name.read().rstrip('\n')
+            l_file_src_name.close()
+            if(l_src_name == l_deb_src_name):
+                l_file_ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $3}\' | head -n 1' %(l_deb_binary_name, l_deb_binary_name))
+                l_ver_local = l_file_ver_local.read().rstrip('\n')
+                l_file_ver_local.close()
+            else:
+                l_ver_local = "-"
+        else:
+            if(l_src_name == l_deb_src_name):
+                l_file_ver_local = os.popen('dpkg -l %s 2>/dev/null| grep %s 2>/dev/null | awk -F" " \'{print $3}\' | head -n 1' %(l_deb_binary_name, l_deb_binary_name))
+                l_ver_local = l_file_ver_local.read().rstrip('\n')
+                l_file_ver_local.close()
+    else:
+        l_ver_local = "-"
+
+    return l_ver_local
+
+##====rpm获取二进制包版本====##  
+def get_rpmpkg_local_verison(l_rpm_binary_name):
+    # this function for get rpm pacgakes local verison
+    # input: 
+    #           @ l_rpm_binary_name
+    # return:
+    #           @ l_ver_local
+    l_ver_local = "-"
+
+    l_rpm_install_status = os.system('rpm -qi %s 2>/dev/null 1>/dev/null' %(l_rpm_binary_name))
+    if (l_rpm_install_status == 0):
+        l_file_ver_local = os.popen('rpm -qi %s 2>/dev/null | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(l_rpm_binary_name))
+        l_ver_local = l_file_ver_local.read().rstrip('\n')
+        l_file_ver_local.close()
+
+    return l_ver_local
+
 
 libchecker_environment_init()
 libchecker_checking_loop()
