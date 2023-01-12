@@ -37,8 +37,8 @@ g_inputjson = args.json
 
 
 # option module import
-if (g_inputpkgmngr == "apt-deb"):
-    import apt_pkg # import for apt-deb package management tools
+#if (g_inputpkgmngr == "apt-deb"):
+#    import apt_pkg # import for apt-deb package management tools
 
 
 # for logger handler
@@ -122,8 +122,8 @@ def libchecker_environment_init():
 
     get_stdjsons_info('Jsons/lib_list.json')
     
-    if (g_inputpkgmngr == "apt-deb"):
-        apt_pkg.init_system()
+#   if (g_inputpkgmngr == "apt-deb"):
+#       apt_pkg.init_system()
 
 ##====获取别名信息字典====##
 def get_alias_dcit(l_realname):
@@ -492,7 +492,7 @@ def get_deb_file_belongs_package(l_deb_file_name):
     l_belongs_deb = l_file_belongs_deb.read().rsplit('\n')[0]
     l_file_belongs_deb.close()
 
-    if (len(l_belongs_deb[0]) == 0):
+    if (len(l_belongs_deb) == 0):
         l_belongs_deb = "None"
 
     return l_belongs_deb 
