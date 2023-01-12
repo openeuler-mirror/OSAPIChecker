@@ -418,7 +418,7 @@ def libchecker_checking_loop():
                     temp_libsoname = lib_result.split('/')[-1]
                     if (lib_result == "not found"):
                         print("\t\t\t\t\t检测结果 ->  未检测到存在")
-                        g_subresults_to_json[list1_item] = {'status': 'not found', 'path':'-'}
+                        g_subresults_to_json[list1_item] = {'status': 'not found', 'path':'-', 'belongs':'None'}
                         g_counter_flags['lib_counter']['failed'] += 1
                     else:
                         if (g_inputpkgmngr == "yum-rpm"):
@@ -471,7 +471,7 @@ def get_deb_file_belongs_package(l_deb_file_name):
     #           @ l_deb_binary_name
     l_deb_realpath = os.path.realpath(l_deb_file_name)
     l_file_belongs_deb = os.popen('dpkg -S %s 2>/dev/null | awk -F": " \'{print $1}\'' %(l_deb_realpath))
-    l_belongs_deb = l_file_belongs_deb.read().rsplit('\n')
+    l_belongs_deb = l_file_belongs_deb.read().rsplit('\n')[0]
     l_file_belongs_deb.close()
 
     if (len(l_belongs_deb[0]) == 0):
