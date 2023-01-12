@@ -300,7 +300,7 @@ def libchecker_checking_loop():
                 elif (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L0"):
                     g_storejsondict.pop(key)
             elif (args.level == "l1l2l3"):
-                g_storejsondict = l_tmp_dict
+                g_storejsondict[key] = l_tmp_dict[key]
             else:
                 g_storejsondict[key] = l_tmp_dict[key]
                 if (l_tmp_dict[key]['necessity'][g_ostype]['level'] == "L3"):
@@ -314,6 +314,24 @@ def libchecker_checking_loop():
         l_dict_to_json={'Level': 'gen', 'Shared library':'gen', 'Required version': 'gen', 'Binary package':'gen'}
         g_genresults_to_json.update({ key4 : l_dict_to_json })
         
+    if ( g_inputstrategy == "base" ):
+        print(g_genresults_to_json)
+        print(g_storejsondict)
+        for l_name in list(g_genresults_to_json.keys()):
+            if ( g_storejsondict[l_name]['necessity'][g_inputostype]['options'] != "basic" ):
+                del g_genresults_to_json[l_name]
+    elif( g_inputstrategy == "with-expand" ):
+         for l_name in list(g_genresults_to_json.keys()):
+            if ( len(g_storejsondict[l_name]['necessity'][g_inputostype]['options']) == 0 ):
+                del g_genresults_to_json[l_name]
+    elif( g_inputstrategy == "only-expand" ):
+        for l_name in list(g_genresults_to_json.keys()):
+            if ( g_storejsondict[l_name]['necessity'][g_inputostype]['options'] != "expansion" ):
+                del g_genresults_to_json[l_name]
+    else:
+        print("Error： --strategy 参数指定错误")
+        exit()
+
     with open("Outputs/libchecker-output.json","w") as f:
         json.dump(g_genresults_to_json,f)
 
