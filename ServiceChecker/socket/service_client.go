@@ -42,7 +42,7 @@ func main() {
 		}
 		fmt.Println("Client receive:" + returnData)
 		if strings.Contains(returnData, "server"){
-		    fmt.Println("The client is end !")
+		    fmt.Println("The client is end!")
 			break
 		}
     }

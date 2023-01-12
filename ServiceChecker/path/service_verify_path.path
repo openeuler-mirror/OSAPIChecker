@@ -2,7 +2,7 @@
 Description=Detect systemd Path
 
 [Path]
-PathChanged=/tmp/tem_monitor
+PathChanged=/opt/tem_monitor
 MakeDirectory=yes
 Unit=service_verify_path.service
 

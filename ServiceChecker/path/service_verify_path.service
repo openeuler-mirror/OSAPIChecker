@@ -3,7 +3,7 @@ Description=Detect systemd Path service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c "echo [`date`] /tmp/tem_monitor 目录下文件发生了变化。 >> /tmp/tem_monitor/test_path.log"
+ExecStart=/bin/bash -c "echo [`date`] /opt/tem_monitor 目录下文件发生了变化。 >> /opt/tem_monitor/test_path.log"
 StandardOutput=syslog
 StandardError=inherit
 

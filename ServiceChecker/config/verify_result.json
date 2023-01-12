@@ -1,0 +1,34 @@
+{
+  "start": {
+    "Path Unit": {
+      "test": "journalctl -u service_verify_path.service",
+      "str": "Deactivated successfully"
+      },
+    "Socket Unit": {
+      "test": "journalctl -u service_verify_server.service",
+      "str": "Verify socket client"
+      },
+    "Timer Unit": {
+      "test": "journalctl -u service_verify_timer.service",
+      "str": "Deactivated successfully"
+      },
+    "Swap Unit": {
+      "test": "journalctl -u swapfile.swap",
+      "str": "Activated swap /swapfile"
+      },
+    "Target Unit": {
+      "test": "runlevel",
+      "str": "3 1"
+      }
+  },
+  "reboot": {
+    "Service enable": {
+      "test": "systemctl list-unit-files --type=service |grep verify_reboot.service",
+      "str": "enabled"
+      },
+    "Service unable": {
+      "test": "systemctl list-unit-files --type=service |grep service_verify_disable.service",
+      "str": "disabled"
+      }
+  }
+}

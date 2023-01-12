@@ -1,0 +1,11 @@
+[Unit]
+Description=verify disable function service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "echo [`date`] service_verify_disable.service 已执行。 >> /opt/tem_monitor/test_disable.log"
+StandardOutput=syslog
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target

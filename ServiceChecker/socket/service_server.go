@@ -25,7 +25,7 @@ func handle(conn net.Conn) {
             break
         }
 		if strings.Contains(receiveData, "client") {
-		    fmt.Println("service server end !")
+		    fmt.Println("service server end!")
 			break
 		}
     }
