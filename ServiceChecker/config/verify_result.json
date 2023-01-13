@@ -26,7 +26,7 @@
       "test": "systemctl list-unit-files --type=service |grep verify_reboot.service",
       "str": "enabled"
       },
-    "Service unable": {
+    "Service disable": {
       "test": "systemctl list-unit-files --type=service |grep service_verify_disable.service",
       "str": "disabled"
       }

@@ -44,7 +44,7 @@ python3 service_checker.py
         "Service enable": {				    --自定义开机自启动服务
             "Check result": "pass/fail"
         },
-        "Service unable": {				    --自定义开机禁止启动服务
+        "Service disable": {				    --自定义开机禁止启动服务
             "Check result": "pass/fail"
         }
     }
