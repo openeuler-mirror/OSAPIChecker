@@ -26,6 +26,7 @@ parser.add_argument('-t', '--ostype', action='store', type=str, help='OSType of 
 parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package Manager of current OS: apt-deb, yum-rpm, src-bin, other', default="apt-deb")
 parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Organize or Company')
 parser.add_argument('-j', '--json', action='store', type=str, help='Choice OSChecker Json templete file', required=False) # this line use for dect the json file.
+parser.add_argument('-T', '--timetmp', action='store', type=str)
 args = parser.parse_args() # write arguments to struct
 
 g_inputstrategy = args.strategy
@@ -35,6 +36,9 @@ g_inputpkgmngr = args.pkgmngr
 g_inputorganize = args.organize
 g_inputjson = args.json
 
+g_time_stamp = args.timetmp
+g_output_filename = "Outputs/libchecker-output_" + g_time_stamp + ".json"
+g_output_logname = "Logs/libchecker_" + g_time_stamp + ".log"
 
 # option module import
 #if (g_inputpkgmngr == "apt-deb"):
@@ -85,10 +89,9 @@ g_test_list = []
 
 ## 0.2 a recycle call function for user
 def libchecker_over_jobs():
-    time_now = time.strftime("%Y-%m-%d_%H-%M-%S",time.localtime())
-    log_file_name = "Logs/libchecker-" + time_now + ".log"
-    # os.system("cp Logs/libchecker-tmp.log Outputs/libchecker-output.txt")
-    os.rename("Logs/libchecker-tmp.log", log_file_name)
+    #time_now = time.strftime("%Y-%m-%d_%H-%M-%S",time.localtime())
+    #log_file_name = "Logs/libchecker-" + g_time_stamp + ".log"
+    os.rename("Logs/libchecker-tmp.log", g_output_logname)
 
 ## 0.3 platform info
 def get_env_info():
@@ -335,7 +338,7 @@ def libchecker_checking_loop():
         print("Error： --strategy 参数指定错误")
         exit()
 
-    with open("Outputs/libchecker-output.json","w") as f:
+    with open(g_output_filename,"w") as f:
         json.dump(g_genresults_to_json,f)
 
     for last_key in g_storejsondict:
@@ -345,16 +348,16 @@ def libchecker_checking_loop():
         l_require_version = g_storejsondict[last_key]['version'][g_inputostype]  #源码包需求版本
 
         ###向json文件写入'Level'信息
-        with open("Outputs/libchecker-output.json", 'r') as fr:
+        with open(g_output_filename, 'r') as fr:
             json_level = json.load(fr)
             json_level[last_key]['Level'] = g_storejsondict[last_key]['necessity'][g_inputostype]['level']
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
+        with open(g_output_filename, 'w+') as fw:
             json.dump(json_level,fw,ensure_ascii=False,indent=4)
         ###向json文件写入'Required version'信息
-        with open("Outputs/libchecker-output.json", 'r') as fr:
+        with open(g_output_filename, 'r') as fr:
             json_required_ver = json.load(fr)
             json_required_ver[last_key]['Required version'] = l_require_version
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
+        with open(g_output_filename, 'w+') as fw:
             json.dump(json_required_ver,fw,ensure_ascii=False,indent=4)
 
         if (len(g_storejsondict[last_key]['version'][g_ostype]) != 0):
@@ -392,10 +395,10 @@ def libchecker_checking_loop():
             l_dict_alias_info[l_src_name] = "None"
 
         ###向json文件写入'Binary package'信息
-        with open("Outputs/libchecker-output.json", 'r') as fr:
+        with open(g_output_filename, 'r') as fr:
             json_alias_info = json.load(fr)
             json_alias_info[last_key]['Binary package'] =  l_dict_alias_info
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
+        with open(g_output_filename, 'w+') as fw:
             json.dump(json_alias_info,fw,ensure_ascii=False,indent=4)
 
         if (g_storejsondict[last_key]['necessity'][g_ostype]['level'] == "L1"):
@@ -424,10 +427,10 @@ def libchecker_checking_loop():
                 g_counter_flags['pkg_counter']['failed']['all'] += 1
 
                 ###向json文件写入'Shared library'信息
-                with open("Outputs/libchecker-output.json", 'r') as fr:
+                with open(g_output_filename, 'r') as fr:
                     json_so = json.load(fr)
                     json_so[last_key]['Shared library'] = "-"
-                with open("Outputs/libchecker-output.json", 'w+') as fw:
+                with open(g_output_filename, 'w+') as fw:
                     json.dump(json_so,fw,ensure_ascii=False,indent=4)
                 continue
             else:
@@ -460,10 +463,10 @@ def libchecker_checking_loop():
                             g_subresults_to_json[list1_item] = {'status': 'compatible bigger', 'path':lib_result, 'belongs':l_file_belongs}
 
         ###向json文件写入'Shared library'信息
-        with open("Outputs/libchecker-output.json", 'r') as fr:
+        with open(g_output_filename, 'r') as fr:
             json_so = json.load(fr)
             json_so[last_key]['Shared library'] = g_subresults_to_json
-        with open("Outputs/libchecker-output.json", 'w+') as fw:
+        with open(g_output_filename, 'w+') as fw:
             json.dump(json_so,fw,ensure_ascii=False,indent=4)
 
     print("=============================================================================================================")
@@ -471,16 +474,16 @@ def libchecker_checking_loop():
     print("")
     print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "--organize =", args.organize, "\"")
     print("")
-    print("\t软件包:")
-    print("\t\t总计:", g_counter_flags['pkg_counter']['total']['all'], "{" ,"l1->",g_counter_flags['pkg_counter']['total']['l1'],";", "l2->", g_counter_flags['pkg_counter']['total']['l2'], ";", "l3->", g_counter_flags['pkg_counter']['total']['l3'],  "}")
-    print("\t\t通过:", g_counter_flags['pkg_counter']['passed']['all'])
-    print("\t\t警告:", g_counter_flags['pkg_counter']['warning']['all'])
-    print("\t\t报错:", g_counter_flags['pkg_counter']['failed']['all'])
-    print("\t动态库:")
-    print("\t\t总计:", g_counter_flags['lib_counter']['total'])
-    print("\t\t通过:", g_counter_flags['lib_counter']['passed'])
-    print("\t\t警告:", g_counter_flags['lib_counter']['warning'])
-    print("\t\t报错:", g_counter_flags['lib_counter']['failed'])
+    #print("\t软件包:")
+    #print("\t\t总计:", g_counter_flags['pkg_counter']['total']['all'], "{" ,"l1->",g_counter_flags['pkg_counter']['total']['l1'],";", "l2->", g_counter_flags['pkg_counter']['total']['l2'], ";", "l3->", g_counter_flags['pkg_counter']['total']['l3'],  "}")
+    #print("\t\t通过:", g_counter_flags['pkg_counter']['passed']['all'])
+    #print("\t\t警告:", g_counter_flags['pkg_counter']['warning']['all'])
+    #print("\t\t报错:", g_counter_flags['pkg_counter']['failed']['all'])
+    #print("\t动态库:")
+    #print("\t\t总计:", g_counter_flags['lib_counter']['total'])
+    #print("\t\t通过:", g_counter_flags['lib_counter']['passed'])
+    #print("\t\t警告:", g_counter_flags['lib_counter']['warning'])
+    #print("\t\t报错:", g_counter_flags['lib_counter']['failed'])
     print("=============================================================================================================")
 
 ##====deb查询文件所属二进制包====##

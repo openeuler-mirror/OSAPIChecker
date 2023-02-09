@@ -64,6 +64,7 @@ parser.add_argument('-o', '--organize', action='store', type=str, help='Choice O
 
 args = parser.parse_args()
 
+l_file_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(timestamp)) 
 
 # 1. Input Valid Check
 def input_valid_check():
@@ -84,14 +85,18 @@ def gen_envinfo_json():
     l_osprocessor = platform.processor()
     l_kernel = os.popen("uname -r").read().rstrip("\n")
     l_compver = os.popen("gcc --version | awk 'NR==1'").read().rstrip("\n")
-    l_pythonver = "test" # os.popen("python --version").read().rstrip("\n")
-    l_meminfo = os.popen("free -g | grep Mem | awk '{print $2}'").read().rstrip("\n")
+    l_pythonver = os.popen("python3 --version").read().rstrip("\n")
+    l_meminfo = os.popen("free -g | grep Mem | awk '{print $2}'").read().rstrip("\n") + "G"
     l_firmwareinfo = os.popen("dmidecode -s bios-version").read().rstrip("\n")
     l_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp)) 
+    l_disk = os.popen("lsblk -d -n | awk '{print $4}'").read().rstrip("\n")
 
-    l_envinfodict = {"测试对象" : {"系统名称" : l_osname, "版本" : l_osversion}, "送测单位" : l_organize , "系统环境" : {"内核版本" : l_kernel , "编译器版本" : l_compver , "Python版本" : l_pythonver} , "环境配置" : {"机器型号" : l_osmachine , "CPU指令集" : l_osarchitecture , "CPU型号" : l_osprocessor , "内存" : l_meminfo , "硬盘" : "345", "固件" : l_firmwareinfo} , "测试工具" : {"名称" : "OSAPIChecker", "版本" : "0.0.0" } , "测试时间" : l_time }
-
-    with open("Outputs/environments-info.json","w+") as fw:
+    #l_envinfodict = {"测试对象" : {"系统名称" : l_osname, "版本" : l_osversion}, "送测单位" : l_organize , "系统环境" : {"内核版本" : l_kernel , "编译器版本" : l_compver , "Python版本" : l_pythonver} , "环境配置" : {"机器型号" : l_osmachine , "CPU指令集" : l_osmachine , "CPU型号" : l_osprocessor , "内存" : l_meminfo , "硬盘" : l_disk, "固件" : l_firmwareinfo} , "测试工具" : {"名称" : "OSAPIChecker", "版本" : "1.0.0" } , "测试时间" : l_time }
+    l_envinfodict = {"测试对象" : {"系统名称" : l_osname, "版本" : l_osversion}, "送测单位" : l_organize , "系统环境" : {"内核版本" : l_kernel , "编译器版本" : l_compver , "Python版本" : l_pythonver} , "环境配置" : {"CPU指令集" : l_osmachine , "CPU型号" : l_osprocessor , "内存" : l_meminfo , "硬盘" : l_disk, "固件" : l_firmwareinfo} , "测试工具" : {"名称" : "OSAPIChecker", "版本" : "1.0.0" } , "测试时间" : l_time }
+    
+    env_file_name = "Outputs/environments-info_%s.json" %(l_file_time) 
+    #with open("Outputs/environments-info.json","w+") as fw:
+    with open(env_file_name,"w+") as fw:
         json.dump(l_envinfodict,fw,ensure_ascii=False,indent=4)
 
 
@@ -106,296 +111,303 @@ def checker_call_handler():
     gen_envinfo_json()
     if (args.channel == "libchecker"):
         print("进入 LibChecker 处理程序 . . .")
-        
-        if (args.strategy == "with-expand"):
-            if (args.level == "l1"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l1"
-            elif (args.level == "l2"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l2"
-            elif (args.level == "l3"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l3"
-            elif (args.level == "l1l2"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l1l2"
-
-            elif (args.level == "l1l2l3"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end l1l2l3
-            else:
-                # os.system('python3 LibChecker/lib_checker.py --strategy=with-expand')
-                os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-
-        elif (args.strategy == "base"):
-            if (args.level == "l1"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end l1
-            elif (args.level == "l2"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end l2
-            elif (args.level == "l3"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=yum-rpm')
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end l3
-            elif (args.level == "l1l2"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l1l2"
-            elif (args.level == "l1l2l3"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end l1l2l3
-            else:
-                # os.system('python3 LibChecker/lib_checker.py --strategy=base')
-                os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-        elif (args.strategy == "only-expand"):
-            if (args.level == "l1"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l1"
-            elif (args.level == "l2"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l2"
-            elif (args.level == "l3"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l3"
-            elif (args.level == "l1l2"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end "level l1l2"
-
-            elif (args.level == "l1l2l3"):
-                if (args.ostype == "desktop"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # desktop default use apt-deb
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                elif (args.ostype == "server"):
-                    if (args.pkgmngr == "apt-deb"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
-                    elif (args.pkgmngr == "yum-rpm"):
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                    else: # server default use yum-rpm
-                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
-                else: # default desktop with apt-deb
-                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-            # end l1l2l3
-            else:
-                # os.system('python3 LibChecker/lib_checker.py --strategy=with-expand')
-                os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
-        else:
-            # os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2') 
-            os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize)) # default --strategy=base --levle=l1l2 --ostype=desktop --pkgmngr=apt-deb
+        s_str = args.strategy
+        l_str = args.level
+        os_str = args.ostype
+        pkg_str = args.pkgmngr
+        org_str = args.organize
+        os.system('python3 LibChecker/lib_checker.py --strategy=%s --level=%s --ostype=%s --pkgmngr=%s --organize=%s --timetmp=%s' %(s_str, l_str, os_str, pkg_str,org_str,l_file_time))        
+        #添加生成pdf工具
+        #os.system()        
+#        if (args.strategy == "with-expand"):
+#            if (args.level == "l1"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l1"
+#            elif (args.level == "l2"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l2"
+#            elif (args.level == "l3"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l3"
+#            elif (args.level == "l1l2"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l1l2"
+#
+#            elif (args.level == "l1l2l3"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end l1l2l3
+#            else:
+#                # os.system('python3 LibChecker/lib_checker.py --strategy=with-expand')
+#                os.system('python3 LibChecker/lib_checker.py --strategy=with-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#
+#        elif (args.strategy == "base"):
+#            if (args.level == "l1"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end l1
+#            elif (args.level == "l2"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end l2
+#            elif (args.level == "l3"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=yum-rpm')
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end l3
+#            elif (args.level == "l1l2"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l1l2"
+#            elif (args.level == "l1l2l3"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end l1l2l3
+#            else:
+#                # os.system('python3 LibChecker/lib_checker.py --strategy=base')
+#                os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#        elif (args.strategy == "only-expand"):
+#            if (args.level == "l1"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l1"
+#            elif (args.level == "l2"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l2"
+#            elif (args.level == "l3"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l3"
+#            elif (args.level == "l1l2"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end "level l1l2"
+#
+#            elif (args.level == "l1l2l3"):
+#                if (args.ostype == "desktop"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # desktop default use apt-deb
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                elif (args.ostype == "server"):
+#                    if (args.pkgmngr == "apt-deb"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=server --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#                    elif (args.pkgmngr == "yum-rpm"):
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                    else: # server default use yum-rpm
+#                        os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=server --pkgmngr=yum-rpm --organize=%s' %(args.organize))
+#                else: # default desktop with apt-deb
+#                    os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2l3 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#            # end l1l2l3
+#            else:
+#                # os.system('python3 LibChecker/lib_checker.py --strategy=with-expand')
+#                os.system('python3 LibChecker/lib_checker.py --strategy=only-expand --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize))
+#        else:
+#            # os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2') 
+#            os.system('python3 LibChecker/lib_checker.py --strategy=base --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --organize=%s' %(args.organize)) # default --strategy=base --levle=l1l2 --ostype=desktop --pkgmngr=apt-deb
 
         # For LibChecker:
         # import libcheck: input (json-file) (formated-json)
