@@ -320,17 +320,14 @@ def libchecker_checking_loop():
         for l_name in list(g_genresults_to_json.keys()):
             if ( g_storejsondict[l_name]['necessity'][g_inputostype]['options'] != "basic" ):
                 del g_genresults_to_json[l_name]
-                g_storejsondict.pop(l_name)
     elif( g_inputstrategy == "with-expand" ):
          for l_name in list(g_genresults_to_json.keys()):
             if ( len(g_storejsondict[l_name]['necessity'][g_inputostype]['options']) == 0 ):
                 del g_genresults_to_json[l_name]
-                g_storejsondict.pop(l_name)
     elif( g_inputstrategy == "only-expand" ):
         for l_name in list(g_genresults_to_json.keys()):
             if ( g_storejsondict[l_name]['necessity'][g_inputostype]['options'] != "expansion" ):
                 del g_genresults_to_json[l_name]
-                g_storejsondict.pop(l_name)
     else:
         print("Error： --strategy 参数指定错误")
         exit()
