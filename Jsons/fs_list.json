@@ -22,22 +22,7 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/dev/null",
-      "type": "character device file",
-      "permission": "0666"
-    },
-    {
-      "FS_name": "/dev/zero",
-      "type": "character device file",
-      "permission": "0666"
-    },
-    {
-      "FS_name": "/dev/tty",
-      "type": "character device file",
-      "permission": "0666"
-    },
-    {
-      "FS_name": "/dev/shm/",
+      "FS_name": "/dev/shm",
       "type": "directory",
       "permission": "1777"
     },
@@ -47,44 +32,9 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/etc/opt/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
       "FS_name": "/etc/X11/",
       "type": "directory",
       "permission": "0755"
-    },
-    {
-      "FS_name": "/etc/default/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/etc/timezone",
-      "type": "file",
-      "permission": "0664"
-    },
-    {
-      "FS_name": "/etc/passwd",
-      "type": "file",
-      "permission": "0644"
-    },
-    {
-      "FS_name": "/etc/group",
-      "type": "file",
-      "permission": "0644"
-    },
-    {
-      "FS_name": "/etc/systemd/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/etc/profile",
-      "type": "file",
-      "permission": "0666"
     },
     {
       "FS_name": "/home/",
@@ -93,11 +43,6 @@
     },
     {
       "FS_name": "/lib/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/lib64/",
       "type": "directory",
       "permission": "0755"
     },
@@ -122,7 +67,7 @@
       "permission": "0555"
     },
     {
-      "FS_name": "/proc/sys/",
+      "FS_name": "/proc/sys",
       "type": "directory",
       "permission": "0555"
     },
@@ -132,12 +77,12 @@
       "permission": "0700"
     },
     {
-      "FS_name": "/run/",
+      "FS_name": "/run",
       "type": "directory",
       "permission": "0755"
     },
     {
-      "FS_name": "/run/log/",
+      "FS_name": "/run/log",
       "type": "directory",
       "permission": "0755"
     },
@@ -150,11 +95,6 @@
       "FS_name": "/srv/",
       "type": "directory",
       "permission": "0755"
-    },
-    {
-      "FS_name": "/sys/",
-      "type": "directory",
-      "permission": "0555"
     },
     {
       "FS_name": "/tmp/",
@@ -177,22 +117,12 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/usr/local/",
+      "FS_name": "/usr/local",
       "type": "directory",
       "permission": "0755"
     },
     {
-      "FS_name": "/usr/lib/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/usr/lib32/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/usr/lib64/",
+      "FS_name": "/usr/lib",
       "type": "directory",
       "permission": "0755"
     },
@@ -202,17 +132,7 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/usr/share/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/usr/share/man/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/usr/share/misc/",
+      "FS_name": "/usr/share",
       "type": "directory",
       "permission": "0755"
     },
@@ -222,7 +142,7 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/usr/share/doc/",
+      "FS_name": "/usr/share/doc",
       "type": "directory",
       "permission": "0755"
     },
@@ -232,7 +152,7 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/usr/share/locale/",
+      "FS_name": "/usr/share/locale",
       "type": "directory",
       "permission": "0755"
     },
@@ -242,18 +162,13 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/var/",
+      "FS_name": "/usr/local/",
       "type": "directory",
       "permission": "0755"
     },
     {
-      "FS_name": "/var/run/utmp",
-      "type": "file",
-      "permission": "0664"
-    },
-    {
-      "FS_name": "/var/run/wtmp",
-      "type": "file",
+      "FS_name": "/var/",
+      "type": "directory",
       "permission": "0755"
     },
     {
@@ -263,11 +178,6 @@
     },
     {
       "FS_name": "/var/lib/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
-      "FS_name": "/var/lib/misc/",
       "type": "directory",
       "permission": "0755"
     },
@@ -287,11 +197,6 @@
       "permission": "2775"
     },
     {
-      "FS_name": "/var/opt/",
-      "type": "directory",
-      "permission": "0755"
-    },
-    {
       "FS_name": "/var/run/",
       "type": "directory",
       "permission": "0755"
@@ -302,9 +207,9 @@
       "permission": "0755"
     },
     {
-      "FS_name": "/var/spool/cron/",
+      "FS_name": "/var/spool/mail/",
       "type": "directory",
-      "permission": "0755"
+      "permission": "2775"
     },
     {
       "FS_name": "/var/tmp/",
@@ -313,8 +218,8 @@
     },
     {
       "FS_name": "/var/run",
-      "type": "link file",
-      "permission": "0777"
+      "type": "directory",
+      "permission": "0755"
     }
   ]
 }
