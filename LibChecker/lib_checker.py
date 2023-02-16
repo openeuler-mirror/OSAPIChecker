@@ -359,10 +359,18 @@ def get_debpkg_ver_contrast(l_local_ver, l_required_ver):
 ##====rpm对比版本大小====##
 def get_rpmpkg_ver_contrast(l_local_ver, l_required_ver):
     # compare ver_local op ver_required
-    if l_local_ver < l_required_ver:
-        return "incompatible"
-    else:
+    compare_result = subprocess.getstatusoutput('rpmdev-vercmp  %s %s 2>/dev/null ' %(str(l_local_ver), str(l_required_ver)))
+    if (compare_result[0] == 0):
         return "compatible"
+    elif (compare_result[0] == 11):
+        return "compatible"
+    else:
+        return "incompatible"
+    
+    #if l_local_ver < l_required_ver:
+    #    return "incompatible"
+    #else:
+    #    return "compatible"
 
 ##====比较共享库版本大小====##
 def compare_library_version(l_local_ver, l_required_ver):
@@ -416,9 +424,12 @@ def get_rpmpkg_from_srcpkg(l_rpm_srcname):
     #           @ l_rpm_srcname
     # return:
     #           @ l_list_rpmpkgs
-    l_rpmpkgs = os.popen('dnf info | grep -B 5 -E "%s.*.src.rpm" | grep "名称" | awk -F" " \'{ print $3 }\' | sort -n | uniq | sed \':label;N;s/\\n/ /;t label\'' %(l_rpm_srcname))
-    l_list_rpmpkgs = l_rpmpkgs.read().split("\n")[0].split(" ")
-    l_rpmpkgs.close()
+    #l_rpmpkgs = os.popen('dnf info | grep -B 5 -E "%s.*.src.rpm" | grep "Name" | awk -F" " \'{ print $3 }\' | sort -n | uniq | sed \':label;N;s/\\n/ /;t label\'' %(l_rpm_srcname))
+    #l_list_rpmpkgs = l_rpmpkgs.read().split("\n")[0].split(" ")
+    #l_rpmpkgs.close()
+    l_rpmpkgs = subprocess.getstatusoutput("dnf repoquery -q --queryformat \"%%{sourcerpm} %%{name}\"| grep -E \"^%s-[0-9]\" | awk '{print $2}'" %(l_rpm_srcname)) 
+    l_list_rpmpkgs = l_rpmpkgs[1].split("\n")
+    #print (l_list_rpmpkgs)
 
     return l_list_rpmpkgs
 
@@ -462,7 +473,8 @@ def get_rpmpkg_local_version(l_rpm_binary_name, l_req_version):
 
     l_rpm_install_status = os.system('rpm -qi %s 2>/dev/null 1>/dev/null' %(l_rpm_binary_name))
     if (l_rpm_install_status == 0):
-        l_file_ver_local = os.popen('rpm -qi %s 2>/dev/null | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(l_rpm_binary_name))
+        #l_file_ver_local = os.popen('rpm -qi %s 2>/dev/null | grep "Version\|Release" | awk -F" " \'{print $3}\' | sed \':label;N;s/\\n/-/;t label\'' %(l_rpm_binary_name))
+        l_file_ver_local = os.popen('rpm -qa --queryformat="%%{VERSION}\n" %s 2>/dev/null ' %(l_rpm_binary_name))
         l_ver = l_file_ver_local.read().rstrip('\n')
         l_file_ver_local.close()
         l_status = get_rpmpkg_ver_contrast(l_ver, l_req_version)
