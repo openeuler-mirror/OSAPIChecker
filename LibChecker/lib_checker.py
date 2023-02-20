@@ -92,7 +92,37 @@ def get_stdjsons_info(json_file_path):
 def libchecker_environment_init():
     global g_counter_flags
 
-    g_counter_flags = {'pkg_counter': {'total': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} , 'passed': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'warning': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'failed': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} }, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
+    #g_counter_flags = {'pkg_counter': {'total': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} , 'passed': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'warning': {'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0}, 'failed': {'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0} }, 'lib_counter': {'total': 0, 'passed': 0, 'warning': 0, 'failed': 0}}
+    g_counter_flags = {
+            'pkg_counter': {
+                'total': {
+                    'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    } , 
+                'passed': {
+                    'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    }, 
+                'warning': {
+                    'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    }, 
+                'failed': {
+                    'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    }
+                }, 
+            'lib_counter': {
+                'total': {
+                    'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    } , 
+                'passed': {
+                    'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    }, 
+                'warning': {
+                    'all': 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    }, 
+                'failed': {
+                    'all' : 0, 'l1' : 0, 'l2' : 0, 'l3' : 0
+                    }
+                }
+            }
 
     get_env_info()
     get_stdjsons_info('Jsons/lib_list.json')
@@ -141,7 +171,6 @@ def check_per_pkg_info(dict_name, l_src_name):
         else:
             srcpkgver = src_list
 
-    #g_counter_flags['pkg_counter']['total']['all'] += 1
 
     print("\t\t系统实现: ")
     if (len(srcpkgver) == 0):
@@ -150,18 +179,13 @@ def check_per_pkg_info(dict_name, l_src_name):
     else:
         print("\t\t\t\t实现包名 -> ", l_src_name.ljust(20),"实现版本 -> ",srcpkgver)
         return l_src_name
-        #g_counter_flags['pkg_counter']['passed']['all'] += 1   
-        #g_notfind_set_flag = 1 
 
 ##====查询共享库路径信息====##
 def check_sharelib_info(lib_soname):
 
     global g_lib_location_path
-    global g_counter_flags
     g_lib_location_path = "0"
 
-    global g_counter_flags
-    g_counter_flags['lib_counter']['total'] += 1
     l_list = ["/lib", "/lib64", "/usr/lib", "/usr/lib64"]
 
     for path_tmp in l_list:
@@ -170,7 +194,7 @@ def check_sharelib_info(lib_soname):
                 full_path = os.path.join(path_tmp, realpath, lib_soname)
                 g_lib_location_path = (os.path.normpath(os.path.abspath(full_path)))
                 break
-                #print (g_lib_location_path)
+
         if g_lib_location_path != "0":
             break
         
@@ -184,6 +208,8 @@ def get_packages_binary_info (dict_name, key):
     l_list_binary_name = []
     l_dict_alias_info = {}
     l_dict_src_info = {}
+
+    global g_counter_flags
 
     l_dict_src_info = get_src_alias_list (dict_name, key)
     for l in l_dict_src_info:
@@ -201,6 +227,22 @@ def get_packages_binary_info (dict_name, key):
                         l_local_version = get_debpkg_local_version(l_list_binary_name[j], l_dict_src_info[l]['version'])
                     l_dict_binary_name.update({l_list_binary_name[j]: l_local_version})
                 l_dict_alias_info[l] = l_dict_binary_name
+
+    old_failed_num = g_counter_flags['pkg_counter']['failed']['all']
+    for p_a in l_dict_alias_info:
+        for p_b in l_dict_alias_info[p_a]:
+            if (l_dict_alias_info[p_a][p_b]['status'] == "incompatible"):
+                g_counter_flags['pkg_counter']['failed']['all'] += 1
+                if (dict_name[key]['necessity'][g_inputostype]['level'].lower() == "l1" ):
+                    g_counter_flags['pkg_counter']['failed']['l1'] += 1
+                elif (dict_name[key]['necessity'][g_inputostype]['level'].lower() == "l2" ):
+                    g_counter_flags['pkg_counter']['failed']['l2'] += 1
+                elif (dict_name[key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
+                    g_counter_flags['pkg_counter']['failed']['l3'] += 1
+                break
+        new_failed_num = g_counter_flags['pkg_counter']['failed']['all']
+        if (new_failed_num > old_failed_num): 
+                break
 
     with open(g_output_filename, 'r') as fr:
         json_alias_info = json.load(fr)
@@ -253,6 +295,14 @@ def libchecker_checking_loop():
         with open(g_output_filename, 'w+') as fw:
             json.dump(json_level,fw,ensure_ascii=False,indent=4)
 
+        g_counter_flags['pkg_counter']['total']['all'] += 1
+        if (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l1" ):
+            g_counter_flags['pkg_counter']['total']['l1'] += 1
+        elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l2" ):
+            g_counter_flags['pkg_counter']['total']['l2'] += 1
+        elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
+            g_counter_flags['pkg_counter']['total']['l3'] += 1
+
         get_packages_binary_info (g_storejsondict, last_key)
 
         print("\t\t共享库信息:")
@@ -267,7 +317,12 @@ def libchecker_checking_loop():
                 print("\t\t\t\t\t文件所属 -> ", None)
                 print("\t\t\t\t\t检测结果 ->  未检测到存在")
                 l_subresults_to_json.update({list1_item: {'status': 'not found', 'path':'-', 'belongs':'None'}})
-                g_counter_flags['lib_counter']['failed'] += 1
+                if (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l1" ):
+                    g_counter_flags['lib_counter']['failed']['l1'] += 1
+                elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l2" ):
+                    g_counter_flags['lib_counter']['failed']['l2'] += 1
+                elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
+                    g_counter_flags['lib_counter']['failed']['l3'] += 1
             else:
                 if (g_inputpkgmngr == "yum-rpm"):
                     l_file_belongs = get_rpm_file_belongs_package(lib_result)
@@ -276,11 +331,23 @@ def libchecker_checking_loop():
                 print("\t\t\t\t\t文件所属 -> ", l_file_belongs)
                 l_check_version = compare_library_version(temp_libsoname, str(list1_item))
                 if (l_check_version == "equal") or (l_check_version == "bigger"):
-                    g_counter_flags['lib_counter']['passed'] += 1
+                    #g_counter_flags['lib_counter']['passed'] += 1
                     l_subresults_to_json.update({list1_item: {'status': 'compatible', 'path':lib_result, 'belongs':l_file_belongs}})
+                    if (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l1" ):
+                        g_counter_flags['lib_counter']['passed']['l1'] += 1
+                    elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l2" ):
+                        g_counter_flags['lib_counter']['passed']['l2'] += 1
+                    elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
+                        g_counter_flags['lib_counter']['passed']['l3'] += 1
                 else:
-                    g_counter_flags['lib_counter']['failed'] += 1
+                    #g_counter_flags['lib_counter']['failed'] += 1
                     l_subresults_to_json.update({list1_item: {'status': 'incompatible', 'path':lib_result, 'belongs':l_file_belongs}})
+                    if (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l1" ):
+                        g_counter_flags['lib_counter']['failed']['l1'] += 1
+                    elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l2" ):
+                        g_counter_flags['lib_counter']['failed']['l2'] += 1
+                    elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
+                        g_counter_flags['lib_counter']['failed']['l3'] += 1
 
                 print("\t\t\t\t\t检测结果 -> ", l_check_version)
 
@@ -290,10 +357,33 @@ def libchecker_checking_loop():
             with open(g_output_filename, 'w+') as fw:
                 json.dump(json_so,fw,ensure_ascii=False,indent=4)
 
+    ## 软件包
+    g_counter_flags['pkg_counter']['passed']['all'] = g_counter_flags['pkg_counter']['total']['all'] - g_counter_flags['pkg_counter']['failed']['all']
+    g_counter_flags['pkg_counter']['passed']['l1'] = g_counter_flags['pkg_counter']['total']['l1'] - g_counter_flags['pkg_counter']['failed']['l1']
+    g_counter_flags['pkg_counter']['passed']['l2'] = g_counter_flags['pkg_counter']['total']['l2'] - g_counter_flags['pkg_counter']['failed']['l2']
+    g_counter_flags['pkg_counter']['passed']['l3'] = g_counter_flags['pkg_counter']['total']['l3'] - g_counter_flags['pkg_counter']['failed']['l3']
+
+    ## 动态库
+    g_counter_flags['lib_counter']['passed']['all'] = g_counter_flags['lib_counter']['passed']['l1'] + g_counter_flags['lib_counter']['passed']['l2'] + g_counter_flags['lib_counter']['passed']['l3']
+    g_counter_flags['lib_counter']['failed']['all'] = g_counter_flags['lib_counter']['failed']['l1'] + g_counter_flags['lib_counter']['failed']['l2'] + g_counter_flags['lib_counter']['failed']['l3']
+    g_counter_flags['lib_counter']['total']['l1'] = g_counter_flags['lib_counter']['passed']['l1'] + g_counter_flags['lib_counter']['failed']['l1']
+    g_counter_flags['lib_counter']['total']['l2'] = g_counter_flags['lib_counter']['passed']['l2'] + g_counter_flags['lib_counter']['failed']['l2']
+    g_counter_flags['lib_counter']['total']['l3'] = g_counter_flags['lib_counter']['passed']['l3'] + g_counter_flags['lib_counter']['failed']['l3']
+    g_counter_flags['lib_counter']['total']['all'] = g_counter_flags['lib_counter']['passed']['all'] + g_counter_flags['lib_counter']['failed']['all']
+
     print("=============================================================================================================")
     print("结束检查 ",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))
     print("")
     print("\t检查策略：", "\"",  "--strategy =",args.strategy, "--level =",args.level, "--ostype =", args.ostype, "--pkgmngr =", args.pkgmngr, "--organize =", args.organize, "\"")
+    print("")
+    print("\t软件包:")
+    print(("\t\t总计: %s" %(g_counter_flags['pkg_counter']['total']['all'])).ljust(10), ("(L1--->%s," %(g_counter_flags['pkg_counter']['total']['l1'])).ljust(10), ("L2--->%s," %(g_counter_flags['pkg_counter']['total']['l2'])).ljust(10), ("L3--->%s)" %(g_counter_flags['pkg_counter']['total']['l3'])).ljust(10))
+    print(("\t\t通过: %s" %(g_counter_flags['pkg_counter']['passed']['all'])).ljust(10), ("(L1--->%s," %(g_counter_flags['pkg_counter']['passed']['l1'])).ljust(10), ("L2--->%s," %(g_counter_flags['pkg_counter']['passed']['l2'])).ljust(10), ("L3--->%s)" %(g_counter_flags['pkg_counter']['passed']['l3'])).ljust(10))
+    print(("\t\t报错: %s" %(g_counter_flags['pkg_counter']['failed']['all'])).ljust(10), ("(L1--->%s," %(g_counter_flags['pkg_counter']['failed']['l1'])).ljust(10), ("L2--->%s," %(g_counter_flags['pkg_counter']['failed']['l2'])).ljust(10), ("L3--->%s)" %(g_counter_flags['pkg_counter']['failed']['l3'])).ljust(10))
+    print("\t动态库:")
+    print(("\t\t总计: %s" %(g_counter_flags['lib_counter']['total']['all'])).ljust(10), ("(L1--->%s," %(g_counter_flags['lib_counter']['total']['l1'])).ljust(10), ("L2--->%s," %(g_counter_flags['lib_counter']['total']['l2'])).ljust(10), ("L3--->%s)" %(g_counter_flags['lib_counter']['total']['l3'])).ljust(10))
+    print(("\t\t通过: %s" %(g_counter_flags['lib_counter']['passed']['all'])).ljust(10), ("(L1--->%s," %(g_counter_flags['lib_counter']['passed']['l1'])).ljust(10), ("L2--->%s," %(g_counter_flags['lib_counter']['passed']['l2'])).ljust(10), ("L3--->%s)" %(g_counter_flags['lib_counter']['passed']['l3'])).ljust(10))
+    print(("\t\t报错: %s" %(g_counter_flags['lib_counter']['failed']['all'])).ljust(10), ("(L1--->%s," %(g_counter_flags['lib_counter']['failed']['l1'])).ljust(10), ("L2--->%s," %(g_counter_flags['lib_counter']['failed']['l2'])).ljust(10), ("L3--->%s)" %(g_counter_flags['lib_counter']['failed']['l3'])).ljust(10))
     print("")
     print("=============================================================================================================")
 
