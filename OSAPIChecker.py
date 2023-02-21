@@ -7,6 +7,7 @@ import sys
 import platform
 import logging
 import time
+import getpass
 
 timestamp = int(time.time())
 #import tkinter # for graphical user interface
@@ -19,10 +20,10 @@ timestamp = int(time.time())
 parser = argparse.ArgumentParser(description="This Progermm is OSChecker", prog="OSChecker")
 
 # --channel: 
-#       cmdchecker (default)
+#       cmdchecker
 #       libchecker 
 #       fschecker
-parser.add_argument('-c', '--channel', action='store', type=str, help='Choice OSAPIChecker channels: libchecker,cmdchecker,fschecker', default="cmdchecker")
+parser.add_argument('-c', '--channel', action='store', type=str, help='Choice OSAPIChecker channels: libchecker,cmdchecker,fschecker,servicechecker,all', default="all")
 
 # --strategy: 
 #       base (default)
@@ -36,7 +37,7 @@ parser.add_argument('-s', '--strategy', action='store', type=str, help='Choice O
 #       l3
 #       l1l2 (default)
 #       l1l2l3
-parser.add_argument('-l', '--level', action='store', type=str, help='Choice OSAPIChecker level: l1,l2,l3,l1l2,l1l2l3', default="l1l2")
+parser.add_argument('-l', '--level', action='store', type=str, help='Choice OSAPIChecker level like: l1,l2,l3,l1l2,l1l2l3', default="l1l2")
 
 # --ostype:
 #       desktop
@@ -55,7 +56,7 @@ parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package M
 # 
 #parser.add_argument('-j', '--stdjson', action='store', type=str, help='Choice OSAPIChecker standard json templete file', required=True)
 
-parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Organize')
+parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Organize', default="")
 
 # --ostype:
 #       desktop
@@ -65,6 +66,7 @@ parser.add_argument('-o', '--organize', action='store', type=str, help='Choice O
 args = parser.parse_args()
 
 l_file_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(timestamp)) 
+l_arch_name = os.popen("uname -m").read().rstrip("\n")
 
 # 1. Input Valid Check
 def input_valid_check():
@@ -107,9 +109,8 @@ def gen_envinfo_json():
     # --level       [l1,l2,l3,l1l2,l1l2l3]
     # --ostype      [desktop,server,embed]
     # --pkgmngr     [apt-deb,yum-rpm,src-bin,other]
-def checker_call_handler():
-    gen_envinfo_json()
-    if (args.channel == "libchecker"):
+def checker_call_handler(channel):
+    if (channel == "libchecker"):
         print("进入 LibChecker 处理程序 . . .")
         s_str = args.strategy
         l_str = args.level
@@ -139,11 +140,9 @@ def checker_call_handler():
             print ("Error: -p or --pkgmngr 参数指定错误")
             return 2
 
-        os.system('python3 LibChecker/lib_checker.py --strategy=%s --level=%s --ostype=%s --pkgmngr=%s --organize=%s --timetmp=%s' %(s_str, l_str, os_str, pkg_str,org_str,l_file_time))        
-        #添加生成pdf工具
-        #os.system()        
+        os.system('python3 LibChecker/lib_checker.py --strategy=%s --level=%s --ostype=%s --pkgmngr=%s --organize=%s --timetmp=%s' %(s_str, l_str, os_str, pkg_str, org_str, l_file_time))        
 
-    elif (args.channel == "cmdchecker"):
+    elif (channel == "cmdchecker"):
         print("进入 CmdChecker 处理程序 . . .")
 
         os.system('python3 CmdChecker/cmd_checker.py')
@@ -151,7 +150,7 @@ def checker_call_handler():
         # For CmdChecker
         # import cmdcheck: input (json-file) (formated-json)
 
-    elif (args.channel == "fschecker"):
+    elif (channel == "fschecker"):
         print("进入 FsChecker 处理程序 . . .")
 
         os.system('python3 FsChecker/fs_checker.py')
@@ -159,17 +158,22 @@ def checker_call_handler():
         # For FsChecker
         # import fscheck: input (json-file) (formated-json)
 
-    elif (args.channel == "servicechecker"):
+    elif (channel == "servicechecker"):
         print("进入 ServiceChecker 处理程序 . . .")
 
-        os.system('python3 ServiceChecker/service_checker.py')
+        login_name = getpass.getuser()
+        if (login_name != "root"):
+            os.system('sudo python3 ServiceChecker/service_checker.py')
+        else:
+            os.system('python3 ServiceChecker/service_checker.py')
+        #os.system('sudo python3 ServiceChecker/service_checker.py')
 
         # For CmdChecker
         # import cmdcheck: input (json-file) (formated-json)
 
 
     else:
-        print("Invalid Options, please input --channel=[cmdchecker|fschecker|libchecker]")
+        print("Invalid Options, please input --channel=[cmdchecker|fschecker|libchecker|servicechecker]")
 
 
 # 3. Generate Output
@@ -182,6 +186,18 @@ def checker_call_handler():
 #def convert_json_to_pdf():
 
 
+def main_loop():
+    gen_envinfo_json()
+    if (args.channel == "all"):
+        checker_call_handler("libchecker")
+        checker_call_handler("cmdchecker")
+        checker_call_handler("fschecker")
+        checker_call_handler("servicechecker")
+    else:
+        if ((args.channel != "libchecker") and (args.channel != "cmdchecker") and (args.channel != "fschecker") and (args.channel != "servicechecker")):
+            print ("Error: -c or --channel 参数指定错误")
+            return 2
+        checker_call_handler(args.channel)
 
 # 4. Draw Graphics
 def draw_main_gui():
@@ -193,7 +209,8 @@ def draw_main_gui():
 if __name__ == '__main__':
     try:
         input_valid_check()
-        checker_call_handler()
+        main_loop()
+#        checker_call_handler()
 #        generate_json_file()
 #        draw_main_gui()
     except Exception as e:
