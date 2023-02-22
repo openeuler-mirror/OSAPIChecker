@@ -58,6 +58,7 @@ parser.add_argument('-p', '--pkgmngr', action='store', type=str, help='Package M
 
 parser.add_argument('-o', '--organize', action='store', type=str, help='Choice Organize', default="")
 
+parser.add_argument('-R', '--reports', action='store_true', help='Generate Reports')
 # --ostype:
 #       desktop
 #       service
@@ -71,11 +72,6 @@ l_arch_name = os.popen("uname -m").read().rstrip("\n")
 # 1. Input Valid Check
 def input_valid_check():
     print("|************************ 操作系统软件兼容性应用编程接口检查工具 ************************|")
-#    print('the options is', options)
-
-    # Options check
-
-    # Json check
 
 # 2. Check Environment Info
 def gen_envinfo_json():
@@ -101,14 +97,6 @@ def gen_envinfo_json():
     with open(env_file_name,"w+") as fw:
         json.dump(l_envinfodict,fw,ensure_ascii=False,indent=4)
 
-
-
-# 2. Call Subchecker's Handler
-    # --channel:    [cmdchecker,fschecker,libchecker]
-    # --strategy:   [with-expand, base]
-    # --level       [l1,l2,l3,l1l2,l1l2l3]
-    # --ostype      [desktop,server,embed]
-    # --pkgmngr     [apt-deb,yum-rpm,src-bin,other]
 def checker_call_handler(channel):
     if (channel == "libchecker"):
         print("进入 LibChecker 处理程序 . . .")
@@ -117,11 +105,7 @@ def checker_call_handler(channel):
         os_str = args.ostype
         pkg_str = args.pkgmngr
         org_str = args.organize
-        ### 添加参数错误判断:strategy level ostype pkgmngr
-        ### 错误即退出
-        #args_error_check()
-        #print("arg.level is ", l_str, "len(l_str) is ", len(l_str)%2)
-        #print("arg.level is ", l_str, "l_stri[0] is ", l_str[0])
+        
         if ((s_str != "basic") and (s_str != "expansion") and (s_str != "with-expand")):
             print ("Error: -s or --strategy 参数指定错误")
             return 2
@@ -135,28 +119,23 @@ def checker_call_handler(channel):
             print ("Error: -t or --ostype 参数指定错误")
             return 2
 
-        #print("检测 LibChecker 参数 ")
         if ((pkg_str != "apt-deb") and (pkg_str != "yum-rpm")):
             print ("Error: -p or --pkgmngr 参数指定错误")
             return 2
 
         os.system('python3 LibChecker/lib_checker.py --strategy=%s --level=%s --ostype=%s --pkgmngr=%s --organize=%s --timetmp=%s' %(s_str, l_str, os_str, pkg_str, org_str, l_file_time))        
 
+
     elif (channel == "cmdchecker"):
         print("进入 CmdChecker 处理程序 . . .")
 
         os.system('python3 CmdChecker/cmd_checker.py')
-
-        # For CmdChecker
-        # import cmdcheck: input (json-file) (formated-json)
-
+        
     elif (channel == "fschecker"):
         print("进入 FsChecker 处理程序 . . .")
 
         os.system('python3 FsChecker/fs_checker.py')
         
-        # For FsChecker
-        # import fscheck: input (json-file) (formated-json)
 
     elif (channel == "servicechecker"):
         print("进入 ServiceChecker 处理程序 . . .")
@@ -166,24 +145,25 @@ def checker_call_handler(channel):
             os.system('sudo python3 ServiceChecker/service_checker.py')
         else:
             os.system('python3 ServiceChecker/service_checker.py')
-        #os.system('sudo python3 ServiceChecker/service_checker.py')
-
-        # For CmdChecker
-        # import cmdcheck: input (json-file) (formated-json)
-
+        
 
     else:
-        print("Invalid Options, please input --channel=[cmdchecker|fschecker|libchecker|servicechecker]")
+        print("Invalid Options, please input --channel=[cmdchecker|fschecker|libchecker]")
 
+def report_pdf_service(channel):
+    os.system('sudo reports/reboot-pdf.sh %s %s' %(channel, l_file_time))
 
-# 3. Generate Output
-#def generate_json_file():
-#    print("This Label is generatejson ")
-#    print('Label:', generate_json_file.__name__)
+def report_pdf_shell(channel):
+    os.system('reports/report-pdf.sh %s %s' %(channel, l_file_time))
 
-#def convert_json_to_txt():
-
-#def convert_json_to_pdf():
+# 3. PDF Report files
+def generate_report(channel):
+    if ((channel == "all") or (channel == "servicechecker")):
+        print ("会重启（包含servicechecker模块）")
+        report_pdf_service(channel)
+    elif ((channel == "libchecker") or (channel == "cmdchecker") or (channel == "fschecker")):
+        print ("不重启，单独程序：", channel)
+        report_pdf_shell(channel)
 
 
 def main_loop():
@@ -192,12 +172,27 @@ def main_loop():
         checker_call_handler("libchecker")
         checker_call_handler("cmdchecker")
         checker_call_handler("fschecker")
+        if(args.reports):
+            generate_report(args.channel)
+        else:
+            print ("NO Report Generation")
         checker_call_handler("servicechecker")
     else:
         if ((args.channel != "libchecker") and (args.channel != "cmdchecker") and (args.channel != "fschecker") and (args.channel != "servicechecker")):
             print ("Error: -c or --channel 参数指定错误")
             return 2
-        checker_call_handler(args.channel)
+        if (args.channel == "servicechecker"):
+            if(args.reports):
+                generate_report(args.channel)
+            else:
+                print ("NO Report Generation")
+            checker_call_handler(args.channel)
+        else:
+            checker_call_handler(args.channel)
+            if(args.reports):
+                generate_report(args.channel)
+            else:
+                print ("NO Report Generation")
 
 # 4. Draw Graphics
 def draw_main_gui():
@@ -210,8 +205,6 @@ if __name__ == '__main__':
     try:
         input_valid_check()
         main_loop()
-#        checker_call_handler()
-#        generate_json_file()
 #        draw_main_gui()
     except Exception as e:
         print(e)
