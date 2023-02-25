@@ -14,12 +14,29 @@ timer_file=${dir_path}/timer
 service_file=${dir_path}/service
 swap_file=${dir_path}/swap
 
+function generator_enable_service() {
+echo "[Unit]
+Description=service verify reboot
+
+[Service]
+Type=oneshot
+ExecStart=python3 ${dir_path}/service_checker.py -m reboot
+ExecStop=/bin/bash -c "echo Stop verify_reboot.servic"
+
+[Install]
+WantedBy=`systemctl get-default`" >${dir_systemd}/verify_reboot.service
+
+}
+
 function mv_register_file() {
   log_info "开始注册所有systemd检测单元文件..."
 
   if [[ ! -d ${dir_systemd} ]]; then
     log_error "Have not found systemd service work directory: ${dir_systemd},please check your system."
   fi
+
+  # 创建开机自启动reboot service单元配置文件
+  generator_enable_service
 
   if [[ -d ${path_file} ]]; then
     cp ${path_file}/service_verify_path.service ${dir_systemd} &&
@@ -44,9 +61,6 @@ function mv_register_file() {
   fi
 
   if [[ -d ${service_file} ]]; then
-    run_level=`systemctl get-default`
-    sed -i "s/WantedBy=/`systemctl get-default`/" ${service_file}/verify_reboot.service
-    cp ${service_file}/verify_reboot.service ${dir_systemd}
     cp ${service_file}/service_verify_disable.service ${dir_systemd}
   else
     log_warn "Service file directory not exist, can not copy register file."
@@ -74,11 +88,13 @@ function mv_register_file() {
     fi
   fi
 
-  cd ${socket_file}
   # install go-systemd库 activation
 #  go env -w GOPRIVATE=git.mycompany.com,github.com/my/private
+  cd ${socket_file}
   go env -w GO111MODULE=on
   go env -w GOPROXY=https://goproxy.cn,direct
+  go mod init service_checker
+  log_info "正在安装go-systemd activation库..."
   go get github.com/coreos/go-systemd/activation >/dev/null 2>&1
   if [ $? -ne 0 ]; then
     log_error "获取go-systemd activation库失败，可能导致socket单元检测失败。"
@@ -144,7 +160,7 @@ function verify_path() {
   else
     log_warn "***** path单元功能验证失败 *****\n"
   fi
-  log_info "***** path单元功能验证成功 *****\n"
+  log_info "***** path单元功能验证完成 *****\n"
 
   # 验证socket服务功能
   verify_socket
@@ -168,7 +184,7 @@ function verify_socket() {
   journalctl -u service_verify_client.service -n 5 | grep "Verify socket server" >/dev/null 2>&1 &&
     journalctl -u service_verify_server.service -n 3 | grep "Verify socket client" >/dev/null 2>&1
   if [ $? -eq 0 ]; then
-    log_info "***** socket单元功能验证成功 *****\n"
+    log_info "***** socket单元功能验证完成 *****\n"
   else
     log_warn "***** socket单元功能验证失败 *****\n"
   fi
@@ -181,6 +197,10 @@ function verify_timer() {
 
   # 启动timer定时单元
   log_info "***** 启动service_verify_timer单元 *****"
+  cd $monitor_path
+  if [[ -f test_timer.log ]]; then
+    rm -f test_timer.log
+  fi
   systemctl start service_verify_timer.timer
 
   if [ $? -eq 0 ]; then
@@ -194,7 +214,7 @@ function verify_timer() {
   sleep 70
   if [[ -f ${monitor_path}/test_timer.log ]]; then
     log_info "service_verify_timer.service服务启动输出为：\n$(cat ${monitor_path}/test_timer.log)"
-    log_info "***** timer单元功能验证成功 *****\n"
+    log_info "***** timer单元功能验证完成 *****\n"
   else
     log_warn "***** timer单元功能验证失败 *****\n"
   fi
@@ -226,12 +246,11 @@ function verify_swap() {
     log_warn "启动swap单元失败"
   fi
 
-  log_info "查看swap单元服务状态：\n`systemctl status swapfile_service.swap`"
-
   log_info "查看交换空间使用详细信息："
   swapon --show
   if [ $? -eq 0 ]; then
-    log_info "***** swap单元功能验证成功 *****\n"
+    log_info "查看swap单元服务状态：\n`journalctl -u swapfile_service.swap`"
+    log_info "***** swap单元功能验证完成 *****\n"
   else
     log_warn "***** swap单元功能验证失败 *****\n"
   fi
@@ -245,23 +264,23 @@ function verify_target() {
   log_info "查询所有运行级别传统runlevel与对应target信息如下：\n $(ls -al ${dir_systemd}/runlevel*.target | awk -F " " '{print $9 $10 $11}')"
 
   default_runlevel=`systemctl get-default`
-  log_info "查看当前系统默认target为: $(default_runlevel)"
+  log_info "查看当前系统默认target为: $default_runlevel"
   if [ "$default_runlevel" = "graphical.target" ]; then
-    log_info "检测目标为桌面操作系统，检测完成。"
-  else
+      log_info "检测目标为桌面版操作系统,当前运行级别为多用户模式（$default_runlevel），runlevel信息为：`runlevel`"
+  elif [ "$default_runlevel" = "multi-user.target" ]; then
     systemctl isolate rescue.target
     if [ $? -eq 0 ]; then
       sleep 2
       log_info "检测目标为服务器操作系统,切换当前运行级别至单用户模式（rescue.target）成功，runlevel信息为：`runlevel`"
     else
-      log_warn "切换至单用户级别失败"
+      log_warn "切换系统运行模式至单用户级别失败"
     fi
   fi
-  log_info "***** target单元功能验证成功 *****"
+  log_info "***** target单元功能验证完成 *****"
   # 重启系统
   log_info "请等待3秒后将重启系统...\n"
   sleep 3
-  reboot
+
 }
 
 
@@ -300,6 +319,8 @@ function clear_environment() {
   rm -f ${dir_systemd}/swapfile_service.swap
 
   export GO111MODULE=""
+  rm -f ${socket_file}/go.mod &&
+   rm -f ${socket_file}/go.sum
 
   systemctl stop verify_reboot.service &&
   rm -f ${dir_systemd}/verify_reboot.service

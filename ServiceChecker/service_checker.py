@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-import re
 import stat
 import sys
 import argparse
@@ -9,6 +8,8 @@ import argparse
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ServiceChecker.utils.shell import shell_cmd
 from ServiceChecker.utils.logger import init_logger
+from ServiceChecker.constants import K_TEST, k_VERIFY, VERIFY_PATH_TYPE, PASS, CHECK_RESULT, FAIL, TARGET_UNIT, \
+    START_MODEL_TYPE, REBOOT_MODEL_TYPE, MODEL_REBOOT, MODEL_START
 
 logger = logging.getLogger('OSAPIChecker')
 
@@ -50,19 +51,34 @@ class ServiceChecker(object):
         with open(path, "w", encoding='utf-8') as f:
             json.dump(result, f, indent=4)
 
+    @staticmethod
+    def verift_cmd_unit(cmd, result, unit, target_result):
+        ret, out, err = shell_cmd(cmd.split())
+        if not ret:
+            if out:
+                if unit == TARGET_UNIT:
+                    result.get(unit)[CHECK_RESULT] = PASS
+                elif target_result in out:
+                    result.get(unit)[CHECK_RESULT] = PASS
+        else:
+            logger.debug(f"验证检测单元{unit}输出信息错误：{err}")
+
     def service_register_check(self, model='start'):
         result_path = os.path.join(os.path.dirname(self.dir_path), 'Outputs/service_result.json')
         os.chmod(self.sh_path, stat.S_IXUSR)
 
         try:
             os.system(f"/bin/bash {self.sh_path} {model} 2>&1 | tee -a {self.log_path}")
-            if model == "start":
+            if model == MODEL_START:
                 result = {}
                 start_result = self.verify_all_item(model, result)
 
                 self.export_verify_result(result_path, start_result)
 
-            elif model == "reboot":
+                # 重启系统
+                os.system("reboot")
+
+            elif model == MODEL_REBOOT:
                 logger.info("service_checker 检测完成!")
                 with open(result_path, "r") as f:
                     start_result = json.load(f)
@@ -98,33 +114,22 @@ class ServiceChecker(object):
         @return: 检测结果
         """
         v_config = self.get_verify_result_config()
-        verify_item = v_config.get(model)
-        result_str = "Check result"
-        for unit, test_config in verify_item.items():
-            result.setdefault(unit, {})
-            verify_shell = test_config.get('test')
-            verify_str = test_config.get('str')
-            ret, out, err = shell_cmd(verify_shell.split())
-            if not ret and out:
-                unit_result = result.get(unit)
-                if model == 'reboot':
-                    status_row = out.split('\n')[1]
-                    status = status_row.split()[1]
-                    if status == verify_str:
-                        unit_result.setdefault(result_str, 'pass')
-                    elif not verify_str and status:
-                        unit_result.setdefault(result_str, 'pass')
-                    else:
-                        unit_result.setdefault(result_str, 'fail')
+        for unit, verify_content in v_config.items():
+            verify_cmd = verify_content.get(K_TEST)
+            target_result = verify_content.get(k_VERIFY)
+            if model == MODEL_START:
+                result.setdefault(unit, {CHECK_RESULT: FAIL})
+                if unit not in START_MODEL_TYPE:
+                    continue
+                elif unit in VERIFY_PATH_TYPE:
+                    if os.path.exists(verify_cmd):
+                        result.get(unit)[CHECK_RESULT] = PASS
                 else:
-                    match = re.search(verify_str, out)
-                    if match:
-                        unit_result.setdefault(result_str, 'pass')
-                    else:
-                        unit_result.setdefault(result_str, 'fail')
-            else:
-                result.get(unit).setdefault(result_str, 'fail')
-                logger.debug(f"验证检测单元输出信息错误：{err}")
+                    self.verift_cmd_unit(verify_cmd, result, unit, target_result)
+            elif model == MODEL_REBOOT:
+                if unit not in REBOOT_MODEL_TYPE:
+                    continue
+                self.verift_cmd_unit(verify_cmd, result, unit, target_result)
 
         return result
 
@@ -156,7 +161,7 @@ if __name__ == "__main__":
         service_checker.verify_service()
         service_checker.service_register_check()
     # 系统重启后检测待测功能
-    elif args.verify_model == "reboot":
+    elif args.verify_model == MODEL_REBOOT:
         service_checker.service_register_check(model=args.verify_model)
     else:
         logger.error("参数输入有误。")
