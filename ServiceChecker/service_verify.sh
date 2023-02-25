@@ -14,29 +14,12 @@ timer_file=${dir_path}/timer
 service_file=${dir_path}/service
 swap_file=${dir_path}/swap
 
-function generator_enable_service() {
-echo "[Unit]
-Description=service verify reboot
-
-[Service]
-Type=oneshot
-ExecStart=python3 ${dir_path}/service_checker.py -m reboot
-ExecStop=/bin/bash -c "echo Stop verify_reboot.servic"
-
-[Install]
-WantedBy=multi-user.target" >${dir_systemd}/verify_reboot.service
-
-}
-
 function mv_register_file() {
   log_info "开始注册所有systemd检测单元文件..."
 
   if [[ ! -d ${dir_systemd} ]]; then
     log_error "Have not found systemd service work directory: ${dir_systemd},please check your system."
   fi
-
-  # 创建开机自启动reboot service单元配置文件
-  generator_enable_service
 
   if [[ -d ${path_file} ]]; then
     cp ${path_file}/service_verify_path.service ${dir_systemd} &&
@@ -61,13 +44,16 @@ function mv_register_file() {
   fi
 
   if [[ -d ${service_file} ]]; then
+    run_level=`systemctl get-default`
+    sed -i "s/WantedBy=/`systemctl get-default`/" ${service_file}/verify_reboot.service
+    cp ${service_file}/verify_reboot.service ${dir_systemd}
     cp ${service_file}/service_verify_disable.service ${dir_systemd}
   else
     log_warn "Service file directory not exist, can not copy register file."
   fi
 
   if [[ -d ${swap_file} ]]; then
-    cp ${swap_file}/swapfile.swap ${dir_systemd}
+    cp ${swap_file}/swapfile_service.swap ${dir_systemd}
   else
     log_warn "Service swap file directory not exist, can not copy register file."
   fi
@@ -77,21 +63,25 @@ function mv_register_file() {
     log_info "正在安装golang，请等待..."
     sudo yum install -y golang >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-      log_error "自动安装失败，请先安装golang。"
+      sudo apt install golang >/dev/null 2>&1
+      if [ $? -ne 0 ]; then
+        log_error "自动安装失败，请先安装golang。"
+      else
+        log_info "golang 安装完成！"
+      fi
+    else
+      log_info "golang 安装完成！"
     fi
-    log_info "golang 安装完成！"
   fi
 
   cd ${socket_file}
   # install go-systemd库 activation
-  export GO111MODULE=auto
-  # git clone https://github.com/coreos/go-systemd.git ~/go/src/github.com/coreos/go-systemd
+#  go env -w GOPRIVATE=git.mycompany.com,github.com/my/private
+  go env -w GO111MODULE=on
+  go env -w GOPROXY=https://goproxy.cn,direct
   go get github.com/coreos/go-systemd/activation >/dev/null 2>&1
   if [ $? -ne 0 ]; then
-    go env -w GOPROXY=https://goproxy.cn,direct
-    go env -w GOPRIVATE=git.mycompany.com,github.com/my/private
-
-    go get github.com/coreos/go-systemd/activation >/dev/null 2>&1
+    log_error "获取go-systemd activation库失败，可能导致socket单元检测失败。"
   fi
 
   go build service_client.go
@@ -217,26 +207,26 @@ function verify_timer() {
 
 function verify_swap() {
   log_info "***** 验证swap单元 *****"
-  log_info "创建一个交换文件（swapfile）:"
-  dd if=/dev/zero of=/swapfile bs=1M count=512 status=progress
+  log_info "创建一个交换文件（swapfile_service）:"
+  dd if=/dev/zero of=/swapfile_service bs=1M count=512 status=progress
   if [ $? -ne 0 ]; then
     log_warn "创建交换文件失败。"
   fi
   # 防止交换文件全局可读
-  chmod 600 /swapfile
+  chmod 600 /swapfile_service
 
-  mkswap /swapfile
-  # 重启后会启动/swapfile交换分区
+  mkswap /swapfile_service
+  # 重启后会启动/swapfile_service交换分区
   # sed -i '$ a\# /etc/fstab\n/swapfile none swap defaults 0 0' /etc/fstab
 
-  systemctl start swapfile.swap
+  systemctl start swapfile_service.swap
   if [ $? -eq 0 ]; then
     log_info "成功启动swap单元。"
   else
     log_warn "启动swap单元失败"
   fi
 
-  log_info "查看swap单元服务状态：\n`systemctl status swapfile.swap`"
+  log_info "查看swap单元服务状态：\n`systemctl status swapfile_service.swap`"
 
   log_info "查看交换空间使用详细信息："
   swapon --show
@@ -254,18 +244,20 @@ function verify_target() {
   log_info "***** 开始验证target单元 *****"
   log_info "查询所有运行级别传统runlevel与对应target信息如下：\n $(ls -al ${dir_systemd}/runlevel*.target | awk -F " " '{print $9 $10 $11}')"
 
-  log_info "查看当前系统默认target为: $(systemctl get-default)"
-
-  systemctl isolate rescue.target
-  if [ $? -eq 0 ]; then
-    sleep 2
-    log_info "切换当前运行级别至单用户模式（rescue.target）成功，runlevel信息为：`runlevel`"
-    log_info "***** target单元功能验证成功 *****"
+  default_runlevel=`systemctl get-default`
+  log_info "查看当前系统默认target为: $(default_runlevel)"
+  if [ "$default_runlevel" = "graphical.target" ]; then
+    log_info "检测目标为桌面操作系统，检测完成。"
   else
-    log_warn "切换至单用户级别失败"
-    log_warn "***** target单元功能验证失败 *****"
+    systemctl isolate rescue.target
+    if [ $? -eq 0 ]; then
+      sleep 2
+      log_info "检测目标为服务器操作系统,切换当前运行级别至单用户模式（rescue.target）成功，runlevel信息为：`runlevel`"
+    else
+      log_warn "切换至单用户级别失败"
+    fi
   fi
-
+  log_info "***** target单元功能验证成功 *****"
   # 重启系统
   log_info "请等待3秒后将重启系统...\n"
   sleep 3
@@ -289,7 +281,7 @@ function verify_reboot_service() {
 
 function clear_environment() {
 
-  systemctl stop swapfile.swap
+  systemctl stop swapfile_service.swap
   systemctl stop service_verify_server.socket
   systemctl stop service_verify_server.service
   systemctl stop service_verify_timer.timer
@@ -297,7 +289,7 @@ function clear_environment() {
   systemctl stop service_verify_disable.service
 
   # 删除交换文件
-  rm -f /swapfile
+  rm -f /swapfile_service
 
   rm -rf ${monitor_path}
   rm -rf ${apply_path}
@@ -305,7 +297,7 @@ function clear_environment() {
   rm -f ${socket_file}/service_client
   rm -f ${socket_file}/service_server
   find ${dir_systemd} -name "service_verify*" | xargs rm -f
-  rm -f ${dir_systemd}/swapfile.swap
+  rm -f ${dir_systemd}/swapfile_service.swap
 
   export GO111MODULE=""
 

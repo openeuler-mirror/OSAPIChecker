@@ -1,0 +1,10 @@
+[Unit]
+Description=service verify reboot
+
+[Service]
+Type=oneshot
+ExecStart=python3 ${dir_path}/service_checker.py -m reboot
+ExecStop=/bin/bash -c "echo Stop verify_reboot.service"
+
+[Install]
+WantedBy=

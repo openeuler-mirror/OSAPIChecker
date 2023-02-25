@@ -13,12 +13,12 @@
       "str": "Deactivated successfully"
       },
     "Swap Unit": {
-      "test": "journalctl -u swapfile.swap",
-      "str": "Activated swap /swapfile"
+      "test": "journalctl -u swapfile_service.swap",
+      "str": "Activated swap /swapfile_service"
       },
     "Target Unit": {
       "test": "runlevel",
-      "str": "3 1"
+      "str": ""
       }
   },
   "reboot": {

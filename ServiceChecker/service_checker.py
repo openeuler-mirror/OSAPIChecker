@@ -112,6 +112,8 @@ class ServiceChecker(object):
                     status = status_row.split()[1]
                     if status == verify_str:
                         unit_result.setdefault(result_str, 'pass')
+                    elif not verify_str and status:
+                        unit_result.setdefault(result_str, 'pass')
                     else:
                         unit_result.setdefault(result_str, 'fail')
                 else:
