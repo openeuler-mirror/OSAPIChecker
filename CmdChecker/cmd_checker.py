@@ -137,6 +137,18 @@ class CMD:
         return 'not found'
 
     @staticmethod
+    def get_os_cmd_path(cmd):
+        if cmd == 'sh':
+            shell_cmd = 'echo $SHELL'
+        else:
+            shell_cmd = 'which ' + cmd
+
+        po = os.popen(f'{shell_cmd}')
+        path = po.read().split('\n')[0]
+
+        return path or 'not found'
+
+    @staticmethod
     def compare_version(standard_version, os_version):
         ver1 = [int(x) for x in standard_version.split('.')]
         ver2 = [int(x) for x in os_version.split('.')]
@@ -157,7 +169,7 @@ class Result:
     def __init__(self):
         self.result = []
 
-    def add(self, stand, exist_result, run_result, cmd_version):
+    def add(self, stand, exist_result, run_result, cmd_version, cmd_path):
 
         if run_result.get('result') == 'pass':
             result = 'pass'
@@ -173,6 +185,7 @@ class Result:
             'exist_check': exist_result,
             'run_check': run_result,
             'cmd_version': cmd_version,
+            'cmd_path': cmd_path,
             'result': result
         })
 
@@ -210,9 +223,9 @@ class CmdChecker:
     def __init__(self, cmd_json_path=None, cmd_path_conf_path=None):
         logger.info('CmdChecker 执行开始。。。')
         cmd_json = cmd_json_path or os.path.abspath('Jsons/cmd_list.json')
-        cmd_path = cmd_path_conf_path or os.path.abspath('Config/cmd_config.json')
+        cmd_config_path = cmd_path_conf_path or os.path.abspath('Config/cmd_config.json')
         self.standard = Standard(cmd_json).get_list()
-        self.os_cmd = CMD(cmd_path)
+        self.os_cmd = CMD(cmd_config_path)
         self.result = Result()
 
     def check(self):
@@ -222,12 +235,14 @@ class CmdChecker:
             exist_result = self.os_cmd.is_exist(stand.get('name'))
             run_result = self.os_cmd.check_run(stand.get('name'))
             cmd_version = CMD.get_os_cmd_version(stand.get('name'))
-            #cmd_version = "xxx"
-            self.result.add(stand=stand, exist_result=exist_result, run_result=run_result, cmd_version=cmd_version)
-            logger.info(f"\ncmd: {stand.get('name')},\n"
+            cmd_path = CMD.get_os_cmd_path(stand.get('name'))
+
+            self.result.add(stand=stand, exist_result=exist_result, run_result=run_result, cmd_version=cmd_version, cmd_path=cmd_path)
+            logger.info(f"\ncmd: {stand.get('name')}\n"
                         f"exist_check: {exist_result}\n"
                         f"run_result: {run_result}\n"
-                        f"cmd_version: {cmd_version}\n")
+                        f"cmd_version: {cmd_version}\n"
+                        f"cmd_path: {cmd_path}\n")
             # tmp.append({
             #     "name": stand.get('name'),
             #     "version": os_V
