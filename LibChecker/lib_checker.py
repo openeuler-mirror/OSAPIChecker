@@ -137,10 +137,11 @@ def get_src_alias_list (dict_name, l_realname):
     l_src_dict.update({l_realname: {'version': dict_name[l_realname]['version'][g_inputostype]}})
     if(len(dict_name[l_realname]['alias']) >= 0):
         for i in range(0, len(dict_name[l_realname]['alias'])):
-            l_alias_name = dict_name[l_realname]['alias'][i]['name']
-            if (l_alias_name != l_realname):
-                l_alias_version = dict_name[l_realname]['alias'][i]['version'][g_inputostype]
-                l_src_dict.update({l_alias_name: {'version': l_alias_version}})
+            if ((dict_name[l_realname]['alias'][i]['version'][g_inputostype]) != "-"):
+                l_alias_name = dict_name[l_realname]['alias'][i]['name']
+                if (l_alias_name != l_realname):
+                    l_alias_version = dict_name[l_realname]['alias'][i]['version'][g_inputostype]
+                    l_src_dict.update({l_alias_name: {'version': l_alias_version}})
 
     return l_src_dict
 
