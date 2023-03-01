@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 
+import os
 from reportlab.pdfbase import pdfmetrics   # 注册字体
-from reportlab.pdfbase.ttfonts import TTFont # 字体类
-from reportlab.platypus import Table, SimpleDocTemplate, Paragraph, Image # 报告内容相关类
-from reportlab.lib.pagesizes import letter, landscape # 页面的标志尺寸(8.5*inch, 11*inch)
+from reportlab.pdfbase.ttfonts import TTFont  # 字体类
+from reportlab.platypus import Table, LongTable, SimpleDocTemplate, Paragraph, Image  # 报告内容相关类
+# 页面的标志尺寸(8.5*inch, 11*inch)
+from reportlab.lib.pagesizes import letter, landscape
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle  # 文本样式
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib import colors  # 颜色模块
@@ -11,15 +13,35 @@ from reportlab.graphics.charts.barcharts import VerticalBarChart  # 图表类
 from reportlab.graphics.charts.legends import Legend  # 图例类
 from reportlab.graphics.shapes import Drawing  # 绘图工具
 from reportlab.lib.units import cm  # 单位：cm
- 
+
 # 注册字体(提前准备好字体文件, 如果同一个文件需要多种字体可以注册多个)
-pdfmetrics.registerFont(TTFont('SimSun', "./NotoSansSCRegular.ttf"))
+fonts = [
+    ["SimSun", "./NotoSansSCRegular.ttf"],
+]
+for f in fonts:
+    font_path = os.path.join(os.path.dirname(__file__), f[1])
+    pdfmetrics.registerFont(TTFont(f[0], font_path))
+
+
+class Custom_tab(Table):
+    # hack的table类，用于多页的单元格合并，当前仅在reportlab=3.6.12下测试
+    @staticmethod
+    def _getRowImpossible(impossible, cells, ranges):
+        impossible = {}
 
 
 class PdfMaker:
     # 绘制标题
-    content_style = ParagraphStyle(name="ContentStyle", fontName="ping", fontSize=18, leading=25, spaceAfter=20,
-                                            underlineWidth=1, alignment=TA_LEFT, )
+    content_style = ParagraphStyle(
+        name="ContentStyle",
+        fontName="ping",
+        fontSize=18,
+        leading=25,
+        spaceAfter=20,
+        underlineWidth=1,
+        alignment=TA_LEFT,
+    )
+
     @staticmethod
     def draw_title(title, size=20):
         # 获取所有样式表
@@ -35,10 +57,10 @@ class PdfMaker:
         ct.bold = True
         # 创建标题对应的段落，并且返回
         return Paragraph(title, ct)
-      
+
   # 绘制小标题
     @staticmethod
-    def draw_little_title(title, size=20 , color=colors.black):
+    def draw_little_title(title, size=20, color=colors.black):
         # 获取所有样式表
         style = getSampleStyleSheet()
         # 拿到标题样式
@@ -51,7 +73,7 @@ class PdfMaker:
         ct.bold = True
         # 创建标题对应的段落，并且返回
         return Paragraph(title, ct)
- 
+
     # 绘制普通段落内容
     @staticmethod
     def draw_text(text, size):
@@ -66,56 +88,62 @@ class PdfMaker:
         ct.firstLineIndent = 32     # 第一行开头空格
         ct.leading = 25
         return Paragraph(text, ct)
- 
+
     # 绘制表格
     @staticmethod
-    def draw_table(style, *args, totalWidth, rowHeight=30, rates):
+    def draw_table(style, tab_dict, totalWidth, rates, rowHeight=30):
         total_rate = 0
         for rate in rates:
             total_rate += rate
-        
+
         col_rate = []
         for rate in rates:
-            col_rate.append((rate/total_rate) * totalWidth)
-
-        table = Table(args, colWidths=col_rate,  style=style, rowHeights=rowHeight)
+            col_rate.append((rate / total_rate) * totalWidth)
+        table = LongTable(
+            tab_dict,
+            colWidths=col_rate,
+            style=style,
+            rowHeights=rowHeight)
         return table
 
-    #跨页合并需求
+    # 跨页合并需求
     @staticmethod
-    def draw_mul_table(style, *args, totalWidth, rates):
+    def draw_mul_table(style, tab_dict, totalWidth, rates):
         total_rate = 0
         for rate in rates:
             total_rate += rate
-        
+
         col_rate = []
         for rate in rates:
-            col_rate.append((rate/total_rate) * totalWidth)
-            
+            col_rate.append((rate / total_rate) * totalWidth)
+
         i = 0
         begin = 0
         end = 0
-        while i < len(args)-1:
-            if args[i+1][0] == args[i][0] :
-                if i +1 == len(args)-1:
-                    end = len(args)-1
+        while i < len(tab_dict) - 1:
+            if tab_dict[i +
+                        1][0].getPlainText() == tab_dict[i][0].getPlainText():
+                if i + 1 == len(tab_dict) - 1:
+                    end = len(tab_dict) - 1
                     style = style + [
-                        ('SPAN', (0, begin), (0, end))  
+                        ('SPAN', (0, begin), (0, end))
                     ]
             else:
                 end = i
                 style = style + [
-                        ('SPAN', (0, begin), (0, end))  
-                    ] 
+                    ('SPAN', (0, begin), (0, end))
+                ]
 
                 begin = end + 1
-        
             i += 1
 
-        table = Table(args, colWidths=col_rate,  style=style, rowHeights=30)
-            # i += 15
+        table = Custom_tab(
+            tab_dict,
+            colWidths=col_rate,
+            style=style)
+
         return table
- 
+
     # 创建图表
     @staticmethod
     def draw_bar(bar_data: list, ax: list, items: list):
@@ -134,7 +162,7 @@ class PdfMaker:
         bc.categoryAxis.labels.dy = -8
         bc.categoryAxis.labels.angle = 20
         bc.categoryAxis.categoryNames = ax
- 
+
         # 图示
         leg = Legend()
         leg.fontName = 'SimSun'
@@ -148,18 +176,17 @@ class PdfMaker:
         drawing.add(leg)
         drawing.add(bc)
         return drawing
- 
+
     # 绘制图片
     @staticmethod
     def draw_img(path):
         img = Image(path)       # 读取指定路径下的图片
-        img.drawWidth = 5*cm        # 设置图片的宽度
-        img.drawHeight = 8*cm       # 设置图片的高度
+        img.drawWidth = 5 * cm        # 设置图片的宽度
+        img.drawHeight = 8 * cm       # 设置图片的高度
         return img
 
+    @staticmethod
     def create_pdf(filename, content):
         # 生成pdf文件
         doc = SimpleDocTemplate(filename, pagesize=landscape(letter))
         doc.build(content)
-
-
