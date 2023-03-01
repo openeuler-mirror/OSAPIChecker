@@ -8,6 +8,7 @@ import platform
 import logging
 import time
 import getpass
+import subprocess
 
 timestamp = int(time.time())
 #import tkinter # for graphical user interface
@@ -69,8 +70,23 @@ args = parser.parse_args()
 l_file_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(timestamp)) 
 l_arch_name = os.popen("uname -m").read().rstrip("\n")
 
+# for logger handler
+class Logger(object):
+    def __init__(self, filename='default.log', stream=sys.stdout):
+        self.terminal = stream
+        self.log = open(filename, 'a')
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+
+    def flush(self):
+        pass
+
+
 # 1. Input Valid Check
 def input_valid_check():
+    #sys.stdout = Logger("Logs/OSAPIChecker-%s.log" %(l_file_time), sys.stdout)
     print("|************************ 操作系统软件兼容性应用编程接口检查工具 ************************|")
 
 # 2. Check Environment Info
@@ -108,20 +124,26 @@ def checker_call_handler(channel):
         
         if ((s_str != "basic") and (s_str != "expansion") and (s_str != "with-expand")):
             print ("Error: -s or --strategy 参数指定错误")
-            return 2
+            sys.exit(0)
 
         level_list=['l1', 'l2', 'l3', 'l1l2', 'l1l3', 'l2l3', 'l1l2l3', 'l2l1', 'l3l1', 'l3l2', 'l1l3l2', 'l2l1l3', 'l2l3l1', 'l3l1l2', 'l3l2l1']
         if l_str not in level_list:
             print ("Error: -l or --level 参数指定错误")
-            return 2
+            sys.exit(0)
 
         if ((os_str != "desktop") and (os_str != "server")):
             print ("Error: -t or --ostype 参数指定错误")
-            return 2
+            sys.exit(0)
 
         if ((pkg_str != "apt-deb") and (pkg_str != "yum-rpm")):
             print ("Error: -p or --pkgmngr 参数指定错误")
-            return 2
+            sys.exit(0)
+
+        if (pkg_str == "yum-rpm"):
+            check_info=subprocess.getstatusoutput('rpmdev-vercmp 1.0 2.0 2>/dev/null ')
+            if (check_info[0] == 127):
+                print ("Error: 未找到rpmdev-vercmp命令，请安装软件包:rpmdevtools")
+                sys.exit(0)
 
         os.system('python3 LibChecker/lib_checker.py --strategy=%s --level=%s --ostype=%s --pkgmngr=%s --organize=%s --timetmp=%s' %(s_str, l_str, os_str, pkg_str, org_str, l_file_time))        
 
@@ -129,12 +151,12 @@ def checker_call_handler(channel):
     elif (channel == "cmdchecker"):
         print("进入 CmdChecker 处理程序 . . .")
 
-        os.system('python3 CmdChecker/cmd_checker.py')
+        os.system('python3 CmdChecker/cmd_checker.py --timestamp=%s' %(l_file_time))
         
     elif (channel == "fschecker"):
         print("进入 FsChecker 处理程序 . . .")
 
-        os.system('python3 FsChecker/fs_checker.py')
+        os.system('python3 FsChecker/fs_checker.py --timestamp=%s' %(l_file_time))
         
 
     elif (channel == "servicechecker"):
