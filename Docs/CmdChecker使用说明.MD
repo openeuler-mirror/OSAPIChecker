@@ -26,18 +26,19 @@ usage: cmd_checker.py [-h] [-V] [-L cmd_list.json] [-P config.json] [-T filetime
 
 ## 结果说明
     {
-        "handler": "cmdchecker",    ——子工具名
-        "result": [                 ——结果集合
+        "handler": "cmdchecker",            ——子工具名
+        "result": [                         ——结果集合
             {
-                "name": "ar",           ——检查命令
-                "exist_check": {        ——命令存在性检查
+                "name": "ar",               ——检查命令
+                "exist_check": {            ——命令存在性检查
                     "result": "pass"        ——检查结果
                 },
-                "run_check": {          ——命令运行检查
+                "run_check": {              ——命令运行检查
                     "result": "pass"        ——检查结果
                 },
-                "cmd_version": "2.34",  ——命令版本
-                "result": "pass"        ——综合测试结果
+                "cmd_version": "2.34",      ——命令版本
+                "cmd_path": "/usr/bin/ar",  ——命令实际路径
+                "result": "pass"            ——综合测试结果
             },
             ……
         ]
