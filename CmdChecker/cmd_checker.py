@@ -206,14 +206,18 @@ class Result:
         # logger.info(data)
         return data
 
-    def export(self, path=None):
+    def export(self, timestamp=None, path=None):
         # pprint.pprint(self.result)
         data = {
             'handler': 'cmdchecker',
             'result': self.result
         }
         path = path or 'Outputs'
-        with open(f'{path}/cmd_{time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())}.json', 'w', encoding='utf-8') as f:
+        if not timestamp:
+            result_file = path + '/cmd_' + time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + '.json'
+        else:
+            result_file = path + '/cmd_' + timestamp + '.json'
+        with open(result_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
         logger.info(f'CmdChecker 测试完成，测试结果见 {path}')
         return path
@@ -251,8 +255,8 @@ class CmdChecker:
         # with open(path, 'w', encoding='utf-8') as f:
         #     json.dump({'result': tmp}, f)
 
-    def export(self):
-        return self.result.export()
+    def export(self, timestamp=None):
+        return self.result.export(timestamp)
 
     def stat(self):
         data = self.result.stat()
@@ -265,6 +269,7 @@ if __name__ == '__main__':
     parser.add_argument('-V', '--version', action='version', version='version 1.0 操作系统标准工具SIG CMDChecker')
     parser.add_argument('-L', '--list', default=None, metavar='cmd_list.json', help='cmd_list的json文件')
     parser.add_argument('-P', '--path', default=None, metavar='cmd_config.json', help='cmd可能存在的路径配置文件')
+    parser.add_argument('-T', '--timestamp', default=None, action='store', type=str)
     args = parser.parse_args()
     if args.list and not os.path.isfile(args.list):
         print('CmdList.json 文件不正确 ！！！')
@@ -276,6 +281,6 @@ if __name__ == '__main__':
     # main(args.list, args.path)
     checker = CmdChecker()
     checker.check()
-    checker.export()
+    checker.export(args.timestamp)
     checker.stat()
 

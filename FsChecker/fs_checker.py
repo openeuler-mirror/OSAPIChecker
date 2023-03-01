@@ -77,14 +77,18 @@ class Result:
         # logger.info(data)
         return data
 
-    def export(self, path=None):
+    def export(self, timestamp=None, path=None):
         # pprint.pprint(self.result)
         data = {
             'handler': 'fs_checker',
             'result': self.result
         }
         path = path or 'Outputs'
-        with open(f'{path}/fs_{time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())}.json', 'w', encoding='utf-8') as f:
+        if not timestamp:
+            result_file = path + '/fs_' + time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + '.json'
+        else:
+            result_file = path + '/fs_' + timestamp + '.json'
+        with open(result_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
         logger.info(f'FSChecker 测试完成，测试结果见 {path}')
         return path
@@ -135,12 +139,12 @@ class FSChecker:
         # with open(path, 'w', encoding='utf-8') as f:
         #     json.dump({'result': tmp}, f)
 
-    def export(self):
+    def export(self, timestamp):
         """
         输出文件报告
         :return:
         """
-        return self.result.export()
+        return self.result.export(timestamp)
 
     def stat(self):
         """
@@ -156,6 +160,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="操作系统标准工具SIG FsChecker")
     parser.add_argument('-V', '--version', action='version', version='version 1.0 操作系统标准工具SIG FS Checker')
     parser.add_argument('-L', '--list', default=None, metavar='fs_list.json', help='fs_list的json文件')
+    parser.add_argument('-T', '--timestamp', default=None, action='store', type=str)
     args = parser.parse_args()
     if args.list and not os.path.isfile(args.list):
         print('fs_list.json 文件不正确 ！！！')
@@ -164,6 +169,6 @@ if __name__ == '__main__':
     # main(args.list, args.path)
     checker = FSChecker()
     checker.check()
-    checker.export()
+    checker.export(args.timestamp)
     checker.stat()
 
