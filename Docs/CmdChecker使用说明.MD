@@ -10,7 +10,7 @@ cd OSChecker
 2. 使用python3执行cmdchecker检查工具   
 python3 CmdChecker/cmd_checker.py  
 3. 常用参数  
-usage: cmd_checker.py [-h] [-V] [-L cmd_list.json] [-P config.json]
+usage: cmd_checker.py [-h] [-V] [-L cmd_list.json] [-P config.json] [-T filetime]
     
 
     操作系统标准工具SIG CMDChecker  
@@ -21,6 +21,8 @@ usage: cmd_checker.py [-h] [-V] [-L cmd_list.json] [-P config.json]
                             cmd_list的json文件
     -P config.json, --path config.json
                             cmd可能存在的路径配置文件  
+    -T filetime, --timestamp filetime
+                            文件时间戳
 
 ## 结果说明
     {

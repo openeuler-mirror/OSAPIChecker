@@ -9,15 +9,16 @@ cd OSChecker
 2. 使用python3执行fschecker检查工具  
 python3 FsChecker/fs_checker.py 
 3. 常用参数  
-usage: fs_checker.py [-h] [-V] [-L fs_list.json]  
+usage: fs_checker.py [-h] [-V] [-L fs_list.json]  [-T filetime]
 
-
-    操作系统标准工具SIG FsChecker
+    操作系统标准工具SIG FsChecker  
     optional arguments:  
-      -h, --help            show this help message and exit  
-      -V, --version         show program's version number and exit  
-      -L fs_list.json, --list fs_list.json
+    -h, --help              show this help message and exit  
+    -V, --version           show program's version number and exit  
+    -L fs_list.json, --list fs_list.json
                             fs_list的json文件  
+    -T filetime, --timestamp filetime
+                            文件时间戳
 
 ## 结果说明
     {
