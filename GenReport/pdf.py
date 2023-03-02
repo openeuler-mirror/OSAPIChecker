@@ -614,7 +614,7 @@ def make_pdf_service(content):
         i = 1
         for r in json_data:
             result = json_data[r]["Check result"]
-            if result == "pass":
+            if (result == "pass" or result == "PASS"):
                 result = "通过"
             else:
                 result = "不通过"
