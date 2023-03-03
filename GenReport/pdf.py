@@ -674,7 +674,7 @@ def make_pdf_conclusion(content):
             json_data["送测单位"],
             json_data["测试对象"]["系统名称"],
             json_data["测试对象"]["版本"],
-            json_data["环境配置"]["CPU指令集"][0],
+            json_data["环境配置"]["CPU指令集"],
             g_isConform)
         content.append(PdfMaker.draw_text(text, 12))
 
