@@ -526,7 +526,13 @@ def make_pdf_cmd(content):
             else:
                 result = "不符合"
 
-            table_content = [r["name"], "-", r["cmd_version"], check, result]
+            table_content = [
+                r["name"],
+                r["cmd_path"],
+                r["cmd_version"],
+                check,
+                result]
+
             data.append(table_content)
 
             i += 1
