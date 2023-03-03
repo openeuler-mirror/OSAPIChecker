@@ -39,8 +39,7 @@ default_para_style.alignment = 1        # 居中对齐
 
 # 首页样式
 home_table_style = [
-    ['ALIGN', (0, 0), (-1, -1), 'CENTER'],  # 第一行水平居中
-    ['VALIGN', (0, 0), (-1, -1), 'MIDDLE'],  # 所有表格上下居中对齐
+    ['VALIGN', (0, 0), (-1, -1), 'TOP'],  # 所有表格上对齐
     ['ALIGN', (0, 0), (0, -1), 'RIGHT'],
     ['ALIGN', (1, 0), (1, -1), 'CENTER'],
 ]
@@ -49,6 +48,7 @@ home_para_style.fontName = 'SimSun'
 home_para_style.fontSize = 20
 home_para_style.wordWrap = 'CJK'     # 设置自动换行
 home_para_style.alignment = 1        # 居中对齐
+home_para_style.leading = 24
 
 
 def make_pdf_cover(content):
@@ -141,7 +141,6 @@ def make_pdf_test_env(content):
             extra_style,
             data,
             totalWidth=total_width,
-            rowHeight=27,
             rates=[1, 1, 3]))
 
 
@@ -163,12 +162,10 @@ def make_pdf_lib(content):
     # 添加表格
     data = [
         ['包名', '检测信息', '--', '--', '--'],
-        ['包名', '检测信息', '--', '--', '--'],
     ]
 
     with open(g_lib, 'r', encoding='utf8') as fp:
         json_data = json.load(fp)
-        row = 2
         for r in json_data:
 
             require_version = json_data[r]["Required version"]
@@ -215,9 +212,7 @@ def make_pdf_lib(content):
 
     lib_table_style = default_table_style + [
         ['BACKGROUND', (0, 0), (-1, 0), table_background_color],  # 设置第一行背景颜色
-        ['BACKGROUND', (0, 1), (-1, 1), table_background_color],  # 设置第二行背景颜色
-        ['SPAN', (0, 0), (0, 1)],  # 合并第一列一二行
-        ['SPAN', (1, 0), (-1, 1)],  # 合并第四列一二行
+        ['SPAN', (1, 0), (-1, 0)],  # 合并第一行后几列
     ]
 
     is_merge = False
@@ -257,7 +252,7 @@ def make_pdf_lib(content):
                 default_para_style.fontSize = s
 
     content.append(
-        PdfMaker.draw_mul_table(
+        PdfMaker.draw_table(
             lib_table_style,
             data,
             totalWidth=total_width,

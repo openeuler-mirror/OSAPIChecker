@@ -91,24 +91,7 @@ class PdfMaker:
 
     # 绘制表格
     @staticmethod
-    def draw_table(style, tab_dict, totalWidth, rates, rowHeight=30):
-        total_rate = 0
-        for rate in rates:
-            total_rate += rate
-
-        col_rate = []
-        for rate in rates:
-            col_rate.append((rate / total_rate) * totalWidth)
-        table = LongTable(
-            tab_dict,
-            colWidths=col_rate,
-            style=style,
-            rowHeights=rowHeight)
-        return table
-
-    # 跨页合并需求
-    @staticmethod
-    def draw_mul_table(style, tab_dict, totalWidth, rates):
+    def draw_table(style, tab_dict, totalWidth, rates):
         total_rate = 0
         for rate in rates:
             total_rate += rate
