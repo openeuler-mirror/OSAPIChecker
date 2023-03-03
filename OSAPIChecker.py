@@ -100,8 +100,8 @@ def gen_envinfo_json():
     l_kernel = os.popen("uname -r").read().rstrip("\n")
     l_compver = os.popen("gcc --version | awk 'NR==1'").read().rstrip("\n")
     l_pythonver = os.popen("python3 --version").read().rstrip("\n")
-    l_meminfo = os.popen("free -g | grep Mem | awk '{print $2}'").read().rstrip("\n") + "G"
-    l_firmwareinfo = os.popen("dmidecode -s bios-version").read().rstrip("\n")
+    l_meminfo = os.popen("free -g | grep 'Mem\|内存' | awk '{print $2}'").read().rstrip("\n") + "G"
+    l_firmwareinfo = os.popen("sudo dmidecode -s bios-version").read().rstrip("\n")
     l_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp)) 
     l_disk = os.popen("lsblk -d -n | awk '{print $4}'").read().rstrip("\n")
 
