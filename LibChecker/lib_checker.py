@@ -37,7 +37,10 @@ g_inputpkgmngr = args.pkgmngr
 g_inputorganize = args.organize
 g_inputjson = args.json
 
-g_time_stamp = args.timetmp
+if (args.timetmp == None):
+    g_time_stamp = time.strftime("%Y-%m-%d-%H-%M-%S",time.localtime())
+else:
+    g_time_stamp = args.timetmp
 g_cpu_type = os.popen('uname -m').read().rstrip('\n')
 g_output_filename = "Outputs/libchecker-output_" + g_cpu_type + "_" + g_time_stamp + ".json"
 g_output_logname = "Logs/libchecker_" + g_time_stamp + ".log"

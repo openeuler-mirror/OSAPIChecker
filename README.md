@@ -1,5 +1,4 @@
 
-
 #  OSAPIChecker
 
 ## 介绍
@@ -12,10 +11,8 @@ Operating system API compliance check tool. ----操作系统API符合性检查�
 
 ## 安装教程
 
-可以直接下载运行。
-
-运行程序前，需要确定系统中有以下软件：
-
+可以直接下载运行。  
+运行程序前，需要确定系统中有以下软件：  
 python 3.7+  
 golang 1.13+  
 python3-reportlab（或者使用pip安装reportlab）  
@@ -46,8 +43,7 @@ cd OSAPIChecker
 ./OSAPIChecker.py
 ```
 
-运行说明：
-
+运行说明：  
 直接运行主程序，会使用默认的方式进行检测，默认参数如下（详细信息参见[1.2 参数解析]）：
 
 ```
@@ -106,6 +102,8 @@ LibChecker是测试工具的中检测当前操作系统环境包含的动态库�
 
 ```
 ./OSChecker.py --channel=libchecker
+或者
+./OSChecker.py -c libchecker
 ```
 
 方式二：单独运行子程序
@@ -121,7 +119,6 @@ python3 LibChecker/lib_checker.py
 ```
 --strategy=basic  --level=l1l2 --ostype=desktop --pkgmngr=apt-deb    
 ```
-
 
 
 #### 3.2 参数解析
@@ -176,6 +173,8 @@ CmdChecker是一款检查操作系统内置命令是否符合标准的快捷工�
 
 ```
 ./OSChecker.py --channel=cmdchecker
+或者
+./OSChecker.py -c cmdchecker
 ```
 
 方式二：单独运行子程序
@@ -232,6 +231,8 @@ FsChecker是款检查操作系统文件系统是否符合标准的快捷工具
 
 ```
 ./OSChecker.py --channel=fschecker
+或者
+./OSChecker.py -c fschecker
 ```
 
 方式二：单独运行子程序
@@ -284,6 +285,8 @@ ServiceChecker 是一款检查操作系统管理软件systemd是否符合标准�
 
 ```
 sudo ./OSChecker.py --channel=servicechecker
+或者
+./OSChecker.py -c servicechecker
 ```
 
 方式二：单独运行子程序
@@ -334,7 +337,7 @@ usage: pdf.py [-h] [-r RESULT] [-e ENV] [-l LIB] [-f FS] [-c CMD] [-s SERVER]
 
  -l LIB, --lib LIB   
   指定运行库检查结果文件路径
- 	  	
+
  -f FS, --fs FS   
   指定文件系统层次结构检查结果文件路径
 
@@ -348,8 +351,6 @@ usage: pdf.py [-h] [-r RESULT] [-e ENV] [-l LIB] [-f FS] [-c CMD] [-s SERVER]
 
 ServiceChecker 执行的日志位于: OSAPIChecker/Logs 下,输出结果存放于: OSAPIChecker/Outputs 下.
 
-
-
 ## 常用举例说明
 
 1、当我们想要检测桌面、DEB格式软件包、basic类型、L1L2级别的libchecker，以及其他三项子项目并需要生成检测报告时，可以运行以下命令：
@@ -357,7 +358,9 @@ ServiceChecker 执行的日志位于: OSAPIChecker/Logs 下,输出结果存放�
 ```
 ./OSAPIChecker.py -R
 或者
-./OSAPIChecker.py --channel=all --strategy=basic --level=l1l2 --ostype=desktop --pkgmngr=apt-deb -R
+./OSAPIChecker.py --channel=all --strategy=basic --level=l1l2 --ostype=desktop --pkgmngr=apt-deb --reports
+或者
+./OSAPIChecker.py -c all -s basic -l l1l2 -t desktop -p apt-deb -R
 ```
 
 以上两条命令输出结果一致。
@@ -365,18 +368,25 @@ ServiceChecker 执行的日志位于: OSAPIChecker/Logs 下,输出结果存放�
 2、当我们需要检测服务器、RPM格式软件包、basic类型、L1L2级别的libchecker，以及其他三项子项目并需要生成检测报告时，可以运行以下命令：
 
 ```
-./OSAPIChecker.py --channel=all --strategy=basic --level=l1l2 --ostype=server --pkgmngr=yum-rpm -R
+./OSAPIChecker.py --channel=all --strategy=basic --level=l1l2 --ostype=server --pkgmngr=yum-rpm --reports
+或者
+./OSAPIChecker.py -c all -s basic -l l1l2 -t server -p yum-rpm -R
 ```
 
 3、当我们需要检测服务器、RPM格式软件包、basic+expansion类型、L1L2级别的libchecker,可以运行以下命令：
 
 ```
 ./OSAPIChecker.py --channel=libchecker --strategy=with-expand --level=l1l2 --ostype=server --pkgmngr=yum-rpm
+或者
+./OSAPIChecker.py -c libchecker -s with-expand -l l1l2 -t server -p yum-rpm 
 ```
 
 4、当我们需要检测服务器、RPM格式软件包、expansion类型、L1L2级别的libchecker,并单独生成报告时，可以运行以下命令：
 
 ```
 ./OSAPIChecker.py --channel=libchecker --strategy=expansion --level=l1l2 --ostype=server --pkgmngr=yum-rpm -R
+或者
+./OSAPIChecker.py -c libchecker -s expansion -l l1l2 -t server -p yum-rpm 
 ```
+
 
