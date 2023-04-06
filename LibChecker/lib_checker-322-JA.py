@@ -65,7 +65,6 @@ g_jsonfile_dict = {}            # a josn file struct
 g_counter_flags = {}            # a conuter struct 
 g_storejsondict = {}
 g_genresults_to_json = {}
-g_binary_src_dict = {}
 
 ## 0.2 a recycle call function for user
 def libchecker_over_jobs():
@@ -148,89 +147,6 @@ def get_src_alias_list (dict_name, l_realname):
                     l_src_dict.update({l_alias_name: {'version': l_alias_version}})
 
     return l_src_dict
-
-#### 获取全部的源码与二进制软件包信息
-def get_all_src_binary_info():
-    global g_binary_src_dict
-    ##### 获取全部的软件包信息
-    #l_binary_output=subprocess.getstatusoutput('apt-cache pkgnames')
-    ####仅整理已安装的软件包部分
-    l_binary_output=subprocess.getstatusoutput('dpkg-query -W --showformat=\'${Package}\n\'')
-    l_binary_list=l_binary_output[1].split("\n")
-    for binary_i in range(0, len(l_binary_list)):
-        binary_name=l_binary_list[binary_i]
-        l_binary_src_output = subprocess.getstatusoutput('apt-cache show %s | grep ^Source:' %(binary_name))
-        if (l_binary_src_output[0] == 0):
-            l_binary_src_name = l_binary_src_output[1].split( )[1]
-        else:
-            l_binary_src_name = binary_name
-
-        ####获取软件包版本
-        #l_binary_status=subprocess.getstatusoutput('dpkg-query -W --showformat=\'${Status}\n\' %s| sort -u' %(binary_name))
-        l_binary_version=subprocess.getstatusoutput('dpkg-query -W --showformat=\'${Version}\n\' %s| sort -u' %(binary_name))
-
-        ### 判断当前源码在字典中是否存在
-        ### 存在，将deb信息追加
-        ### 不存在，将src deb 信息追加到最后
-        l_src_key_binary_info = {}
-        if (len(g_binary_src_dict) != 0):
-            ###判断g_binary_src_dict的key值是否相同
-            l_new_binary_info = {binary_name:{"status":"-","version":l_binary_version[1]}}
-            for src_key in g_binary_src_dict:
-                if (src_key == l_binary_src_name):
-                    ### 将原有的字典内容整理出来，生成新的字典内容
-                    l_src_key_binary_info = g_binary_src_dict[src_key]
-                    break
-
-            l_src_key_binary_info.update(l_new_binary_info) 
-            #print ("l_src_key_binary_info is ", l_src_key_binary_info)
-            g_binary_src_dict.update({l_binary_src_name:l_src_key_binary_info})
-        else:
-            g_binary_src_dict.update({l_binary_src_name:{binary_name:{"status":"-","version":l_binary_version[1]}}})
-
-    return g_binary_src_dict
-
-def get_installed_package_binary_info (dict_name, key):
-    l_src_list_update = []
-    l_list_binary_name = []
-    l_dict_alias_info = {}
-    l_dict_src_info = {}
-
-    global g_counter_flags
-
-    l_dict_src_info = get_src_alias_list (dict_name, key)
-    for l in l_dict_src_info:
-        src_name = l
-        l_dict_binary_name = {}
-        for src_key in g_binary_src_dict:
-            if (src_key == src_name):
-                for j in g_binary_src_dict[src_key]:
-                    l_status = get_debpkg_ver_contrast(g_binary_src_dict[src_key][j]['version'], l_dict_src_info[l]['version'])
-                    g_binary_src_dict[src_key][j]['status'] = l_status
-                l_dict_alias_info[l] = g_binary_src_dict[src_key]
-                break
-
-    old_failed_num = g_counter_flags['pkg_counter']['failed']['all']
-    for p_a in l_dict_alias_info:
-        for p_b in l_dict_alias_info[p_a]:
-            if (l_dict_alias_info[p_a][p_b]['status'] == "incompatible"):
-                g_counter_flags['pkg_counter']['failed']['all'] += 1
-                if (dict_name[key]['necessity'][g_inputostype]['level'].lower() == "l1" ):
-                    g_counter_flags['pkg_counter']['failed']['l1'] += 1
-                elif (dict_name[key]['necessity'][g_inputostype]['level'].lower() == "l2" ):
-                    g_counter_flags['pkg_counter']['failed']['l2'] += 1
-                elif (dict_name[key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
-                    g_counter_flags['pkg_counter']['failed']['l3'] += 1
-                break
-        new_failed_num = g_counter_flags['pkg_counter']['failed']['all']
-        if (new_failed_num > old_failed_num): 
-                break
-
-    with open(g_output_filename, 'r') as fr:
-        json_alias_info = json.load(fr)
-        json_alias_info[key]['Binary package'] =  l_dict_alias_info
-    with open(g_output_filename, 'w+') as fw:
-        json.dump(json_alias_info,fw,ensure_ascii=False,indent=4)
 
 def check_per_pkg_info(dict_name, l_src_name):
     global g_notfind_set_flag
@@ -342,7 +258,6 @@ def get_packages_binary_info (dict_name, key):
 def libchecker_checking_loop():
     global g_genresults_to_json
     global g_storejsondict
-    global g_binary_src_dict
 
     l_strategy_list = ['basic', 'expansion', 'with-expand']
     
@@ -370,12 +285,6 @@ def libchecker_checking_loop():
     with open(g_output_filename,"w") as f:
         json.dump(g_genresults_to_json,f)
 
-    source_status=subprocess.getstatusoutput('apt-cache showsrc glibc')
-    if (g_inputpkgmngr == "apt-deb") and (source_status[0] == 100):
-        print ("deb-src 未开启，开始查询已安装软件包信息.")
-        print ("时间较长，请耐心等待……")
-        g_binary_src_dict = get_all_src_binary_info()
-
     for last_key in g_storejsondict: 
         print("=============================================================================================================")
         print("\t正在检查 ", '<',last_key,'>', "...")
@@ -398,10 +307,7 @@ def libchecker_checking_loop():
         elif (g_storejsondict[last_key]['necessity'][g_inputostype]['level'].lower() == "l3" ):
             g_counter_flags['pkg_counter']['total']['l3'] += 1
 
-        if (g_inputpkgmngr == "apt-deb") and (source_status[0] == 100):
-            get_installed_package_binary_info(g_storejsondict, last_key)
-        else:
-            get_packages_binary_info (g_storejsondict, last_key)
+        get_packages_binary_info (g_storejsondict, last_key)
 
         print("\t\t共享库信息:")
         l_subresults_to_json = {}
