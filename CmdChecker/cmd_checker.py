@@ -134,7 +134,7 @@ class CMD:
                 os_version = version_by_stderr.group()
                 return os_version
 
-        return 'not found'
+        return '/'
 
     @staticmethod
     def get_os_cmd_path(cmd):
