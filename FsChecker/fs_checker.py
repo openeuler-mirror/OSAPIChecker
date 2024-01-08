@@ -119,9 +119,19 @@ class FSChecker:
         # tmp = []
         for stand in self.standard:
             logger.info(f'fs checking...{stand}...')
-            exist_result = {
-                'result': 'pass' if os.path.isdir(stand.get('FS_name')) else 'fail'
-            }
+            # 增加对普通文件和特殊文件（字符设备文件和链接文件）的判断
+            if stand.get('type') == 'directory':
+                exist_result = {
+                    'result': 'pass' if os.path.isdir(stand.get('FS_name')) else 'fail'
+                }
+            elif stand.get('type') == 'file':
+                exist_result = {
+                    'result': 'pass' if os.path.isfile(stand.get('FS_name')) else 'fail'
+                }
+            else:
+                exist_result = {
+                    'result': 'pass' if os.path.exists(stand.get('FS_name')) else 'fail'
+                }
             file_permissions = self._get_file_permissions(stand.get('FS_name'))
             self.result.add(stand=stand, exist_result=exist_result, file_permissions=file_permissions)
             logger.info(f"\ncmd: {stand.get('FS_name')},\n"
