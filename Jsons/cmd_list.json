@@ -302,6 +302,9 @@
    "name": "uname"
   },
   {
+   "name": "uniq"
+  },
+  {
    "name": "useradd"
   },
   {
